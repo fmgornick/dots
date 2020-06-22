@@ -23,6 +23,7 @@ set shiftwidth=4
 set shiftround
 set expandtab
 set smartindent
+set backspace=indent,eol,start
 
 "" better word search
 set hlsearch
@@ -46,6 +47,16 @@ call plug#begin('~/.vim/plugged')
 "" colorscheme
 Plug 'morhetz/gruvbox'
 
+"" fuzzy file finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+"" coc autocompletion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+"" language pack
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
 
 colorscheme gruvbox
@@ -58,10 +69,13 @@ set background=dark
 """""""""""""""""""
 
 "" toggle splits with vim keys
+map <C-h> <C-W>h
 map <C-j> <C-W>j
 map <C-k> <C-W>k
-map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+"" brace completion
+inoremap {<TAB> {<CR>}<ESC>ko
 
 
 
