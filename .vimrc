@@ -7,6 +7,7 @@ filetype off
 filetype plugin indent on
 
 set noerrorbells
+set showcmd
 
 "" line numbers + color column
 set relativenumber
@@ -77,7 +78,16 @@ map <C-l> <C-W>l
 "" brace completion
 inoremap {<TAB> {<CR>}<ESC>ko
 
+"" coc tab completion
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 
+inoremap <silent><expr> <Tab>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
 
 """""""""""""""""""""""""
 """ COMPILE SHORTCUTS """
