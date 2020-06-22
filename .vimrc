@@ -76,7 +76,7 @@ map <C-k> <C-W>k
 map <C-l> <C-W>l
 
 "" brace completion
-inoremap {<TAB> {<CR>}<ESC>ko
+inoremap {<TAB> {}<ESC>i<CR><ESC>O
 
 "" coc tab completion
 function! s:check_back_space() abort
