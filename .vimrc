@@ -69,6 +69,10 @@ set background=dark
 """ KEYBINDINGS """
 """""""""""""""""""
 
+"" set spacebar as leader
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
 "" toggle splits with vim keys
 map <C-h> <C-W>h
 map <C-j> <C-W>j
@@ -76,7 +80,9 @@ map <C-k> <C-W>k
 map <C-l> <C-W>l
 
 "" brace completion
-inoremap {<TAB> {}<ESC>i<CR><ESC>O
+if expand("%:e") == "c"
+    inoremap {<TAB> {}<ESC>i<CR><ESC>O
+endif
 
 "" coc tab completion
 function! s:check_back_space() abort
@@ -88,6 +94,8 @@ inoremap <silent><expr> <Tab>
     \ pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<Tab>" :
     \ coc#refresh()
+
+"" leader shortcut mappings
 
 """""""""""""""""""""""""
 """ COMPILE SHORTCUTS """
@@ -110,5 +118,9 @@ elseif extension == "java"
 "" compile and run code writtent in Python
 elseif extension == "py"
     map  <F5> :w <CR> :!python3 %  <CR>
+
+"" compile LaTeX document
+elseif extension == "tex"
+    map <F5> :w <CR> :!clear && pdflatex % && open %<.pdf <CR>
 
 endif
