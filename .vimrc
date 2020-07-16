@@ -1,6 +1,7 @@
 """"""""""""""""
 """ DEFAULTS """
 """"""""""""""""
+
 syntax on
 
 filetype off
@@ -95,7 +96,12 @@ inoremap <silent><expr> <Tab>
     \ <SID>check_back_space() ? "\<Tab>" :
     \ coc#refresh()
 
-"" leader shortcut mappings
+
+
+""""""""""""""""""""""""""""""""
+""" LEADER SHORTCUT MAPPINGS """
+""""""""""""""""""""""""""""""""
+
 
 """""""""""""""""""""""""
 """ COMPILE SHORTCUTS """
