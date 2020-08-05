@@ -7,6 +7,7 @@ syntax on
 filetype off
 filetype plugin indent on
 
+"" shows normal-mode entries in bottom right
 set noerrorbells
 set showcmd
 
@@ -123,10 +124,14 @@ elseif extension == "java"
 
 "" compile and run code writtent in Python
 elseif extension == "py"
-    map  <F5> :w <CR> :!python3 %  <CR>
+    map  <F5> :w <CR> :!clear && :!python3 %  <CR>
 
 "" compile LaTeX document
 elseif extension == "tex"
     map <F5> :w <CR> :!clear && pdflatex % && open %<.pdf <CR>
 
+"" run a shell script
+elseif extension == "sh"
+        map <F5> :w <CR> :!clear && chmod +x % && ./% <CR>
 endif
+
