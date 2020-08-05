@@ -71,10 +71,6 @@ set background=dark
 """ KEYBINDINGS """
 """""""""""""""""""
 
-"" set spacebar as leader
-nnoremap <SPACE> <Nop>
-let mapleader=" "
-
 "" toggle splits with vim keys
 map <C-h> <C-W>h
 map <C-j> <C-W>j
@@ -103,6 +99,11 @@ inoremap <silent><expr> <Tab>
 """ LEADER SHORTCUT MAPPINGS """
 """"""""""""""""""""""""""""""""
 
+"" set spacebar as leader
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
+
 
 """""""""""""""""""""""""
 """ COMPILE SHORTCUTS """
@@ -130,7 +131,7 @@ elseif extension == "py"
 elseif extension == "tex"
     map <F5> :w <CR> :!clear && pdflatex % && open %<.pdf <CR>
 
-"" run a shell script
+"" run a shell script (and make it executable)
 elseif extension == "sh"
         map <F5> :w <CR> :!clear && chmod +x % && ./% <CR>
 endif
