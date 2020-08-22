@@ -53,6 +53,7 @@ Plug 'morhetz/gruvbox'
 "" fuzzy file finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
 
 "" coc autocompletion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -62,8 +63,14 @@ Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
+
+"" gruvbox colorscheme
 colorscheme gruvbox
 set background=dark
+
+"" fzf layout
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
 
 
 
@@ -103,7 +110,8 @@ inoremap <silent><expr> <Tab>
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
-
+"" fzf git checkout shortcut
+nnoremap <leader>gc :GCheckout<CR>
 
 """""""""""""""""""""""""
 """ COMPILE SHORTCUTS """
@@ -125,14 +133,15 @@ elseif extension == "java"
 
 "" compile and run code writtent in Python
 elseif extension == "py"
-    map  <F5> :w <CR> :!clear && :!python3 %  <CR>
+    map  <F5> :w <CR> :!clear && python3 %  <CR>
+    
+"" run a shell script (and make it executable)
+elseif extension == "sh"
+        map <F5> :w <CR> :!clear && chmod +x % && ./% <CR>
 
 "" compile LaTeX document
 elseif extension == "tex"
     map <F5> :w <CR> :!clear && pdflatex % && open %<.pdf <CR>
 
-"" run a shell script (and make it executable)
-elseif extension == "sh"
-        map <F5> :w <CR> :!clear && chmod +x % && ./% <CR>
 endif
 
