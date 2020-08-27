@@ -61,6 +61,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "" language pack
 Plug 'sheerun/vim-polyglot'
 
+"" better syntax highlighting for C
+Plug 'justinmk/vim-syntax-extra'
+
 call plug#end()
 
 
