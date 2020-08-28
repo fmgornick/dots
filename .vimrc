@@ -87,10 +87,15 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-l> <C-W>l
 
-"" brace completion
+"" brace completion for C
 if expand("%:e") == "c"
     inoremap {<TAB> {}<ESC>i<CR><ESC>O
 endif
+
+"" parenthases bracket and brace completion
+inoremap () ()<ESC>i
+inoremap [] []<ESC>i
+inoremap {} {}<ESC>i
 
 "" coc tab completion
 function! s:check_back_space() abort
