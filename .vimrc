@@ -92,11 +92,6 @@ if expand("%:e") == "c"
     inoremap {<TAB> {}<ESC>i<CR><ESC>O
 endif
 
-"" parenthases bracket and brace completion
-inoremap () ()<ESC>i
-inoremap [] []<ESC>i
-inoremap {} {}<ESC>i
-
 "" coc tab completion
 function! s:check_back_space() abort
     let col = col('.') - 1
