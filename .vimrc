@@ -61,9 +61,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "" language pack
 Plug 'sheerun/vim-polyglot'
 
-"" better syntax highlighting for C
-Plug 'justinmk/vim-syntax-extra'
-
 call plug#end()
 
 
@@ -116,6 +113,11 @@ let mapleader=" "
 "" fzf git checkout shortcut
 nnoremap <leader>gc :GCheckout<CR>
 
+"" write command shortcut
+nnoremap <leader><leader> :w<CR>
+
+
+
 """""""""""""""""""""""""
 """ COMPILE SHORTCUTS """
 """""""""""""""""""""""""
@@ -144,7 +146,7 @@ elseif extension == "sh"
 
 "" compile LaTeX document
 elseif extension == "tex"
-    map <F5> :w <CR> :!clear && pdflatex % && open %<.pdf <CR>
+    map <F5> :w <CR> :!clear && latexmk -pvc -pdf -interaction=nonstopmode % && open %<.pdf <CR>
 
 endif
 
