@@ -84,8 +84,8 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-l> <C-W>l
 
-"" brace completion for C
-if expand("%:e") == "c"
+"" brace completion for C and java
+if expand("%:e") == ( "c" || "java" )
     inoremap {<TAB> {}<ESC>i<CR><ESC>O
 endif
 
