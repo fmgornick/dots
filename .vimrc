@@ -85,7 +85,7 @@ map <C-k> <C-W>k
 map <C-l> <C-W>l
 
 "" brace completion for C and java
-if expand("%:e") == ( "c" || "java" )
+if expand("%:e") == "c" || expand("%:e") == "java" 
     inoremap {<TAB> {}<ESC>i<CR><ESC>O
 endif
 
@@ -146,7 +146,8 @@ elseif extension == "sh"
 
 "" compile LaTeX document
 elseif extension == "tex"
-    map <F5> :w <CR> :!clear && latexmk -pvc -pdf -interaction=nonstopmode % && open %<.pdf <CR>
+    map <F5> :w <CR> :!clear && latexmk -pvc -pdf -interaction=nonstopmode %
+        \ && open %<.pdf <CR>
 
 endif
 
