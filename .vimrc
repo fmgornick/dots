@@ -112,7 +112,7 @@ let mapleader=" "
 
 "" yank to primary register
 nnoremap <leader>y "*y
-nnoremap <leader>p "*p
+vnoremap <leader>y "*y
 
 "" fzf git checkout shortcut
 nnoremap <leader>gc :GCheckout<CR>
