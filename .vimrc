@@ -110,6 +110,10 @@ inoremap <silent><expr> <Tab>
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
+"" yank to primary register
+nnoremap <leader>y "*y
+nnoremap <leader>p "*p
+
 "" fzf git checkout shortcut
 nnoremap <leader>gc :GCheckout<CR>
 
