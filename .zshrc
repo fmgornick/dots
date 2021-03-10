@@ -1,8 +1,25 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/Fletcher/.oh-my-zsh"
 
+# make command much shorter for sshing into cse labs machine
+alias sshg="ssh gorni025@csel-kh4250-01.cselabs.umn.edu"
+
+# alias for all the different scp commands
+stl () {
+    scp gorni025@csel-kh4250-01.cselabs.umn.edu:"$1" "$2"
+}
+stlr () {
+    scp -r gorni025@csel-kh4250-01.cselabs.umn.edu:"$1" "$2"
+}
+lts () {
+    scp "$1" gorni025@csel-kh4250-01.cselabs.umn.edu:"$2"
+}
+ltsr () {
+    scp -r "$1" gorni025@csel-kh4250-01.cselabs.umn.edu:"$2"
+}
+
 # ZSH theme
-# ZSH_THEME="gianu"
+ZSH_THEME="fwalch"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -43,13 +60,4 @@ source $ZSH/oh-my-zsh.sh
 # switch ZSH from emacs mode to vim mode
 bindkey -v
 
-################################
-### ZSH PROMPT CUSTOMIZATION ###
-################################
-
-PROMPT='%{$fg_bold[magenta]%}%n%{$reset_color%} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)%{$reset_color%}%{$fg_bold[yellow]%}$%{$reset_color%} '
-
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[red]%}(%{$fg_bold[green]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[red]%}) "
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%} %{$fg[red]%}✗%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}"
+test -r /Users/Fletcher/.opam/opam-init/init.zsh && . /Users/Fletcher/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
