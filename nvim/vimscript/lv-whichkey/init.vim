@@ -22,15 +22,16 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
 let g:which_key_map['/'] = 'comment toggle'
-let g:which_key_map[';'] = [ ':Dashboard'                                      , 'home screen' ]
-let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file' ]
-let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer' ]
-let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files' ]
+let g:which_key_map[';'] = [ ':Dashboard'                                      , 'home screen']
+let g:which_key_map['?'] = [ ':NvimTreeFindFile'                               , 'find current file']
+let g:which_key_map['e'] = [ ':NvimTreeToggle'                                 , 'explorer']
+let g:which_key_map['f'] = [ ':Telescope find_files'                           , 'find files']
 let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
-let g:which_key_map['H'] = [ ':let @/ = ""'                                    , 'no highlight' ]
-let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
+let g:which_key_map['H'] = [ ':let @/ = ""'                                    , 'no highlight']
+let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger']
 " TODO create entire treesitter section
 let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
+let g:which_key_map['w'] = [ ':w'					                           , 'write']
 " TODO play nice with status line
 
 " Group mappings
