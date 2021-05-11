@@ -6,8 +6,8 @@ require('telescope').setup {
     defaults = {
         find_command = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
         prompt_position = "bottom",
-        prompt_prefix = " ",
-        -- prompt_prefix = " ",
+        -- prompt_prefix = " ",
+        prompt_prefix = " ",
         selection_caret = " ",
         entry_prefix = "  ",
         initial_mode = "insert",
@@ -60,6 +60,12 @@ require('telescope').setup {
                 ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
                 -- ["<C-i>"] = my_cool_custom_action,
             }
+        }
+    },
+    extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
         }
     }
 }
