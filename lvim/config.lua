@@ -11,7 +11,7 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "edge"
+lvim.colorscheme = "material"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -49,15 +49,12 @@ lvim.builtin.which_key.mappings["m"] = {
   g = { "<cmd>Glow<cr>", "glow" },
   p = { "<cmd>MarkdownPreview<cr>", "preview" },
 }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+TODO",
+  l = { "<cmd>TodoLocList<cr>", "location list" },
+  q = { "<cmd>TodoQuickFix<cr>", "quickfix" },
+  t = { "<cmd>TodoTelescope<cr>", "telescope" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -167,11 +164,12 @@ lvim.plugins = {
   },
 
   -- colorschemes
-  { "folke/tokyonight.nvim" },
-  { "morhetz/gruvbox" },
-  { "junegunn/seoul256.vim" },
   { "Everblush/everblush.vim" },
   { "sainnhe/edge" },
+  { "rafamadriz/neon" },
+  { "marko-cerovac/material.nvim" },
+  { "Mofiqul/dracula.nvim" },
+  { "folke/tokyonight.nvim" },
 
   -- speedy navigation
   {
@@ -201,19 +199,23 @@ lvim.plugins = {
       require("todo-comments").setup()
     end,
   },
+
+  -- better syntax highlighting
+  -- { "sheerun/vim-polyglot" }
 }
+vim.g.material_style = "palenight"
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = { "*.json", "*.jsonc" },
---   -- enable wrap mode for json files only
---   command = "setlocal wrap",
--- })
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "zsh",
---   callback = function()
---     -- let treesitter use bash highlight for zsh files as well
---     require("nvim-treesitter.highlight").attach(0, "bash")
---   end,
--- })
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.json", "*.jsonc" },
+  -- enable wrap mode for json files only
+  command = "setlocal wrap",
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    -- let treesitter use bash highlight for zsh files as well
+    require("nvim-treesitter.highlight").attach(0, "bash")
+  end,
+})
 
