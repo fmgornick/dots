@@ -266,10 +266,10 @@ M.config = function()
         },
         v = {
           name = "vertical split",
-          ["1"] = { "<cmd>ToggleTerm1 direction=vertical size=80 open_mapping=[[<c-\\>]]<cr>", "vertical" },
-          ["2"] = { "<cmd>ToggleTerm2 direction=vertical size=80 open_mapping=[[<c-\\>]]<cr>", "vertical" },
-          ["3"] = { "<cmd>ToggleTerm3 direction=vertical size=80 open_mapping=[[<c-\\>]]<cr>", "vertical" },
-          ["4"] = { "<cmd>ToggleTerm4 direction=vertical size=80 open_mapping=[[<c-\\>]]<cr>", "vertical" },
+          ["1"] = { "<cmd>ToggleTerm1 direction=vertical size=70 open_mapping=[[<c-\\>]]<cr>", "vertical" },
+          ["2"] = { "<cmd>ToggleTerm2 direction=vertical size=70 open_mapping=[[<c-\\>]]<cr>", "vertical" },
+          ["3"] = { "<cmd>ToggleTerm3 direction=vertical size=70 open_mapping=[[<c-\\>]]<cr>", "vertical" },
+          ["4"] = { "<cmd>ToggleTerm4 direction=vertical size=70 open_mapping=[[<c-\\>]]<cr>", "vertical" },
         },
       },
       T = {
@@ -285,7 +285,8 @@ end
 M.setup = function()
   local which_key = require "which-key"
 
-  which_key.setup(lvim.builtin.which_key.setup)
+  -- which_key.setup(lvim.builtin.which_key.setup)
+  which_key.setup()
 
   local opts = lvim.builtin.which_key.opts
   local vopts = lvim.builtin.which_key.vopts
