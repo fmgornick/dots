@@ -1,5 +1,5 @@
 -- NO MOUSE
-vim.opt.mouse = ''
+vim.opt.mouse = ""
 
 -- line numbering
 vim.opt.number = true
@@ -19,7 +19,7 @@ vim.opt.wrap = false
 -- save undo history
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.opt.writebackup = false
 
@@ -31,22 +31,22 @@ vim.opt.ignorecase = true
 
 -- looks
 vim.opt.termguicolors = true
-vim.opt.guifont = 'monospace:h17'
+vim.opt.guifont = "monospace:h17"
 vim.opt.title = true
 
 -- keep cursor centered more while scrolling
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 
 -- yank to clipboard
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = "unnamedplus"
 
 -- popup menu
 vim.opt.pumheight = 10
 
 -- insert mode completion
-vim.opt.completeopt = { 'menuone', 'noselect' }
+vim.opt.completeopt = { "menuone", "noselect" }
 
 -- don't show mode
 vim.opt.showmode = false
@@ -62,11 +62,11 @@ vim.opt.laststatus = 3
 vim.opt.autochdir = true
 
 -- i like to see what i copy
-vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group = 'YankHighlight',
-    pattern = '*',
-    callback = function()
-        require('vim.highlight').on_yank { higroup = 'Search', timeout = 100 }
-    end,
+vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = "YankHighlight",
+	pattern = "*",
+	callback = function()
+		require("vim.highlight").on_yank({ higroup = "Search", timeout = 100 })
+	end,
 })
