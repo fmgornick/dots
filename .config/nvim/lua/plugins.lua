@@ -1,63 +1,61 @@
 vim.cmd('packadd packer.nvim')
 
 return require('packer').startup(function(use)
-	use 'wbthomason/packer.nvim'
-    use 'goolord/alpha-nvim'
+    -- dependencies
+    use { 'wbthomason/packer.nvim' }
+    use { 'nvim-lua/plenary.nvim' }
+    use { 'nvim-tree/nvim-web-devicons' }
+    use { 'neovim/nvim-lspconfig' }
+    use { 'williamboman/mason.nvim', run = ':MasonUpdate' }
+    use { 'williamboman/mason-lspconfig.nvim' }
+    use { 'hrsh7th/nvim-cmp' }
+    use { 'hrsh7th/cmp-nvim-lsp' }
+    use { 'L3MON4D3/LuaSnip', run = 'make install_jsregexp' }
 
-    use { 
-        'nvim-treesitter/nvim-treesitter',
-        run = "TSUpdate",
-    }
+    -- fuzzy finder + extensions
+    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
+    use { 'nvim-telescope/telescope-file-browser.nvim' }
+    use { 'ahmedkhalf/project.nvim', as = 'projects' }
 
-    use {
-        "folke/trouble.nvim",
-        run = "TroubleToggle",
-    }
+    -- syntax highlighting
+    use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
 
-    use { 
-		'nvim-telescope/telescope.nvim', tag = '0.1.1',
-		requires = 'nvim-lua/plenary.nvim',
-	}
+    -- colorscheme
+    use { 'folke/tokyonight.nvim', as = 'tokyonight' }
 
-	use { 
-		'folke/tokyonight.nvim', 
-		as = 'tokyonight',
-        config = function()
-            require('tokyonight').setup({ style = 'moon' })
-            vim.cmd.colorscheme('tokyonight')
-        end,
-	}
+    -- pretty statusline (with colorscheme)
+    use { 'nvim-lualine/lualine.nvim' }
 
-    use {
-        'nvim-tree/nvim-tree.lua',
-        config = function()
-            require('nvim-tree').setup({
-                sort_by = 'case_sensitive',
-                view = { 
-                    side = 'left',
-                    width = 30,
-                },
-                renderer = { group_empty = true },
-                filters = { dotfiles = true },
-            })
-        end,
-    }
+    -- netrw be damned
+    use { 'nvim-tree/nvim-tree.lua' }
 
-    use {
-        'akinsho/bufferline.nvim',
-        tag = "*",
-        requires = 'nvim-tree/nvim-web-devicons',
-        config = function() require('bufferline').setup() end,
-    }
+    -- for showing workspace diagnostics
+    use { 'folke/trouble.nvim', run = 'TroubleToggle' }
 
-    use {
-        'windwp/nvim-autopairs',
-        config = function() require('nvim-autopairs').setup() end,
-    }
+    -- cute little nvim dashboard
+    use { 'goolord/alpha-nvim' }
 
-    use {
-        'terrortylor/nvim-comment',
-        config = function() require('nvim_comment').setup() end,
-    }
-end
-)
+    -- why tf is this not default
+    use { 'windwp/nvim-autopairs' }
+
+    -- this too oml
+    use { 'terrortylor/nvim-comment' }
+
+    -- i like the tab look for buffers
+    use { 'akinsho/bufferline.nvim', tag = '*' }
+
+    -- i like indentation guides
+    use { 'lukas-reineke/indent-blankline.nvim' }
+
+    -- who uses default 's' key anyway
+    use { 'phaazon/hop.nvim', as = 'hop', branch = 'v2' }
+
+    -- compiles latex files
+    use { 'lervag/vimtex' }
+
+    -- markdown viewer
+    use { 'iamcco/markdown-preview.nvim', run = 'cd app && npm install' }
+
+    -- LSP thingy
+    use { 'VonHeikemen/lsp-zero.nvim', branch = 'v2.x' }
+end)
