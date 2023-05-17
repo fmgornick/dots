@@ -3,7 +3,7 @@ export PATH=/Users/Fletcher/.local/bin:$PATH
 export PATH=/Users/Fletcher/.emacs.d/bin:$PATH
 export PATH="/usr/local/opt/python@3.10/bin:$PATH"
 
-alias v="lvim"             # nvim alias
+alias v="nvim"             # nvim alias
 alias pip="python3 -m pip" # pip install alias
 
 # oh-my-zsh stuff
