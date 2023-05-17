@@ -38,4 +38,4 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- copy current file path
-vim.keymap.set("n", "<leader>yf", ":let @+=expand(\"%:p\")<cr>")
+vim.keymap.set("n", "<leader>yf", ":let @+=expand('%:p')<cr>")
