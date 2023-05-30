@@ -63,6 +63,7 @@ require("gitsigns").setup({
 				name = "git",
 				b = "blame line",
 				d = "get diff",
+				g = "lazy git",
 				p = "preview hunk",
 				r = "reset hunk",
 				R = "reset buffer",
