@@ -2,14 +2,24 @@ vim.g.mapleader = " "
 
 -- colons be damned
 vim.keymap.set("n", "<leader>w", ":w<cr>")
-vim.keymap.set("n", "<leader>q", ":q<cr>")
-vim.keymap.set("n", "<leader>c", ":bd<cr>")
+vim.keymap.set("n", "<leader>q", ":q!<cr>")
+vim.keymap.set("n", "<leader>c", ":bn|bd!#<cr>")
+
+-- no format save
+vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>")
 
 -- get rid of lagging highlights easy
 vim.keymap.set("n", "<leader>h", ":noh<cr>")
 
--- no format save
-vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>")
+-- don't always want to delete into register
+vim.keymap.set("n", "x", '"_x')
+
+-- change increment and decrement
+vim.keymap.set("n", "+", "<c-a>")
+vim.keymap.set("n", "-", "<c-x>")
+
+-- highlight all
+vim.keymap.set("n", "<c-a>", "ggVG$")
 
 -- window navigation
 vim.keymap.set("n", "<c-h>", "<C-w>h")
@@ -37,5 +47,6 @@ vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- copy current file path
+-- copy shortcuts
 vim.keymap.set("n", "<leader>yf", ":let @+=expand('%:p')<cr>")
+vim.keymap.set("n", "<leader>yy", "ggVGy<c-o>")
