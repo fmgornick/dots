@@ -1,4 +1,12 @@
 require("gitsigns").setup({
+	signs = {
+		add = { text = "│", hl = "GreenSign" },
+		change = { text = "│", hl = "YellowSign" },
+		delete = { text = "_", hl = "RedSign" },
+		topdelete = { text = "‾" },
+		changedelete = { text = "~" },
+		untracked = { text = "┆", hl = "BlueSign" },
+	},
 	on_attach = function(bufnr)
 		local gs = package.loaded.gitsigns
 
