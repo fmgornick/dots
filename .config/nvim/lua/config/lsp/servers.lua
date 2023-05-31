@@ -29,6 +29,8 @@ lspconfig.yamlls.setup({
 
 lsp.setup()
 
+vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action)
 vim.keymap.set("n", "<leader>li", ":LspInfo<cr>")
 vim.keymap.set("n", "<leader>lm", ":Mason<cr>")
 vim.keymap.set("n", "<leader>ln", ":NullLsInfo<cr>")
+vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename)

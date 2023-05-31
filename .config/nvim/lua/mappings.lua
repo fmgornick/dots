@@ -47,7 +47,7 @@ vim.keymap.set("n", "<leader>th", ":25 split<cr>:term<cr>i")
 vim.keymap.set("n", "<leader>tv", ":80 vsplit<cr>:term<cr>i")
 vim.keymap.set("t", "<c-w>", "<c-\\><c-n><c-w>w")
 vim.keymap.set("t", "<c-q>", "<c-\\><c-n>:bd!<cr>")
-vim.keymap.set("t", "<c-h>", "<c-\\><c-n>:bd!<cr>")
+vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>w")
 
 -- chefs kiss
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv")

@@ -1,12 +1,18 @@
 local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 
+local fb_actions = require("telescope").extensions.file_browser.actions
 telescope.setup({
-    extensions = {
-        file_browser = {
-            theme = "ivy",
-        },
-    },
+	extensions = {
+		file_browser = {
+			theme = "ivy",
+			mappings = {
+				n = {
+					["<bs>"] = fb_actions.goto_parent_dir,
+				},
+			},
+		},
+	},
 })
 
 telescope.load_extension("file_browser")
@@ -18,6 +24,7 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 vim.keymap.set("n", "<leader>fo", builtin.oldfiles)
 
+vim.keymap.set("n", "<leader>e", ":Telescope file_browser grouped=true<cr>")
 vim.keymap.set("n", "<leader>fb", ":Telescope file_browser grouped=true<cr>")
 vim.keymap.set("n", "<leader>fp", ":Telescope projects<cr>")
 vim.keymap.set("n", "<leader>fc", ":Telescope find_files cwd=~/.config/nvim<cr>")

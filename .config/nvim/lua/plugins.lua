@@ -34,8 +34,8 @@ return require("packer").startup(function(use)
 	use({ "ahmedkhalf/project.nvim", as = "projects" })
 
 	-- git integration
-	use({ "kdheepak/lazygit.nvim" })
 	use({ "lewis6991/gitsigns.nvim" })
+	use({ "kdheepak/lazygit.nvim" })
 
 	-- colorschemes
 	use({ "catppuccin/nvim", as = "catppuccin" })
@@ -48,18 +48,17 @@ return require("packer").startup(function(use)
 
     -- OTHER PLUGINS --
     -- stylua: ignore start
-    use({ "nvim-treesitter/nvim-treesitter", run = "TSUpdate" })        -- syntax highlighting
-    use({ "nvim-lualine/lualine.nvim" })                                -- pretty statusline (with colorscheme)
-    use({ "nvim-tree/nvim-tree.lua" })                                  -- netrw be damned
-    use({ "folke/trouble.nvim", run = "TroubleToggle" })                -- workspace diagnostics
-    use({ "goolord/alpha-nvim" })                                       -- cute little nvim dashboard
-    use({ "windwp/nvim-autopairs" })                                    -- why tf is this not default
-    use({ "terrortylor/nvim-comment" })                                 -- this too oml
-    use({ "akinsho/bufferline.nvim", tag = "*" })                       -- i like the tab look for buffers
-    use({ "phaazon/hop.nvim", as = "hop", branch = "v2" })              -- who uses default 's' key anyway
-    use({ "lervag/vimtex" })                                            -- compiles latex files
+    use({ "nvim-treesitter/nvim-treesitter", run = "TSUpdate" })           -- syntax highlighting
+    use({ "nvim-lualine/lualine.nvim" })                                   -- pretty statusline (with colorscheme)
+    use({ "folke/trouble.nvim", run = "TroubleToggle" })                   -- workspace diagnostics
+    use({ "goolord/alpha-nvim" })                                          -- cute little nvim dashboard
+    use({ "windwp/nvim-autopairs" })                                       -- why tf is this not default
+    use({ "terrortylor/nvim-comment" })                                    -- this too oml
+    use({ "akinsho/bufferline.nvim", tag = "*" })                          -- i like the tab look for buffers
+    use({ "phaazon/hop.nvim", as = "hop", branch = "v2" })                 -- who uses default 's' key anyway
+    use({ "lervag/vimtex" })                                               -- compiles latex files
     use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" }) -- markdown viewer
-    use({ "folke/which-key.nvim" })                                     -- shortcut cheatsheet
-    use({ "SmiteshP/nvim-navic" })                                      -- shows current code context
+    use({ "folke/which-key.nvim" })                                        -- shortcut cheatsheet
+    use({ "SmiteshP/nvim-navic" })                                         -- shows current code context
 	-- stylua: ignore end
 end)
