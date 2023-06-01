@@ -1,4 +1,5 @@
 local dap = require("dap")
+local dapui = require("dapui")
 
 require("mason-nvim-dap").setup({
 	ensure_installed = { "codelldb" },
@@ -81,7 +82,7 @@ dap.configurations.rust = {
 	},
 }
 
-require("dapui").setup({
+dapui.setup({
 	layouts = {
 		{
 			elements = {
@@ -114,20 +115,28 @@ require("dapui").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>dc", ":lua require('dap').continue()<cr>")
-vim.keymap.set("n", "<Leader>db", ":lua require('dap').toggle_breakpoint()<cr>")
-vim.keymap.set("n", "<leader>dB", ":lua require('dap').set_breakpoint(vim.fn.input('breakpoint condition: '))<cr>")
-vim.keymap.set("n", "<leader>de", ":lua require('dapui').eval()<cr>")
-vim.keymap.set("n", "<leader>di", ":lua require('dap').step_into()<cr>")
-vim.keymap.set("n", "<leader>do", ":lua require('dap').step_over()<cr>")
-vim.keymap.set("n", "<leader>dO", ":lua require('dap').step_out()<cr>")
-vim.keymap.set("n", "<Leader>dr", ":lua require('dap').repl.open()<cr>")
-vim.keymap.set("n", "<Leader>dR", ":lua require('dap').restart()<cr>")
-vim.keymap.set("n", "<Leader>dl", ":lua require('dap').run_last()<cr>")
-vim.keymap.set("n", "<leader>dL", ":lua require('dap').set_breakpoint(nil, nil, vim.fn.input('log message: '))<cr>")
-vim.keymap.set("n", "<leader>du", ":lua require('dapui').toggle()<cr>")
+local function conditional_breakpoint()
+	dap.set_breakpoint(vim.fn.input("breakpoint condition: "))
+end
 
-vim.keymap.set("n", "<F1>", ":lua require('dap').step_into()<cr>")
-vim.keymap.set("n", "<F2>", ":lua require('dap').step_over()<cr>")
-vim.keymap.set("n", "<F3>", ":lua require('dap').step_out()<cr>")
-vim.keymap.set("n", "<F4>", ":lua require('dap').continue()<cr>")
+local function log_message()
+	dap.set_breakpoint(nil, nil, vim.fn.input("log message: "))
+end
+
+vim.keymap.set("n", "<leader>dc", dap.continue)
+vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>dB", conditional_breakpoint)
+vim.keymap.set("n", "<leader>de", dapui.eval)
+vim.keymap.set("n", "<leader>di", dap.step_into)
+vim.keymap.set("n", "<leader>do", dap.step_over)
+vim.keymap.set("n", "<leader>dO", dap.step_out)
+vim.keymap.set("n", "<Leader>dl", dap.run_last)
+vim.keymap.set("n", "<leader>dL", log_message)
+vim.keymap.set("n", "<Leader>dr", dap.repl.open)
+vim.keymap.set("n", "<Leader>dR", dap.restart)
+vim.keymap.set("n", "<leader>du", dapui.toggle)
+
+vim.keymap.set("n", "<F1>", dap.step_into)
+vim.keymap.set("n", "<F2>", dap.step_over)
+vim.keymap.set("n", "<F3>", dap.step_out)
+vim.keymap.set("n", "<F4>", dap.continue)
