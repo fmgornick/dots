@@ -3,31 +3,31 @@ local builtin = require("telescope.builtin")
 
 local fb_actions = require("telescope").extensions.file_browser.actions
 telescope.setup({
-	extensions = {
-		file_browser = {
-			grouped = true,
-			hijack_netrw = true,
-			mappings = {
-				n = {
-					["<bs>"] = fb_actions.goto_parent_dir,
-				},
-			},
-			-- theme = "cursor",
-			-- theme = "dropdown",
-			theme = "ivy",
-		},
-	},
+    extensions = {
+        file_browser = {
+            grouped = true,
+            hijack_netrw = true,
+            mappings = {
+                n = {
+                    ["<bs>"] = fb_actions.goto_parent_dir,
+                },
+            },
+            -- theme = "cursor",
+            -- theme = "dropdown",
+            theme = "ivy",
+        },
+    },
 })
 
 telescope.load_extension("file_browser")
 telescope.load_extension("projects")
 
 local function file_browser()
-	telescope.extensions.file_browser.file_browser({ cwd = vim.fn.expand("%:p:h") })
+    telescope.extensions.file_browser.file_browser({ cwd = vim.fn.expand("%:p:h") })
 end
 
 local function find_config_files()
-	builtin.find_files({ cwd = "~/.config/nvim" })
+    builtin.find_files({ cwd = "~/.config/nvim" })
 end
 
 vim.keymap.set("n", "<leader>e", file_browser)

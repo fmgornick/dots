@@ -9,6 +9,7 @@ require("mason-lspconfig").setup({
 		"pyright",
 		"rust_analyzer",
 		"texlab",
+		"tsserver",
 		"yamlls",
 	},
 	automatic_installation = false,

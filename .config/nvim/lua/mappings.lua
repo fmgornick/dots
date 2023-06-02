@@ -5,6 +5,7 @@ vim.keymap.set("n", "<leader>w", ":w<cr>")
 vim.keymap.set("n", "<leader>q", ":q!<cr>")
 vim.keymap.set("n", "<leader>Q", ":qa!<cr>")
 vim.keymap.set("n", "<leader>c", ":bn|bd!#<cr>")
+vim.keymap.set("n", "<leader>r", ":source $MYVIMRC<cr>")
 
 -- no format save
 vim.keymap.set("n", "<c-s>", ":noa w<cr>")

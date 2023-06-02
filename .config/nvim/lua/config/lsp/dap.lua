@@ -2,7 +2,10 @@ local dap = require("dap")
 local dapui = require("dapui")
 
 require("mason-nvim-dap").setup({
-	ensure_installed = { "codelldb" },
+	ensure_installed = {
+		"codelldb",
+		"js-debug-adapter",
+	},
 	automatic_installation = false,
 })
 

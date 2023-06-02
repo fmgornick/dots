@@ -8,6 +8,7 @@ require("mason-null-ls").setup({
     ensure_installed = {
         "autopep8",
         "clang_format",
+        "latexindent",
         "prettier",
         "rustfmt",
         "stylua",
@@ -35,7 +36,13 @@ null_ls.setup({
         formatting.clang_format.with({
             extra_args = { "--style={BasedOnStyle: LLVM, IndentWidth: 4}" },
         }),
-        formatting.prettier,
+        formatting.latexindent,
+        formatting.prettier.with({
+            extra_args = {
+                "--tab-width 4",
+                "--bracket-same-line",
+            },
+        }),
         formatting.rustfmt,
         formatting.stylua,
 

@@ -45,11 +45,13 @@ require("which-key").register({
         s = "sync",
     },
     q = "quit",
+    r = "reload config",
     t = {
         name = "terminal",
         v = "vertical",
         h = "horizontal",
     },
+    v = "list tasks",
     w = "write",
     y = "which_key_ignore",
 }, { prefix = "<leader>" })
