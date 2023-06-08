@@ -6,6 +6,7 @@ source $ZSH/omz.sh
 source $ZSH/prompt.zsh
 
 bindkey -v
+bindkey '\t' autosuggest-accept
 
 # SHORTCUTS
 alias v="nvim"
