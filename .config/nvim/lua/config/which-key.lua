@@ -6,7 +6,7 @@ require("which-key").register({
     c = { ":bn|bd!#<cr>", "close buffer" },
     d = {
         name = "dap",
-        c = { require("dap").continue, "continue" },
+        c = { require("config.lsp.debuggers").debug, "continue" },
         b = { require("dap").toggle_breakpoint, "breakpoint" },
         B = {
             function()
@@ -59,7 +59,7 @@ require("which-key").register({
         f = {
             function()
                 require("telescope.builtin").find_files({
-                    cwd = "~/.config/nvim",
+                    cwd = vim.fn.expand("%:p:h"),
                 })
             end,
             "find files",
@@ -67,7 +67,7 @@ require("which-key").register({
         g = {
             function()
                 require("telescope.builtin").live_grep({
-                    cwd = "~/.config/nvim",
+                    cwd = vim.fn.expand("%:p:h"),
                 })
             end,
             "live grep",
@@ -98,6 +98,12 @@ require("which-key").register({
         name = "terminal",
         h = { ":25 split<cr>:term<cr>i", "horizontal" },
         v = { ":80 vsplit<cr>:term<cr>i", "vertical" },
+    },
+    v = {
+        function()
+            require("telescope").extensions.vstask.tasks(require("telescope.themes").get_ivy())
+        end,
+        "list tasks",
     },
     w = { ":w<cr>", "write" },
     y = {
