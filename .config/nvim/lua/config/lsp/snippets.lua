@@ -56,14 +56,14 @@ ls.add_snippets("json", {
         i(2, "[[DAP]]"),
         t({
             '",',
-            '      "request": "launch"',
+            '      "request": "launch",',
             '      "program": "${workspaceFolder}/',
         }),
         i(3, "[[PATH]]"),
         t({
             '",',
-            '      "stopOnEntry": false',
-            '      "externalConsole": false',
+            '      "stopOnEntry": false,',
+            '      "externalConsole": false,',
             '      "args": [ ',
         }),
         i(4, "[[ARGS]]"),

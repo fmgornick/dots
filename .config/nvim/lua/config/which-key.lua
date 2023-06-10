@@ -90,6 +90,7 @@ require("which-key").register({
         name = "lsp info",
         a = { vim.lsp.buf.code_action, "code action" },
         i = { ":LspInfo<cr>", "current buffer LSPs" },
+        l = { ":NullLsLog<cr>", "null-ls log" },
         m = { ":Mason<cr>", "mason info" },
         n = { ":NullLsInfo<cr>", "null-ls info" },
         r = { vim.lsp.buf.rename, "rename var" },
