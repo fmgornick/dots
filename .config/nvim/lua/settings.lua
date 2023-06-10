@@ -70,3 +70,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		require("vim.highlight").on_yank({ higroup = "Search", timeout = 100 })
 	end,
 })
+
+-- Populate loclist with the current buffer diagnostics
+-- vim.api.nvim_create_autocmd("DiagnosticChanged", {
+-- 	callback = function(_)
+-- 		vim.diagnostic.setloclist({ open = false })
+-- 	end,
+-- })

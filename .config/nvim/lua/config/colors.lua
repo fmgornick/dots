@@ -17,4 +17,4 @@ require("tokyonight").setup({
 	-- style = "day",
 })
 
-settheme("edge")
+settheme("everforest")

@@ -2,56 +2,111 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 require("which-key").register({
-    ["/"] = "toggle comment",
-    c = "close buffer",
+    ["/"] = { ":CommentToggle<cr>", "toggle comment" },
+    c = { ":bn|bd!#<cr>", "close buffer" },
     d = {
         name = "dap",
-        c = "continue",
-        b = "breakpoint",
-        B = "conditional bp",
-        e = "evaluate",
-        i = "step into",
-        l = "run last",
-        L = "set log point",
-        o = "step over",
-        O = "step out",
-        r = "open debug console",
-        R = "restart debugger",
-        u = "toggle dapui",
+        c = { require("dap").continue, "continue" },
+        b = { require("dap").toggle_breakpoint, "breakpoint" },
+        B = {
+            function()
+                require("dap").set_breakpoint(vim.fn.input("breakpoint condition: "))
+            end,
+            "conditional bp",
+        },
+        e = { require("dapui").eval, "evaluate" },
+        i = { require("dap").step_into, "step into" },
+        l = { require("dap").run_last, "run last" },
+        L = {
+            function()
+                require("dap").set_breakpoint(nil, nil, vim.fn.input("log message: "))
+            end,
+            "set log point",
+        },
+        o = { require("dap").step_over, "step over" },
+        O = { require("dap").step_out, "step out" },
+        r = { require("dap").repl.open, "open debug console" },
+        R = { require("dap").restart, "restart debugger" },
+        u = { require("dapui").toggle, "toggle dapui" },
     },
-    e = "file explorer",
+    e = {
+        function()
+            require("telescope").extensions.file_browser.file_browser({
+                cwd = vim.fn.expand("%:p:h"),
+            })
+        end,
+        "file explorer",
+    },
     f = {
         name = "fuzzy",
-        b = "file browser",
-        c = "nvim config files",
-        C = "color schemes",
-        f = "find files",
-        g = "live grep",
-        h = "help tags",
-        k = "keymaps",
-        o = "old files",
-        p = "projects",
+        b = {
+            function()
+                require("telescope").extensions.file_browser.file_browser({
+                    cwd = vim.fn.expand("%:p:h"),
+                })
+            end,
+            "file browser",
+        },
+        c = {
+            function()
+                require("telescope.builtin").find_files({
+                    cwd = "~/.config/nvim",
+                })
+            end,
+            "nvim config files",
+        },
+        C = { require("telescope.builtin").colorscheme, "color schemes" },
+        f = {
+            function()
+                require("telescope.builtin").find_files({
+                    cwd = "~/.config/nvim",
+                })
+            end,
+            "find files",
+        },
+        g = {
+            function()
+                require("telescope.builtin").live_grep({
+                    cwd = "~/.config/nvim",
+                })
+            end,
+            "live grep",
+        },
+        h = { require("telescope.builtin").help_tags, "help tags" },
+        k = { require("telescope.builtin").keymaps, "keymaps" },
+        o = { require("telescope.builtin").oldfiles, "old files" },
+        p = { require("telescope").extensions.projects.projects, "projects" },
+        q = { require("telescope.builtin").quickfix, "quickfix list" },
     },
+    h = { ":noh<cr>", "no highlight" },
     l = {
         name = "lsp info",
-        a = "code action",
-        i = "current buffer LSPs",
-        m = "mason info",
-        n = "null-ls info",
-        r = "rename var",
+        a = { vim.lsp.buf.code_action, "code action" },
+        i = { ":LspInfo<cr>", "current buffer LSPs" },
+        m = { ":Mason<cr>", "mason info" },
+        n = { ":NullLsInfo<cr>", "null-ls info" },
+        r = { vim.lsp.buf.rename, "rename var" },
     },
     p = {
         name = "packer",
-        s = "sync",
+        s = { require("packer").sync, "sync" },
     },
-    q = "quit",
-    r = "reload config",
+    q = { ":q!<cr>", "quit" },
+    Q = { ":qa!<cr>", "quit all" },
+    r = { ":source $MYVIMRC<cr>", "reload config" },
     t = {
         name = "terminal",
-        v = "vertical",
-        h = "horizontal",
+        h = { ":25 split<cr>:term<cr>i", "horizontal" },
+        v = { ":80 vsplit<cr>:term<cr>i", "vertical" },
     },
-    v = "list tasks",
-    w = "write",
-    y = "which_key_ignore",
-}, { prefix = "<leader>" })
+    w = { ":w<cr>", "write" },
+    y = {
+        name = "yank",
+        f = { ":let @+=expand('%:p')<cr>", "filepath" },
+        y = { "ggVGy<c-o>", "all contents" },
+    },
+}, { prefix = "<leader>", mode = "n" })
+
+require("which-key").register({
+    ["/"] = { ":CommentToggle<cr>", "toggle comment" },
+}, { prefix = "<leader>", mode = "v" })
