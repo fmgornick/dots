@@ -34,11 +34,3 @@ vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv")
 -- faster indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-
--- better functionality for 's' key
-vim.keymap.set("n", "s", ":HopChar2<cr>", { silent = true })
-vim.keymap.set("n", "S", ":HopWord<cr>", { silent = true })
-
--- easier cycling between buffers
-vim.keymap.set("n", "H", ":BufferLineCyclePrev<cr>")
-vim.keymap.set("n", "L", ":BufferLineCycleNext<cr>")

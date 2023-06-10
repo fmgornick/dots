@@ -2,6 +2,13 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 require("which-key").register({
+    H = { ":BufferLineCyclePrev<cr>", "previous buffer" },
+    L = { ":BufferLineCycleNext<cr>", "next buffer" },
+    s = { ":HopChar2<cr>", "hop char" },
+    S = { ":HopWord<cr>", "hop word" },
+}, { prefix = "", mode = "n" })
+
+require("which-key").register({
     ["/"] = { ":CommentToggle<cr>", "toggle comment" },
     c = { ":bn|bd!#<cr>", "close buffer" },
     d = {
