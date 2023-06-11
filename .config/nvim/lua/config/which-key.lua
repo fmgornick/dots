@@ -40,6 +40,7 @@ require("which-key").register({
         function()
             require("telescope").extensions.file_browser.file_browser({
                 cwd = vim.fn.expand("%:p:h"),
+                respect_gitignore = false,
             })
         end,
         "file explorer",
@@ -108,10 +109,19 @@ require("which-key").register({
         v = { ":80 vsplit<cr>:term<cr>i", "vertical" },
     },
     v = {
-        function()
-            require("telescope").extensions.vstask.tasks(require("telescope.themes").get_ivy())
-        end,
-        "list tasks",
+        name = "vstasks",
+        v = {
+            require("config.vstask").list_tasks,
+            "list tasks",
+        },
+        l = {
+            require("config.vstask").open_launch,
+            "open launch.json",
+        },
+        t = {
+            require("config.vstask").open_tasks,
+            "open task.json",
+        },
     },
     w = { ":w<cr>", "write" },
     y = {

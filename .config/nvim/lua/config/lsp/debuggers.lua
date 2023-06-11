@@ -4,6 +4,7 @@ local dapui = require("dapui")
 require("mason-nvim-dap").setup({
     ensure_installed = {
         "codelldb",
+        "cpptools",
         "js-debug-adapter",
     },
     automatic_installation = false,
@@ -14,37 +15,26 @@ vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "BlueSign"
 vim.fn.sign_define("DapStopped", { text = "", texthl = "YellowSign", linehl = "", numhl = "" })
 vim.fn.sign_define("DapLogPoint", { text = "", texthl = "GreenSign", linehl = "", numhl = "" })
 
-local function executable_path()
-    return vim.fn.input({
-        prompt = "executable path: ",
-        default = vim.fn.getcwd() .. "/",
-        completion = "file",
-    })
-end
+-- local function executable_path()
+--     return vim.fn.input({
+--         prompt = "executable path: ",
+--         default = vim.fn.getcwd() .. "/",
+--         completion = "file",
+--     })
+-- end
 
 dap.adapters.codelldb = {
     type = "server",
     port = "${port}",
     executable = {
-        command = vim.fn.stdpath("data") .. "/mason/bin/lldb-vscode",
+        command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
         args = { "--port", "${port}" },
     },
 }
 
-dap.configurations.c = {
-    {
-        name = "launch",
-        type = "codelldb",
-        request = "launch",
-        program = executable_path,
-        cwd = "${workspaceFolder}",
-        stopOnEntry = false,
-        externalConsole = false,
-        args = {},
-    },
-}
-dap.configurations.cpp = dap.configurations.c
-dap.configurations.rust = dap.configurations.c
+dap.configurations.c = {}
+dap.configurations.cpp = {}
+dap.configurations.rust = {}
 
 dapui.setup({
     layouts = {

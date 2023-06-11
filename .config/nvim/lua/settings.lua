@@ -60,20 +60,3 @@ vim.opt.showcmd = false
 vim.opt.ruler = false
 vim.opt.laststatus = 3
 vim.opt.autochdir = true
-
--- i like to see what i copy
-vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = "YankHighlight",
-	pattern = "*",
-	callback = function()
-		require("vim.highlight").on_yank({ higroup = "Search", timeout = 100 })
-	end,
-})
-
--- Populate loclist with the current buffer diagnostics
--- vim.api.nvim_create_autocmd("DiagnosticChanged", {
--- 	callback = function(_)
--- 		vim.diagnostic.setloclist({ open = false })
--- 	end,
--- })
