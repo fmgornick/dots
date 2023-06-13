@@ -6,6 +6,10 @@ require("which-key").register({
     L = { ":BufferLineCycleNext<cr>", "next buffer" },
     s = { ":HopChar2<cr>", "hop char" },
     S = { ":HopWord<cr>", "hop word" },
+    ["<F1>"] = { require("dap").step_into, "dap step in" },
+    ["<F2>"] = { require("dap").step_over, "dap step over" },
+    ["<F3>"] = { require("dap").step_out, "dap step out" },
+    ["<F4>"] = { require("dap").continue, "dap continue" },
 }, { prefix = "", mode = "n" })
 
 require("which-key").register({
