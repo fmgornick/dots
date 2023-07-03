@@ -18,6 +18,18 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+-- automatically enter insert mode on terminal buffer
+vim.api.nvim_create_augroup("InsertTerm", { clear = true })
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = "InsertTerm",
+    pattern = "*",
+    callback = function()
+        if vim.bo.buftype == "terminal" then
+            vim.cmd("startinsert")
+        end
+    end,
+})
+
 -- open certain files with skeleton code snippets
 -- REQUIRES LUASNIP
 local function skeleton(pattern, filetype, snippet)

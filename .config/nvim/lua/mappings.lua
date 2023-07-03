@@ -23,9 +23,11 @@ vim.keymap.set("n", "<c-t>n", ":tabnew %<cr>")
 vim.keymap.set("t", "<c-t>n", "<c-\\><c-n>:tabnew %<cr>i")
 
 -- terminal stuff
-vim.keymap.set("t", "<c-w>", "<c-\\><c-n><c-w>w")
 vim.keymap.set("t", "<c-q>", "<c-\\><c-n>:bd!<cr>")
-vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>w")
+vim.keymap.set("t", "<a-h>", "<c-\\><c-n><c-w>h")
+vim.keymap.set("t", "<a-j>", "<c-\\><c-n><c-w>j")
+vim.keymap.set("t", "<a-k>", "<c-\\><c-n><c-w>k")
+vim.keymap.set("t", "<a-l>", "<c-\\><c-n><c-w>k")
 
 -- chefs kiss
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv")
