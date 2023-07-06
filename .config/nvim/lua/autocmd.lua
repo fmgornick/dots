@@ -18,6 +18,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+-- wrap in readme and latex files
+vim.api.nvim_create_augroup("SetWrap", { clear = true })
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = { "*.md", "*.tex" },
+    group = "SetWrap",
+    command = "setlocal wrap linebreak nolist",
+})
+
 -- automatically enter insert mode on terminal buffer
 vim.api.nvim_create_augroup("InsertTerm", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
