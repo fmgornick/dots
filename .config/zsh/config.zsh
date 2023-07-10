@@ -1,5 +1,8 @@
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+path+="/opt/homebrew/bin"
+path+="/usr/local/sbin:$PATH"
+path+="$HOME/.cargo/bin:$PATH"
+export PATH
+
 export ZSH=$HOME/.config/zsh
 export EDITOR="nvim"
 
