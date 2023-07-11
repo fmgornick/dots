@@ -1,121 +1,99 @@
-(setq user-init-file "~/.config/emacs/init.el")
-(setq user-emacs-directory "~/.local/share/emacs/")
-(setq org-preview-latex-image-directory "~/.cache/emacs/ltximg/")
+(setq user-init-file                    "~/.config/emacs/init.el"
+      user-emacs-directory              "~/.local/share/emacs/"
+      org-preview-latex-image-directory "~/.cache/emacs/ltximg/")
 
-      (setq image-types (cons 'svg image-types))
+(setq image-types (cons 'svg image-types))
 
-      (menu-bar-mode -1)
-      (scroll-bar-mode -1)
-      (tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
 
-      (setq tab-width 2)
-      (setq ring-bell-function 'ignore)
-      (setq visible-bell t)
-      (setq visible-cursor nil)
+(setq tab-width 2)
+(setq ring-bell-function 'ignore)
+(setq visible-bell t)
+(setq visible-cursor nil)
 
-      (setf dired-kill-when-opening-new-dired-buffer t)
-      (setq debug-on-error t)
-      ;; (setq browse-url-browser-function 'eww-browse-url)
+(setf dired-kill-when-opening-new-dired-buffer t)
+(setq debug-on-error t)
+;; (setq browse-url-browser-function 'eww-browse-url)
 
-      (defun reload ()
-	      "reload emacs configuration"
-	      (interactive)
-	      (load-file user-init-file))
+(defun reload ()
+	"reload emacs configuration"
+	(interactive)
+	(load-file user-init-file))
 
-      (global-set-key (kbd "C-S-w h")  'windmove-left)
-      (global-set-key (kbd "C-S-w j")  'windmove-down)
-      (global-set-key (kbd "C-S-w k")    'windmove-up)
-      (global-set-key (kbd "C-S-w l") 'windmove-right)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(defvar elpaca-installer-version 0.5)
-(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
-(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
-(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-			      :ref nil
-			      :files (:defaults (:exclude "extensions"))
-			      :build (:not elpaca--activate-package)))
-(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
-       (build (expand-file-name "elpaca/" elpaca-builds-directory))
-       (order (cdr elpaca-order))
-       (default-directory repo))
-  (add-to-list 'load-path (if (file-exists-p build) build repo))
-  (unless (file-exists-p repo)
-    (make-directory repo t)
-    (when (< emacs-major-version 28) (require 'subr-x))
-    (condition-case-unless-debug err
-	(if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-		 ((zerop (call-process "git" nil buffer t "clone"
-				       (plist-get order :repo) repo)))
-		 ((zerop (call-process "git" nil buffer t "checkout"
-				       (or (plist-get order :ref) "--"))))
-		 (emacs (concat invocation-directory invocation-name))
-		 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-				       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-		 ((require 'elpaca))
-		 ((elpaca-generate-autoloads "elpaca" repo)))
-	    (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-	  (error "%s" (with-current-buffer buffer (buffer-string))))
-      ((error) (warn "%s" err) (delete-directory repo 'recursive))))
-  (unless (require 'elpaca-autoloads nil t)
-    (require 'elpaca)
-    (elpaca-generate-autoloads "elpaca" repo)
-    (load "./elpaca-autoloads")))
-(add-hook 'after-init-hook #'elpaca-process-queues)
-(elpaca `(,@elpaca-order))
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
-(elpaca elpaca-use-package
-  (elpaca-use-package-mode)
-  (setq elpaca-use-package-by-default t))
+(use-package browse-kill-ring
+  :config (browse-kill-ring-default-keybindings))
 
-(elpaca browse-kill-ring
-	(browse-kill-ring-default-keybindings))
+(use-package exec-path-from-shell
+  :config (exec-path-from-shell-initialize))
 
-(elpaca exec-path-from-shell)
+(use-package pdf-tools
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  (pdf-tools-install)
+  (pdf-loader-install))
 
-(elpaca pdf-tools
-	(pdf-tools-install)
-	(pdf-loader-install))
-(elpaca org-noter)
-(elpaca org-pdftools)
-(elpaca org-noter-pdftools)
+(use-package nov
+  :mode ("\\.epub\\'" . nov-mode))
 
-(elpaca nov
-	(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+(use-package elfeed
+  :bind ("C-x w" . elfeed))
 
-(elpaca elfeed
-	(global-set-key (kbd "C-x w") 'elfeed))
+(use-package evil
+  :config (evil-mode 1))
 
-;;  (unless (package-installed-p 'evil)
-;;    (package-install 'evil))
+(use-package evil-org
+  :after org
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys)
+  (add-hook 'org-mode-hook 'evil-org-mode))
 
-;;  (require 'evil)
-;;  (evil-mode 1)
+(define-key evil-normal-state-map (kbd "H") 'evil-window-left)
+(define-key evil-normal-state-map (kbd "J") 'evil-window-down)
+(define-key evil-normal-state-map (kbd "K") 'evil-window-up)
+(define-key evil-normal-state-map (kbd "L") 'evil-window-right)
 
-;;  (custom-set-variables
-;;  '(package-selected-packages '(evil)))
-;;  (custom-set-faces)
+(define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
+(define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-increase-height)
+(define-key evil-normal-state-map (kbd "C-S-k") 'evil-window-decrease-height)
+(define-key evil-normal-state-map (kbd "C-S-l") 'evil-window-increase-width)
 
-;;  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-;;  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-;;  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-;;  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+(define-key evil-visual-state-map "J" (concat ":m '>+1" (kbd "RET") "gv=gv"))
+(define-key evil-visual-state-map "K" (concat ":m '<-2" (kbd "RET") "gv=gv"))
 
-;;  (define-key evil-normal-state-map (kbd "C-S-h") 'evil-window-decrease-width)
-;;  (define-key evil-normal-state-map (kbd "C-S-j") 'evil-window-increase-height)
-;;  (define-key evil-normal-state-map (kbd "C-S-k") 'evil-window-decrease-height)
-;;  (define-key evil-normal-state-map (kbd "C-S-l") 'evil-window-increase-width)
+(define-key evil-visual-state-map (kbd "<")
+  (lambda ()
+    (interactive)
+    (evil-shift-left (region-beginning) (region-end))
+    (evil-normal-state)
+    (evil-visual-restore)))
 
-;;  (define-key evil-visual-state-map "J" (concat ":m '>+1" (kbd "RET") "gv=gv"))
-;;  (define-key evil-visual-state-map "K" (concat ":m '<-2" (kbd "RET") "gv=gv"))
+(define-key evil-visual-state-map (kbd ">")
+  (lambda ()
+    (interactive) 
+    (evil-shift-right (region-beginning) (region-end))
+    (evil-normal-state)
+    (evil-visual-restore)))
 
-;;  (define-key evil-visual-state-map (kbd "<") (lambda ()
-;;  (interactive)
-;;  (evil-shift-left (region-beginning) (region-end))
-;;  (evil-normal-state)
-;;  (evil-visual-restore)))
-;;  (define-key evil-visual-state-map (kbd ">") (lambda ()
-;; (interactive) 
-;;  (evil-shift-right (region-beginning) (region-end))
-;;  (evil-normal-state)
-;;  (evil-visual-restore)))
+(define-key evil-insert-state-map (kbd "C-b") 'backward-char)
+(define-key evil-insert-state-map (kbd "C-n") 'next-line)
+(define-key evil-insert-state-map (kbd "C-p") 'previous-line)
+(define-key evil-insert-state-map (kbd "C-f") 'forward-char)
