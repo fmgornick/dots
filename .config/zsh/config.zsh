@@ -1,6 +1,7 @@
 path+="/opt/homebrew/bin"
-path+="/usr/local/sbin:$PATH"
-path+="$HOME/.cargo/bin:$PATH"
+path+="/usr/local/sbin"
+path+="$HOME/.cargo/bin"
+path+="$HOME/Library/Python/3.9/bin"
 export PATH
 
 export ZSH=$HOME/.config/zsh
@@ -24,11 +25,7 @@ ssha() {
 
 # make command much shorter for sshing into cse labs machine
 alias sshg="ssh gorni025@csel-cuda-04.cselabs.umn.edu"
-
-# port forwarding
-sshp() {
-	ssh -L "$1":127.0.0.1:"$1" gorni025@csel-cuda-04.cselabs.umn.edu
-}
+sshp() { ssh -L "$1":127.0.0.1:"$1" gorni025@csel-cuda-04.cselabs.umn.edu; }
 
 # alias for all the different scp commands
 stl() { scp gorni025@csel-cuda-04.cselabs.umn.edu:"$1" "$2"; }
