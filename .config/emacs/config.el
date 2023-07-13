@@ -9,7 +9,7 @@
 (tool-bar-mode -1)
 (electric-pair-mode 1)
 
-(setq-default tab-width 4)
+(setq-default tab-width 2)
 (setq tab-stop-list '(4 8 12))
 (setq-default indent-tabs-mode nil)
 ;; (setq indent-line-function 'insert-tab)
@@ -85,6 +85,7 @@
   (evil-org-agenda-set-keys))
 
 (evil-set-undo-system 'undo-redo)
+(setq evil-shift-width tab-width)
 
 (define-key evil-normal-state-map (kbd "H") 'evil-window-left)
 (define-key evil-normal-state-map (kbd "J") 'evil-window-down)
@@ -113,7 +114,7 @@
     (evil-normal-state)
     (evil-visual-restore)))
 
+(define-key evil-insert-state-map (kbd "C-f") 'forward-char)
 (define-key evil-insert-state-map (kbd "C-b") 'backward-char)
 (define-key evil-insert-state-map (kbd "C-n") 'next-line)
 (define-key evil-insert-state-map (kbd "C-p") 'previous-line)
-(define-key evil-insert-state-map (kbd "C-f") 'forward-char)

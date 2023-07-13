@@ -17,7 +17,7 @@
   (tool-bar-mode -1)
   (electric-pair-mode 1)
 
-  (setq-default tab-width 2)
+  (setq-default tab-width 4)
   (setq tab-stop-list '(4 8 12))
   (setq-default indent-tabs-mode nil)
   ;; (setq indent-line-function 'insert-tab)
