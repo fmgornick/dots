@@ -62,5 +62,6 @@ return require("packer").startup(function(use)
     use({ "folke/which-key.nvim" })                                        -- shortcut cheatsheet
     use({ "SmiteshP/nvim-navic" })                                         -- shows current code context
     use({ "EthanJWright/vs-tasks.nvim" })                                  -- automated building tool
+    use({ "michaelb/sniprun", run = "sh ./install.sh" })
     -- stylua: ignore end
 end)

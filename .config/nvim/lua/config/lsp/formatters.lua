@@ -34,12 +34,29 @@ null_ls.setup({
 
     sources = {
         formatting.autopep8,
-        formatting.clang_format.with({ extra_args = { "--style={BasedOnStyle: LLVM, IndentWidth: 4}" } }),
+        formatting.clang_format.with({
+            filetypes = { "c", "cpp" },
+            extra_args = {
+                "--style={BasedOnStyle: llvm, IndentWidth: 4}",
+            },
+        }),
         formatting.latexindent,
-        formatting.prettier.with({ extra_args = { "--tab-width 4", "--bracket-same-line" } }),
+        formatting.prettier.with({
+            extra_args = {
+                "--tab-width 4",
+                "--bracket-same-line",
+            },
+        }),
         formatting.rustfmt,
-        formatting.shfmt.with({ filetypes = { "bash", "sh", "zsh" } }),
-        formatting.stylua,
+        formatting.shfmt.with({
+            filetypes = { "bash", "sh", "zsh" },
+        }),
+        formatting.stylua.with({
+            extra_args = {
+                "--quote-style=AutoPreferDouble",
+                "--sort-requires",
+            },
+        }),
         code_actions.gitsigns,
     },
 })

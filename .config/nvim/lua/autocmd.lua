@@ -9,9 +9,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- allow save if in not-yet-created directory
-vim.api.nvim_create_augroup("Mkdir", { clear = true })
+vim.api.nvim_create_augroup("MkDir", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = "YankHighlight",
+    group = "MkDir",
     pattern = "*",
     callback = function()
         vim.fn.mkdir(vim.fn.expand("%:p:h"), "p")
