@@ -6,6 +6,7 @@ require("mason-lspconfig").setup({
         "bashls",
         "clangd",
         "gopls",
+        "kotlin_language_server",
         "lua_ls",
         "pyright",
         "rust_analyzer",
