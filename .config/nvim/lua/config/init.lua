@@ -1,9 +1,9 @@
 require("nvim-autopairs").setup()
-require("bufferline").setup()
 require("Comment").setup()
 require("hop").setup()
 
 require("config.alpha")
+require("config.bufferline")
 require("config.colors")
 require("config.gitsigns")
 require("config.telescope")

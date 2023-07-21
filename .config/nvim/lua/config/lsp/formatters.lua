@@ -44,7 +44,7 @@ null_ls.setup({
         formatting.prettier.with({
             extra_args = {
                 -- "--tab-width=4",
-                "--bracket-same-line",
+                -- "--bracket-same-line",
             },
         }),
         formatting.rustfmt,

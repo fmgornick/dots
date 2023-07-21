@@ -117,8 +117,24 @@ require("which-key").register({
     r = { ":source $MYVIMRC<cr>", "reload config" },
     t = {
         name = "terminal",
-        h = { ":25 split<cr>:term<cr>i", "horizontal" },
-        v = { ":80 vsplit<cr>:term<cr>i", "vertical" },
+        h = {
+            function()
+                vim.cmd("25 split")
+                vim.cmd("cd" .. vim.lsp.buf.list_workspace_folders()[1])
+                vim.cmd("term")
+                vim.cmd("startinsert")
+            end,
+            "vertical",
+        },
+        v = {
+            function()
+                vim.cmd("80 vsplit")
+                vim.cmd("cd" .. vim.lsp.buf.list_workspace_folders()[1])
+                vim.cmd("term")
+                vim.cmd("startinsert")
+            end,
+            "vertical",
+        },
     },
     v = {
         name = "vstasks",
