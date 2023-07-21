@@ -43,7 +43,7 @@ null_ls.setup({
         formatting.latexindent,
         formatting.prettier.with({
             extra_args = {
-                "--tab-width 4",
+                -- "--tab-width=4",
                 "--bracket-same-line",
             },
         }),

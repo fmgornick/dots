@@ -1,12 +1,11 @@
 require("nvim-autopairs").setup()
 require("bufferline").setup()
-require("nvim_comment").setup()
+require("Comment").setup()
 require("hop").setup()
 
 require("config.alpha")
 require("config.colors")
 require("config.gitsigns")
-require("config.projects")
 require("config.telescope")
 require("config.treesitter")
 require("config.vimtex")

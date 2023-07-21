@@ -29,10 +29,9 @@ return require("packer").startup(function(use)
     use({ "saadparwaiz1/cmp_luasnip" })
     use({ "rafamadriz/friendly-snippets" })
 
-    -- fuzzy finder + extensions
+    -- fuzzy finder + extension(s)
     use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" })
     use({ "nvim-telescope/telescope-file-browser.nvim" })
-    use({ "ahmedkhalf/project.nvim", as = "projects" })
 
     -- git integration
     use({ "lewis6991/gitsigns.nvim" })
@@ -54,7 +53,7 @@ return require("packer").startup(function(use)
     use({ "folke/trouble.nvim", run = "TroubleToggle" })                   -- workspace diagnostics
     use({ "goolord/alpha-nvim" })                                          -- cute little nvim dashboard
     use({ "windwp/nvim-autopairs" })                                       -- why tf is this not default
-    use({ "terrortylor/nvim-comment" })                                    -- this too oml
+    use({ "numToStr/Comment.nvim" })                                       -- this too oml
     use({ "akinsho/bufferline.nvim", tag = "*" })                          -- i like the tab look for buffers
     use({ "phaazon/hop.nvim", as = "hop", branch = "v2" })                 -- who uses default 's' key anyway
     use({ "lervag/vimtex" })                                               -- compiles latex files

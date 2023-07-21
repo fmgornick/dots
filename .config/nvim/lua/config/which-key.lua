@@ -10,10 +10,11 @@ require("which-key").register({
     ["<F2>"] = { require("dap").step_over, "dap step over" },
     ["<F3>"] = { require("dap").step_out, "dap step out" },
     ["<F4>"] = { require("dap").continue, "dap continue" },
+    ["<S-LeftMouse>"] = { "<LeftMouse>:DapToggleBreakpoint<cr>", "toggle break" },
 }, { prefix = "", mode = "n" })
 
 require("which-key").register({
-    ["/"] = { ":CommentToggle<cr>", "toggle comment" },
+    ["/"] = { require("Comment.api").toggle.linewise.current, "toggle comment" },
     c = { ":bn|bd!#<cr>", "close buffer" },
     d = {
         name = "dap",
@@ -87,7 +88,14 @@ require("which-key").register({
         h = { require("telescope.builtin").help_tags, "help tags" },
         k = { require("telescope.builtin").keymaps, "keymaps" },
         o = { require("telescope.builtin").oldfiles, "old files" },
-        p = { require("telescope").extensions.projects.projects, "projects" },
+        p = {
+            function()
+                require("telescope.builtin").find_files({
+                    cwd = vim.lsp.buf.list_workspace_folders()[1],
+                })
+            end,
+            "project files",
+        },
         q = { require("telescope.builtin").quickfix, "quickfix list" },
     },
     h = { ":noh<cr>", "no highlight" },
@@ -136,5 +144,8 @@ require("which-key").register({
 }, { prefix = "<leader>", mode = "n" })
 
 require("which-key").register({
-    ["/"] = { ":CommentToggle<cr>", "toggle comment" },
+    ["/"] = {
+        "<Plug>(comment_toggle_linewise_visual)<cr>",
+        "toggle comment",
+    },
 }, { prefix = "<leader>", mode = "v" })

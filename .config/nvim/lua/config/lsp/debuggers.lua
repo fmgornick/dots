@@ -25,9 +25,10 @@ local dap_path = vim.fn.stdpath("data") .. "/mason/bin/"
 
 dap.adapters.lldb = {
     type = "executable",
-    command = "/usr/local/opt/llvm/bin/lldb-vscode",
+    command = "/opt/homebrew/opt/llvm/bin/lldb-vscode",
     name = "lldb",
 }
+
 dap.adapters.codelldb = {
     type = "server",
     host = "localhost",
