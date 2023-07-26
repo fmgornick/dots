@@ -11,7 +11,7 @@ source "$ZSH/omz.sh"
 source "$ZSH/prompt.zsh"
 
 bindkey -v
-bindkey '^[[Z' autosuggest-accept
+bindkey '^N' autosuggest-accept
 
 # SHORTCUTS
 alias v="nvim"
@@ -25,7 +25,11 @@ ssha() {
 
 # make command much shorter for sshing into cse labs machine
 alias sshg="ssh gorni025@csel-cuda-04.cselabs.umn.edu"
-sshp() { ssh -L "$1":127.0.0.1:"$1" gorni025@csel-cuda-04.cselabs.umn.edu; }
+
+# port forwarding
+sshp() {
+	ssh -L "$1":127.0.0.1:"$1" gorni025@csel-cuda-04.cselabs.umn.edu
+}
 
 # alias for all the different scp commands
 stl() { scp gorni025@csel-cuda-04.cselabs.umn.edu:"$1" "$2"; }
