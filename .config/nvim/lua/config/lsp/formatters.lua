@@ -37,7 +37,18 @@ null_ls.setup({
         formatting.clang_format.with({
             filetypes = { "c", "cpp" },
             extra_args = {
-                "--style={BasedOnStyle: llvm, IndentWidth: 4}",
+                string
+                    .gsub(
+                        [[--style={
+                            BasedOnStyle: llvm,
+                            ColumnLimit: 100,
+                            AllowShortCaseLabelsOnASingleLine: true,
+                            AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+                        }]],
+                        "\n +",
+                        " "
+                    )
+                    :sub(0, -1),
             },
         }),
         formatting.latexindent,
