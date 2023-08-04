@@ -8,9 +8,9 @@ require("mason-null-ls").setup({
     ensure_installed = {
         "autopep8",
         "clang_format",
+        "gofumpt",
         "latexindent",
         "prettier",
-        "rustfmt",
         "shfmt",
         "stylua",
     },
@@ -51,6 +51,7 @@ null_ls.setup({
                     :sub(0, -1),
             },
         }),
+        formatting.gofumpt,
         formatting.latexindent,
         formatting.prettier.with({
             extra_args = {

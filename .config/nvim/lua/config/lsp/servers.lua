@@ -6,6 +6,8 @@ require("mason-lspconfig").setup({
         "bashls",
         "clangd",
         "gopls",
+        "golangci_lint_ls",
+        "jsonls",
         "kotlin_language_server",
         "lua_ls",
         "pyright",

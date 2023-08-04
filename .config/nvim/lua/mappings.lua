@@ -30,6 +30,9 @@ vim.keymap.set("t", "∆", "<c-\\><c-n><c-w>j")
 vim.keymap.set("t", "˚", "<c-\\><c-n><c-w>k")
 vim.keymap.set("t", "¬", "<c-\\><c-n><c-w>l")
 
+-- frick dollar sighns
+vim.keymap.set("n", "E", "$")
+
 -- chefs kiss
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv")

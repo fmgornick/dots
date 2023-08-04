@@ -4,6 +4,7 @@ local dapui = require("dapui")
 require("mason-nvim-dap").setup({
     ensure_installed = {
         "codelldb",
+        "go",
         "js",
     },
     automatic_installation = false,
@@ -23,9 +24,13 @@ local function executable_path()
 end
 local dap_path = vim.fn.stdpath("data") .. "/mason/bin/"
 
+-- c --
+-- make sure llvm installed: brew install llvm
+-- > echo $(brew --prefix)/opt/llvm/bin/lldb-vscode | pbcopy
+
 dap.adapters.lldb = {
     type = "executable",
-    command = "/usr/local/opt/llvm/bin/lldb-vscode",
+    command = "/opt/homebrew/opt/llvm/bin/lldb-vscode",
     name = "lldb",
 }
 
@@ -36,16 +41,6 @@ dap.adapters.codelldb = {
     executable = {
         command = dap_path .. "codelldb",
         args = { "--port", "${port}" },
-    },
-}
-
-require("dap").adapters["pwa-node"] = {
-    type = "server",
-    host = "localhost",
-    port = "${port}",
-    executable = {
-        command = "node",
-        args = { dap_path .. "js-debug-adapter", "${port}" },
     },
 }
 
@@ -63,8 +58,44 @@ dap.configurations.c = {
 }
 dap.configurations.cpp = dap.configurations.c
 dap.configurations.rust = dap.configurations.c
+-------
 
-require("dap").configurations.javascript = {
+-- go --
+-- make sure delve and vscode-go installed
+-- delve: go install github.com/go-delve/delve/cmd/dlv@latest
+--      > echo $(go env GOPATH)/bin/dlv | pbcopy
+-- vscode-go: git clone https://github.com/golang/vscode-go; cd vscode-go
+--            npm install; npm run compile
+
+dap.adapters.go = {
+    type = "executable",
+    command = "node",
+    args = { os.getenv("HOME") .. "/dev/golang/vscode-go/dist/debugAdapter.js" },
+}
+dap.configurations.go = {
+    {
+        type = "go",
+        name = "debug",
+        request = "launch",
+        showLog = false,
+        program = "${file}",
+        dlvToolPath = "/Users/Z00B3R5/go/bin/dlv",
+    },
+}
+--------
+
+-- javascript --
+dap.adapters["pwa-node"] = {
+    type = "server",
+    host = "localhost",
+    port = "${port}",
+    executable = {
+        command = "node",
+        args = { dap_path .. "js-debug-adapter", "${port}" },
+    },
+}
+
+dap.configurations.javascript = {
     {
         name = "default js-debug",
         type = "pwa-node",
@@ -73,6 +104,7 @@ require("dap").configurations.javascript = {
         cwd = "${workspaceFolder}",
     },
 }
+----------------
 
 dapui.setup({
     layouts = {
