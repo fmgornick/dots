@@ -3,9 +3,6 @@ vim.g.mapleader = " "
 -- no format save
 vim.keymap.set("n", "<c-s>", ":noa w<cr>")
 
--- don't always want to delete into register
-vim.keymap.set("n", "x", '"_x')
-
 -- window navigation
 vim.keymap.set("n", "<c-h>", "<c-w>h")
 vim.keymap.set("n", "<c-j>", "<c-w>j")
@@ -30,9 +27,6 @@ vim.keymap.set("t", "∆", "<c-\\><c-n><c-w>j")
 vim.keymap.set("t", "˚", "<c-\\><c-n><c-w>k")
 vim.keymap.set("t", "¬", "<c-\\><c-n><c-w>l")
 
--- frick dollar sighns
-vim.keymap.set("n", "E", "$")
-
 -- chefs kiss
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv")
@@ -40,3 +34,6 @@ vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv")
 -- faster indentation
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+
+-- for clicking on links (mac)
+vim.keymap.set("n", "<M-LeftMouse>", "<LeftMouse>")

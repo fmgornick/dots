@@ -35,7 +35,7 @@ vim.opt.guifont = "monospace:h17"
 vim.opt.title = true
 
 -- keep cursor centered more while scrolling
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 8
 vim.opt.signcolumn = "yes"
 
@@ -55,8 +55,9 @@ vim.opt.showmode = false
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.opt.cursorline = false
-vim.opt.showcmd = false
-vim.opt.ruler = false
-vim.opt.laststatus = 3
 vim.opt.autochdir = true
+vim.opt.cursorline = false
+vim.opt.laststatus = 3
+vim.opt.ruler = false
+vim.opt.showcmd = false
+vim.opt.showtabline = 0

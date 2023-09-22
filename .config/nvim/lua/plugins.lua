@@ -39,28 +39,29 @@ return require("packer").startup(function(use)
 
   -- colorschemes
   use({ "catppuccin/nvim", as = "catppuccin" })
-  use({ "morhetz/gruvbox" })
   use({ "folke/tokyonight.nvim", as = "tokyonight" })
+  use({ "marko-cerovac/material.nvim" })
   use({ "Mofiqul/dracula.nvim" })
+  use({ "morhetz/gruvbox" })
   use({ "nyoom-engineering/oxocarbon.nvim" })
   use({ "sainnhe/edge" })
   use({ "sainnhe/everforest" })
 
   -- OTHER PLUGINS --
   -- stylua: ignore start
-  use({ "nvim-treesitter/nvim-treesitter", run = "TSUpdate" })                 -- syntax highlighting
-  use({ "nvim-lualine/lualine.nvim" })                                         -- pretty statusline (with colorscheme)
-  use({ "folke/trouble.nvim", run = "TroubleToggle" })                         -- workspace diagnostics
-  use({ "goolord/alpha-nvim" })                                                -- cute little nvim dashboard
-  use({ "windwp/nvim-autopairs" })                                             -- why tf is this not default
-  use({ "numToStr/Comment.nvim" })                                             -- this too oml
-  use({ "akinsho/bufferline.nvim", tag = "*" })                                -- i like the tab look for buffers
-  use({ "phaazon/hop.nvim", as = "hop", branch = "v2" })                       -- who uses default 's' key anyway
-  use({ "lervag/vimtex" })                                                     -- compiles latex files
-  use({ "iamcco/markdown-preview.nvim", run = vim.fn["mkdp#util#install"] })   -- markdown viewer
-  use({ "folke/which-key.nvim" })                                              -- shortcut cheatsheet
-  use({ "SmiteshP/nvim-navic" })                                               -- shows current code context
-  use({ "EthanJWright/vs-tasks.nvim" })                                        -- automated building tool
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })              -- syntax highlighting
+  use({ "nvim-lualine/lualine.nvim" })                                       -- pretty statusline (with colorscheme)
+  use({ "folke/trouble.nvim", run = "TroubleToggle" })                       -- workspace diagnostics
+  use({ "goolord/alpha-nvim" })                                              -- cute little nvim dashboard
+  use({ "windwp/nvim-autopairs" })                                           -- why tf is this not default
+  use({ "numToStr/Comment.nvim" })                                           -- this too oml
+  use({ "ThePrimeagen/harpoon" })                                            -- need that creamy coconut oil
+  use({ "phaazon/hop.nvim", as = "hop", branch = "v2" })                     -- who uses default 's' key anyway
+  use({ "lervag/vimtex" })                                                   -- compiles latex files
+  use({ "iamcco/markdown-preview.nvim", run = vim.fn["mkdp#util#install"] }) -- markdown viewer
+  use({ "folke/which-key.nvim" })                                            -- shortcut cheatsheet
+  use({ "SmiteshP/nvim-navic" })                                             -- shows current code context
+  use({ "EthanJWright/vs-tasks.nvim" })                                      -- automated building tool
   use({ "michaelb/sniprun", run = "sh ./install.sh" })
   -- stylua: ignore end
 end)

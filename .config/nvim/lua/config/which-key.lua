@@ -2,8 +2,8 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 require("which-key").register({
-  H = { ":BufferLineCyclePrev<cr>", "previous buffer" },
-  L = { ":BufferLineCycleNext<cr>", "next buffer" },
+  H = { require("harpoon.ui").nav_prev, "harpoon previous buffer" },
+  L = { require("harpoon.ui").nav_next, "harpoon next buffer" },
   s = { ":HopChar2<cr>", "hop char" },
   S = { ":HopWord<cr>", "hop word" },
   ["<F1>"] = { require("dap").step_into, "dap step in" },
@@ -15,6 +15,7 @@ require("which-key").register({
 
 require("which-key").register({
   ["/"] = { require("Comment.api").toggle.linewise.current, "toggle comment" },
+  b = { require("harpoon.ui").toggle_quick_menu, "list marked buffers" },
   c = { ":bn|bd!#<cr>", "close buffer" },
   d = {
     name = "dap",
@@ -52,14 +53,7 @@ require("which-key").register({
   },
   f = {
     name = "fuzzy",
-    b = {
-      function()
-        require("telescope").extensions.file_browser.file_browser({
-          cwd = vim.fn.expand("%:p:h"),
-        })
-      end,
-      "file browser",
-    },
+    b = { require("telescope.builtin").buffers, "buffer browser" },
     c = {
       function()
         require("telescope.builtin").find_files({
@@ -69,33 +63,42 @@ require("which-key").register({
       "nvim config files",
     },
     C = { require("telescope.builtin").colorscheme, "color schemes" },
+    d = { require("telescope.builtin").diagnostics, "buffer diagnostics" },
     f = {
-      function()
-        require("telescope.builtin").find_files({
-          cwd = vim.fn.expand("%:p:h"),
-        })
-      end,
-      "find files",
-    },
-    g = {
-      function()
-        require("telescope.builtin").live_grep({
-          cwd = vim.fn.expand("%:p:h"),
-        })
-      end,
-      "live grep",
-    },
-    h = { require("telescope.builtin").help_tags, "help tags" },
-    k = { require("telescope.builtin").keymaps, "keymaps" },
-    o = { require("telescope.builtin").oldfiles, "old files" },
-    p = {
       function()
         require("telescope.builtin").find_files({
           cwd = vim.lsp.buf.list_workspace_folders()[1],
         })
       end,
-      "project files",
+      "find project files",
     },
+    F = {
+      function()
+        require("telescope.builtin").find_files({
+          cwd = vim.fn.expand("%:p:h"),
+        })
+      end,
+      "find folder files",
+    },
+    g = {
+      function()
+        require("telescope.builtin").live_grep({
+          cwd = vim.lsp.buf.list_workspace_folders()[1],
+        })
+      end,
+      "grep project files",
+    },
+    G = {
+      function()
+        require("telescope.builtin").live_grep({
+          cwd = vim.fn.expand("%:p:h"),
+        })
+      end,
+      "grep folder files",
+    },
+    h = { require("telescope.builtin").help_tags, "help tags" },
+    k = { require("telescope.builtin").keymaps, "keymaps" },
+    o = { require("telescope.builtin").oldfiles, "old files" },
     q = { require("telescope.builtin").quickfix, "quickfix list" },
   },
   h = { ":noh<cr>", "no highlight" },
@@ -108,6 +111,7 @@ require("which-key").register({
     n = { ":NullLsInfo<cr>", "null-ls info" },
     r = { vim.lsp.buf.rename, "rename var" },
   },
+  m = { require("harpoon.mark").add_file, "mark buffer" },
   p = {
     name = "packer",
     s = { require("packer").sync, "sync" },
@@ -119,16 +123,16 @@ require("which-key").register({
     name = "terminal",
     h = {
       function()
-        vim.cmd("25 split")
+        vim.cmd("botright 24 split")
         vim.cmd("cd" .. vim.lsp.buf.list_workspace_folders()[1])
         vim.cmd("term")
         vim.cmd("startinsert")
       end,
-      "vertical",
+      "horizontal",
     },
     v = {
       function()
-        vim.cmd("80 vsplit")
+        vim.cmd("botright 80 vsplit")
         vim.cmd("cd" .. vim.lsp.buf.list_workspace_folders()[1])
         vim.cmd("term")
         vim.cmd("startinsert")
@@ -152,6 +156,14 @@ require("which-key").register({
     },
   },
   w = { ":w<cr>", "write" },
+  x = {
+    name = "exec trouble",
+    d = { require("config.trouble").open_document_diagnostics, "document dignostics" },
+    l = { require("config.trouble").open_loclist, "loclist" },
+    q = { require("config.trouble").open_quickfix, "quickfix" },
+    w = { require("config.trouble").open_workspace_diagnostics, "workspace diagnostics" },
+    x = { require("config.trouble").open, "open trouble" },
+  },
   y = {
     name = "yank",
     f = { ":let @+=expand('%:p')<cr>", "filepath" },

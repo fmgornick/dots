@@ -89,11 +89,6 @@ _G.packer_plugins = {
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/alpha-nvim",
     url = "https://github.com/goolord/alpha-nvim"
   },
-  ["bufferline.nvim"] = {
-    loaded = true,
-    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
-    url = "https://github.com/akinsho/bufferline.nvim"
-  },
   catppuccin = {
     loaded = true,
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/catppuccin",
@@ -139,6 +134,11 @@ _G.packer_plugins = {
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/gruvbox",
     url = "https://github.com/morhetz/gruvbox"
   },
+  harpoon = {
+    loaded = true,
+    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
+  },
   hop = {
     loaded = true,
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/hop",
@@ -183,6 +183,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["material.nvim"] = {
+    loaded = true,
+    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/material.nvim",
+    url = "https://github.com/marko-cerovac/material.nvim"
   },
   ["neodev.nvim"] = {
     loaded = true,
