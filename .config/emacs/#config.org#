@@ -15,7 +15,7 @@
   (scroll-bar-mode -1)
   (menu-bar-mode -1)
   (tool-bar-mode -1)
-  (electric-pair-mode 1)
+  (electric-pair-mode 1)pp
 
   (setq-default tab-width 2)
   (setq tab-stop-list '(4 8 12))
@@ -58,6 +58,9 @@
   (straight-use-package 'use-package)
   (setq straight-use-package-by-default t)
 #+end_src
+
+#+RESULTS:
+: t
 
 ** packages (installed with straight.el)
 #+begin_src emacs-lisp
