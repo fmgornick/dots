@@ -31,7 +31,7 @@ require("lualine").setup({
     lualine_c = {},
     lualine_x = {},
     lualine_y = { "windows" },
-    lualine_z = { "searchcount", "selectioncount" },
+    lualine_z = { "tabs", "searchcount", "selectioncount" },
   },
   winbar = {},
   inactive_winbar = {},

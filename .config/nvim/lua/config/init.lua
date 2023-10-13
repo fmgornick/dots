@@ -2,6 +2,7 @@ require("nvim-autopairs").setup()
 require("Comment").setup()
 require("hop").setup()
 require("harpoon").setup()
+require("mason").setup()
 
 require("config.alpha")
 require("config.colors")

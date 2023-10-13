@@ -11,6 +11,33 @@ require("which-key").register({
   ["<F3>"] = { require("dap").step_out, "dap step out" },
   ["<F4>"] = { require("dap").continue, "dap continue" },
   ["<S-LeftMouse>"] = { "<LeftMouse>:DapToggleBreakpoint<cr>", "toggle break" },
+  ["`"] = {
+    name = "harpoon mark",
+    h = {
+      function()
+        require("harpoon.ui").nav_file(1)
+      end,
+      "first file in buffer list",
+    },
+    j = {
+      function()
+        require("harpoon.ui").nav_file(2)
+      end,
+      "second file in buffer list",
+    },
+    k = {
+      function()
+        require("harpoon.ui").nav_file(3)
+      end,
+      "third file in buffer list",
+    },
+    l = {
+      function()
+        require("harpoon.ui").nav_file(4)
+      end,
+      "fourth file in buffer list",
+    },
+  },
 }, { prefix = "", mode = "n" })
 
 require("which-key").register({

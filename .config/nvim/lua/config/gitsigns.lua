@@ -68,5 +68,23 @@ require("gitsigns").setup({
         u = { gs.undo_stage_hunk, "undo stage hunk" },
       },
     }, { prefix = "<leader>" })
+
+    require("which-key").register({
+      g = {
+        name = "git",
+        r = {
+          function()
+            gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+          end,
+          "reset selected",
+        },
+        s = {
+          function()
+            gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+          end,
+          "stage selected",
+        },
+      },
+    }, { prefix = "<leader>", mode = "v" })
   end,
 })
