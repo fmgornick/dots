@@ -12,7 +12,7 @@ function info() {
 		else
 			untracked_files=false
 			for line in $git_status; do
-				if [[ $line == \?\?* ]]; then
+				if [[ $line =~ "\?\?" ]]; then
 					untracked_files=true
 				fi
 			done
