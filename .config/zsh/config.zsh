@@ -43,10 +43,3 @@ pdfl() { latexmk -pvc -pdf -interaction=nonstopmode *.tex; }
 alias tsd="transmission-daemon"
 alias tsm="transmission-remote"
 alias costart="colima stop && colima start --network-driver slirp"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-export GOPRIVATE=git.target.com
-export GOPROXY=https://binrepo.target.com/artifactory/golang-remote
