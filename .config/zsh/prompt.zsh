@@ -1,11 +1,12 @@
 # personal theme
 
 function info() {
-	main_prompt=" %F{70}󰠖%f %F{207}%n%f %B%F{123} %3~%f%b "
+	main_prompt=" %{$fg[green]%}󰠖$rc %{$fg_bold[magenta]%}%n$rc %{$fg_bold[cyan]%} %3~ $rc"
 	if git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"; then
-		untracked="%B%F{160} $git_branch 󰔑%f%b"
-		modified="%B%F{208} $git_branch 󰔕%f%b"
-		clean="%B%F{113} $git_branch 󰔓%f%b"
+		untracked="%{$fg_bold[red]%} $git_branch 󰔑$rc"
+		modified="%{$fg_bold[yellow]%} $git_branch 󰔕$rc"
+		clean="%{$fg_bold[green]%} $git_branch 󰔓$rc"
+		
 		local git_status="$(git status --short 2>/dev/null)"
 		if [ ${#git_status[@]} -eq 0 ]; then
 			main_prompt+="$clean "
@@ -28,7 +29,7 @@ function info() {
 
 function set-prompt() {
 	emulate -L zsh
-	PROMPT="$(info)"$'\n'" %(?:%F{82}❯:%F{196}❯)%f "
+	PROMPT="$(info)"$'\n'" %(?:%{$fg_bold[green]%}❯:%{$fg_bold[red]%}❯)$rc%b "
 }
 
 preexec_interactive_mode="yes"
