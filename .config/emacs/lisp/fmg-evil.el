@@ -1,14 +1,19 @@
 (use-package evil
-	:config
-	(evil-mode 1))
+	:config (evil-mode 1))
 
 ;; can't teach an old dog new tricks
 (defalias 'evil-insert-state 'evil-emacs-state)
-(global-set-key (kbd "<escape>") 'evil-exit-emacs-state)
+(global-set-key (kbd "<escape>") 'fmg/exit-emacs-state)
+
+(evil-set-initial-state 'Buffer-menu-mode 'emacs)
+(evil-set-initial-state 'dired-mode       'emacs)
+(evil-set-initial-state 'help-mode        'emacs)
+(evil-set-initial-state 'vterm-mode       'emacs)
 
 (use-package undo-tree
   :diminish
   :config
+	(setq undo-tree-history-directory-alist `((".*" . "~/.cache/emacs/undo/"))
   (evil-set-undo-system 'undo-tree)
   (global-undo-tree-mode 1))
 
@@ -22,11 +27,10 @@
 (evil-define-key 'visual global-map (kbd "K") 'fmg/shift-up)
 (evil-define-key 'visual global-map (kbd ">") 'fmg/shift-right)
 
-;; easier window switching
-(evil-define-key 'normal global-map (kbd "C-h") 'evil-window-left)
-(evil-define-key 'normal global-map (kbd "C-j") 'evil-window-down)
-(evil-define-key 'normal global-map (kbd "C-k") 'evil-window-up)
-(evil-define-key 'normal global-map (kbd "C-l") 'evil-window-right)
+(defun fmg/exit-emacs-state ()
+	(interactive)
+	(if (not (bolp)) (left-char 1))
+	(evil-exit-emacs-state))
 
 (defun fmg/shift-up ()
 	(interactive)
