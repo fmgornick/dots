@@ -1,5 +1,11 @@
 (use-package gruvbox-theme)
 (use-package solarized-theme)
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t)
+  (setq doom-themes-enable-italic t)
+  (doom-themes-visual-bell-config)
+  (doom-themes-org-config))
 
 (defun fmg/load-theme (theme)
 	(interactive
@@ -7,6 +13,7 @@
     (intern (completing-read "load custom theme: "
                              (mapcar #'symbol-name
 				     (custom-available-themes))))))
+	(mapcar #'disable-theme custom-enabled-themes)
 	(load-theme theme t)
 	(fmg/revert-all-buffers))
 
