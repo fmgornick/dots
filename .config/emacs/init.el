@@ -1,4 +1,4 @@
-3;; emacs config paths
+;; emacs config paths
 (setq user-init-file                    "~/.config/emacs/init.el"
       user-emacs-directory              "~/.local/share/emacs/"
       package-user-dir                  "~/.local/share/emacs/packages/"
@@ -40,10 +40,11 @@
 (add-to-list 'load-path (expand-file-name "lisp/languages" user-emacs-config-dir))
 
 (require 'fmg-core)
-(require 'fmg-git)
-(require 'fmg-pdf)
 (require 'fmg-epub)
+(require 'fmg-evil)
+(require 'fmg-git)
 (require 'fmg-latex)
+(require 'fmg-pdf)
 (require 'fmg-shell)
 (require 'fmg-themes)
-(require 'fmg-evil)
+(require 'fmg-treesitter)
