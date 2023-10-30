@@ -35,9 +35,8 @@
 (setq use-package-version 'straight)
 
 ;; path to config files
-(defvar user-emacs-config-dir "~/.config/emacs/")
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-config-dir))
-(add-to-list 'load-path (expand-file-name "lisp/languages" user-emacs-config-dir))
+(add-to-list 'load-path (expand-file-name "lisp" default-directory))
+(add-to-list 'load-path (expand-file-name "lisp/languages" default-directory))
 
 (require 'fmg-core)
 (require 'fmg-epub)

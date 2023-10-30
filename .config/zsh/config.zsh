@@ -1,10 +1,13 @@
-path+="/opt/homebrew/bin"
-path+="/usr/local/sbin"
-path+="$HOME/.cargo/bin"
-path+="$HOME/Library/Python/3.9/bin"
-export PATH
+export PATH="$HOME/.cargo/bin":$PATH
+export PATH="/opt/homebrew/bin":$PATH
+export PATH="/opt/homebrew/sbin":$PATH
 
-export ZSH=$HOME/.config/zsh
+# remove ugly dotfiles in homedir
+export HISTFILE="$HOME/.cache/zsh/zsh_history"
+export ZDOTDIR="$HOME/.cache/zsh"
+export JULIA_DEPOT_PATH="$HOME/.cache/julia"
+
+export ZSH="$HOME/.config/zsh"
 export EDITOR="nvim"
 
 source "$ZSH/omz.sh"

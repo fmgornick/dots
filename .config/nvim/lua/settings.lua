@@ -19,9 +19,9 @@ vim.opt.wrap = false
 -- save undo history
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.opt.writebackup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
 
 -- search opts
 vim.opt.hlsearch = true
