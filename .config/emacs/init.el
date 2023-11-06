@@ -1,5 +1,6 @@
 ;; emacs config paths
-(setq user-init-file                    "~/.config/emacs/init.el"
+(setq default-directory                 "~/.config/emacs/"
+      user-init-file                    "~/.config/emacs/init.el"
       user-emacs-directory              "~/.local/share/emacs/"
       package-user-dir                  "~/.local/share/emacs/packages/"
       org-preview-latex-image-directory "~/.cache/emacs/ltximg/"
@@ -45,5 +46,6 @@
 (require 'fmg-latex)
 (require 'fmg-pdf)
 (require 'fmg-shell)
+(require 'fmg-tabs)
 (require 'fmg-themes)
 (require 'fmg-treesitter)

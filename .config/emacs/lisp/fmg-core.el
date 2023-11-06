@@ -16,9 +16,6 @@
 (set-frame-font "FiraMono Nerd Font Mono 12" nil t) ;; yessir B)
 (defalias 'yes-or-no-p 'y-or-n-p)                   ;; one letter's better than 3
 
-(global-set-key (kbd "s-{") 'tab-bar-switch-to-prev-tab)
-(global-set-key (kbd "s-}") 'tab-bar-switch-to-next-tab)
-
 ;; floating frames can smd
 (if (not (frame-parameter nil 'fullscreen)) 
   (toggle-frame-fullscreen))
