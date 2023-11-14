@@ -1,6 +1,5 @@
 ;; emacs config paths
-(setq default-directory                 "~/.config/emacs/"
-      user-init-file                    "~/.config/emacs/init.el"
+(setq user-init-file                    "~/.config/emacs/init.el"
       user-emacs-directory              "~/.local/share/emacs/"
       package-user-dir                  "~/.local/share/emacs/packages/"
       org-preview-latex-image-directory "~/.cache/emacs/ltximg/"
@@ -36,8 +35,9 @@
 (setq use-package-version 'straight)
 
 ;; path to config files
-(add-to-list 'load-path (expand-file-name "lisp" default-directory))
-(add-to-list 'load-path (expand-file-name "lisp/languages" default-directory))
+(defvar fmg/config-dir "~/.config/emacs/")
+(add-to-list 'load-path (expand-file-name "lisp" fmg/config-dir))
+(add-to-list 'load-path (expand-file-name "lisp/languages" fmg/config-dir))
 
 (require 'fmg-core)
 (require 'fmg-epub)
