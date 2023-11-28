@@ -1,23 +1,40 @@
-local lsp = require("lsp-zero").preset()
 local lspconfig = require("lspconfig")
 
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "bashls",
-    "clangd",
-    "gopls",
-    "golangci_lint_ls",
-    "jsonls",
-    "kotlin_language_server",
-    "lua_ls",
-    "pyright",
-    "rust_analyzer",
-    "texlab",
-    "tsserver",
-    "yamlls",
+-- stylua: ignore start
+local servers = {
+	bashls           = { binary = "bash-language-server",        install = "brew install bash-language-server"                              },
+  clangd           = { binary = "clangd",                      install = "brew install llvm"                                              },
+  gopls            = { binary = "gopls",                       install = "go install golang.org/x/tools/gopls@latest"                     },
+  golangci_lint_ls = { binary = "golangci-lint-langserver",    install = "go install github.com/nametake/golangci-lint-langserver@latest" },
+  jsonls           = { binary = "vscode-json-languageservice", install = "brew install vscode-langservers-extracted"                      },
+  lua_ls           = { binary = "lua-language-server",         install = "brew install lua-language-server"                               },
+  pyright          = { binary = "pyright-langserver",          install = "brew install pyright"                                           },
+  rust_analyzer    = { binary = "rust-analyzer",               install = "rustup component add rust-analyzer"                             },
+  tsserver         = { binary = "typescript-language-server",  install = "brew install typescript-language-server"                        },
+  yamlls           = { binary = "yaml-language-server",        install = "brew install yaml-language-server"                              },
+}
+-- stylua: ignore end
+
+require("which-key").register({
+  l = {
+    S = {
+      function()
+        local all_installed = true
+
+        for _, s in pairs(servers) do
+          if vim.fn.executable(s.binary) ~= 1 then
+            all_installed = false
+            print("installing " .. s.binary)
+            vim.cmd("!" .. s.install)
+          end
+        end
+
+        if all_installed then print("all LSPs already installed!") end
+      end,
+      "install language servers",
+    },
   },
-  automatic_installation = false,
-})
+}, { prefix = "<leader>", mode = "n" })
 
 local signs = {
   Error = "",
@@ -31,16 +48,48 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-lsp.on_attach(function(_, bufnr)
-  lsp.default_keymaps({ buffer = bufnr })
-end)
+lspconfig.bashls.setup({
+  cmd = { "bash-language-server", "start" },
+  filetypes = { "bash", "sh", "zsh" },
+})
 
-lspconfig.bashls.setup({ filetypes = { "bash", "sh", "zsh" } })
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+lspconfig.lua_ls.setup({
+  cmd = { "lua-language-server" },
+  settings = {
+    Lua = {
+      completion = {
+        callSnippet = "Replace",
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+      runtime = {
+        path = runtime_path,
+        version = "LuaJIT",
+      },
+      telemetry = { enable = false },
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.fn.expand("$VIMRUNTIME/lua"),
+          vim.fn.stdpath("config") .. "/lua",
+        },
+      },
+    },
+  },
+})
 
+lspconfig.gopls.setup({ cmd = { "gopls" } })
+lspconfig.golangci_lint_ls.setup({ cmd = { "golangci-lint-langserver" } })
+lspconfig.jsonls.setup({ cmd = { "vscode-json-language-server", "--stdio" } })
+lspconfig.pyright.setup({ cmd = { "pyright-langserver", "--stdio" } })
 lspconfig.rust_analyzer.setup({
   settings = {
     ["rust-analyzer"] = {
+      cmd = { "rust-analyzer" },
       completion = {
         callable = {
           snippets = "fill_arguments",
@@ -52,7 +101,9 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
+lspconfig.tsserver.setup({ cmd = { "typescript-language-server", "--stdio" } })
 lspconfig.yamlls.setup({
+  cmd = { "yaml-language-server", "--stdio" },
   settings = {
     yaml = {
       keyOrdering = false,
@@ -60,37 +111,37 @@ lspconfig.yamlls.setup({
   },
 })
 
-lsp.setup()
-
-vim.keymap.set("n", "ga", vim.diagnostic.setloclist)
-vim.keymap.set("n", "gl", vim.diagnostic.open_float)
-vim.keymap.set("n", "gn", vim.diagnostic.goto_next)
-
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+  callback = function(env)
+    -- enable completion triggered by <c-x><c-o>
+    vim.bo[env.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    -- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set("n", "<space>wl", function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "<space>f", function()
-      vim.lsp.buf.format({ async = true })
-    end, opts)
+    -- buffer local mappings
+    -- see `:help vim.lsp.*` for documentation on any of the below functions
+    require("which-key").register({
+      g = {
+        a = { vim.diagnostic.setloclist, "loclist diagnostics" },
+        d = { vim.lsp.buf.definition, "definition", buffer = env.buf },
+        D = { vim.lsp.buf.declaration, "declaration", buffer = env.buf },
+        i = { vim.lsp.buf.implementation, "implementation", buffer = env.buf },
+        l = { vim.diagnostic.open_float, "float diagnostics" },
+        n = { vim.diagnostic.goto_next, "next diagnostic" },
+      },
+      K = { vim.lsp.buf.hover, "hover", buffer = env.buf },
+    }, { prefix = "", mode = "n" })
+
+    require("which-key").register({
+      D = { vim.lsp.buf.type_definition, "type definition", buffer = env.buf },
+      l = {
+        a = { vim.lsp.buf.code_action, "code action" },
+        r = { vim.lsp.buf.rename, "rename var" },
+      },
+      W = {
+        a = { vim.lsp.buf.add_workspace_folder, "add workspace folder", buffer = env.buf },
+        l = { vim.lsp.buf.list_workspace_folders, "list workspace folders", buffer = env.buf },
+        r = { vim.lsp.buf.remove_workspace_folder, "remove workspace folder", buffer = env.buf },
+      },
+    }, { prefix = "<leader>", mode = "n" })
   end,
 })

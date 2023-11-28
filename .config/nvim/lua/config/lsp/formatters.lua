@@ -1,74 +1,134 @@
-local null_ls = require("null-ls")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+-- stylua: ignore start
+local formatters = {
+	black        = { binary = "black",        install = "brew install black"                                 },
+	clang_format = { binary = "clang-format", install = "brew install clang-format"                          },
+	gofumpt      = { binary = "gofmt",        install = "brew install gofumpt"                               },
+	goimports    = { binary = "goimports",    install = "go install golang.org/x/tools/cmd/goimports@latest" },
+	isort        = { binary = "isort",        install = "brew install isort"                                 },
+	latexindent  = { binary = "latexindent",  install = "brew install latexindent"                           },
+	prettierd    = { binary = "prettierd",    install = "brew install prettierd"                             },
+	shfmt        = { binary = "shfmt",        install = "brew install shfmt"                                 },
+	stylua       = { binary = "stylua",       install = "brew install stylua"                                },
+}
+-- stylua: ignore end
 
-local code_actions = null_ls.builtins.code_actions
-local formatting = null_ls.builtins.formatting
+require("which-key").register({
+  l = {
+    F = {
+      function()
+        local all_installed = true
 
-require("mason-null-ls").setup({
-	ensure_installed = {
-		"autopep8",
-		"clang_format",
-		"gofumpt",
-		"latexindent",
-		"prettier",
-		"shfmt",
-		"stylua",
+        for _, f in pairs(formatters) do
+          if vim.fn.executable(f.binary) ~= 1 then
+            all_installed = false
+            print("installing " .. f.binary)
+            vim.cmd("!" .. f.install)
+          end
+        end
+
+        if all_installed then print("all formatters already installed!") end
+      end,
+      "install formatters",
+    },
+  },
+}, { prefix = "<leader>", mode = "n" })
+
+require("which-key").register({
+  f = { function() vim.lsp.buf.format({ async = true }) end, "format" },
+}, { prefix = "<leader>", mode = "v" })
+
+require("conform").setup({
+  -- stylua: ignore start
+	formatters_by_ft = {
+		bash            = { "shfmt"                            },
+		c               = { "clang_format"                     },
+		cpp             = { "clang_format"                     },
+		css             = { "prettierd"                        },
+		go              = { "goimports", "gofmt"               },
+		graphql         = { "prettierd"                        },
+		html            = { "prettierd"                        },
+		javascript      = { "prettierd"                        },
+		javascriptreact = { "prettierd"                        },
+		json            = { "prettierd"                        },
+		jsonc           = { "prettierd"                        },
+		tex             = { "latexindent"                      },
+		lua             = { "stylua"                           },
+		markdown        = { "prettierd"                        },
+		python          = { "isort", "black"                   },
+		sh              = { "shfmt"                            },
+		typescript      = { "prettierd"                        },
+		typescriptreact = { "prettierd"                        },
+		yaml            = { "prettierd"                        },
+		zsh             = { "shfmt"                            },
+    ["_"]           = { "trim_whitespace", "trim_newlines" },
 	},
-})
+  -- stylua: ignore end
 
-null_ls.setup({
-	debug = true,
+  format_on_save = {
+    lsp_fallback = true,
+    timeout_ms = 500,
+  },
 
-	on_attach = function(client, bufnr)
-		if client.supports_method("textDocument/formatting") then
-			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = augroup,
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format()
-				end,
-			})
-		end
-	end,
+  log_level = vim.log.levels.DEBUG,
+  notify_on_error = false,
 
-	sources = {
-		formatting.autopep8,
-		formatting.clang_format.with({
-			filetypes = { "c", "cpp" },
-			extra_args = {
-				string
-					.gsub(
-						[[--style={
-                            BasedOnStyle: llvm,
-                            ColumnLimit: 100,
-                            AllowShortCaseLabelsOnASingleLine: true,
-                            AllowShortIfStatementsOnASingleLine: AllIfsAndElse
-                        }]],
-						"\n +",
-						" "
-					)
-					:sub(0, -1),
-			},
-		}),
-		formatting.gofumpt,
-		formatting.latexindent,
-		formatting.prettier.with({
-			extra_args = {
-				-- "--tab-width=4",
-				-- "--bracket-same-line",
-			},
-		}),
-		formatting.rustfmt,
-		formatting.shfmt.with({
-			filetypes = { "bash", "sh", "zsh" },
-		}),
-		formatting.stylua.with({
-			extra_args = {
-				"--quote-style=AutoPreferDouble",
-				"--sort-requires",
-			},
-		}),
-		code_actions.gitsigns,
-	},
+  formatters = {
+    clang_format = {
+      command = "clang-format",
+      prepend_args = {
+        string
+          .gsub(
+            [[--style={
+                BasedOnStyle: llvm,
+                ColumnLimit: 100,
+                AllowShortCaseLabelsOnASingleLine: true,
+                AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+            }]],
+            "\n +",
+            " "
+          )
+          :sub(0, -1),
+      },
+    },
+    latexindent = {
+      prepend_args = {
+        "-y=defaultIndent:' '",
+      },
+    },
+    prettierd = {
+      prepend_args = {
+        -- "--tab-width=4",
+        -- "--bracket-same-line",
+      },
+      range_args = function(ctx)
+        return {
+          "--line-start",
+          ctx.range.start[1],
+          "--line-end",
+          ctx.range["end"][1],
+        }
+      end,
+    },
+    shfmt = {
+      filetypes = { "bash", "sh", "zsh" },
+      prepend_args = { "-i", "2" },
+    },
+    stylua = {
+      prepend_args = {
+        "--collapse-simple-statement=Always",
+        "--indent-type=Spaces",
+        "--indent-width=2",
+        "--quote-style=AutoPreferDouble",
+        "--sort-requires",
+      },
+      range_args = function(ctx)
+        return {
+          "--range-start",
+          ctx.range.start[1],
+          "--range-end",
+          ctx.range["end"][1],
+        }
+      end,
+    },
+  },
 })

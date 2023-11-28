@@ -18,42 +18,25 @@ require("gitsigns").setup({
 
     -- Navigation
     map("n", "]c", function()
-      if vim.wo.diff then
-        return "]c"
-      end
-      vim.schedule(function()
-        gs.next_hunk()
-      end)
+      if vim.wo.diff then return "]c" end
+      vim.schedule(function() gs.next_hunk() end)
       return "<Ignore>"
     end, { expr = true })
 
     map("n", "[c", function()
-      if vim.wo.diff then
-        return "[c"
-      end
-      vim.schedule(function()
-        gs.prev_hunk()
-      end)
+      if vim.wo.diff then return "[c" end
+      vim.schedule(function() gs.prev_hunk() end)
       return "<Ignore>"
     end, { expr = true })
-
-    map("v", "<leader>gs", function()
-      gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-    end)
-    map("v", "<leader>gr", function()
-      gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-    end)
 
     -- text object
     map({ "o", "x" }, "ih", ":<c-u>Gitsigns select_hunk<cr>")
 
     require("which-key").register({
       g = {
-        name = "git",
+        name = "git/code-actions",
         b = {
-          function()
-            gs.blame_line({ full = true })
-          end,
+          function() gs.blame_line({ full = true }) end,
           "blame line",
         },
         d = { gs.diffthis, "get diff" },
@@ -73,15 +56,11 @@ require("gitsigns").setup({
       g = {
         name = "git",
         r = {
-          function()
-            gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-          end,
+          function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
           "reset selected",
         },
         s = {
-          function()
-            gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-          end,
+          function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
           "stage selected",
         },
       },

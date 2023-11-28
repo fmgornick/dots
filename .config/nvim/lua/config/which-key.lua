@@ -13,30 +13,10 @@ require("which-key").register({
   ["<S-LeftMouse>"] = { "<LeftMouse>:DapToggleBreakpoint<cr>", "toggle break" },
   ["`"] = {
     name = "harpoon mark",
-    h = {
-      function()
-        require("harpoon.ui").nav_file(1)
-      end,
-      "first file in buffer list",
-    },
-    j = {
-      function()
-        require("harpoon.ui").nav_file(2)
-      end,
-      "second file in buffer list",
-    },
-    k = {
-      function()
-        require("harpoon.ui").nav_file(3)
-      end,
-      "third file in buffer list",
-    },
-    l = {
-      function()
-        require("harpoon.ui").nav_file(4)
-      end,
-      "fourth file in buffer list",
-    },
+    h = { function() require("harpoon.ui").nav_file(1) end, "first file in buffer list" },
+    j = { function() require("harpoon.ui").nav_file(2) end, "second file in buffer list" },
+    k = { function() require("harpoon.ui").nav_file(3) end, "third file in buffer list" },
+    l = { function() require("harpoon.ui").nav_file(4) end, "fourth file in buffer list" },
   },
 }, { prefix = "", mode = "n" })
 
@@ -49,18 +29,14 @@ require("which-key").register({
     c = { require("config.lsp.debuggers").debug, "continue" },
     b = { require("dap").toggle_breakpoint, "breakpoint" },
     B = {
-      function()
-        require("dap").set_breakpoint(vim.fn.input("breakpoint condition: "))
-      end,
+      function() require("dap").set_breakpoint(vim.fn.input("breakpoint condition: ")) end,
       "conditional bp",
     },
     e = { require("dapui").eval, "evaluate" },
     i = { require("dap").step_into, "step into" },
     l = { require("dap").run_last, "run last" },
     L = {
-      function()
-        require("dap").set_breakpoint(nil, nil, vim.fn.input("log message: "))
-      end,
+      function() require("dap").set_breakpoint(nil, nil, vim.fn.input("log message: ")) end,
       "set log point",
     },
     o = { require("dap").step_over, "step over" },
@@ -92,35 +68,19 @@ require("which-key").register({
     C = { require("telescope.builtin").colorscheme, "color schemes" },
     d = { require("telescope.builtin").diagnostics, "buffer diagnostics" },
     f = {
-      function()
-        require("telescope.builtin").find_files({
-          cwd = vim.lsp.buf.list_workspace_folders()[1],
-        })
-      end,
+      function() require("telescope.builtin").find_files({ cwd = vim.lsp.buf.list_workspace_folders()[1] }) end,
       "find project files",
     },
     F = {
-      function()
-        require("telescope.builtin").find_files({
-          cwd = vim.fn.expand("%:p:h"),
-        })
-      end,
+      function() require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:p:h") }) end,
       "find folder files",
     },
     g = {
-      function()
-        require("telescope.builtin").live_grep({
-          cwd = vim.lsp.buf.list_workspace_folders()[1],
-        })
-      end,
+      function() require("telescope.builtin").live_grep({ cwd = vim.lsp.buf.list_workspace_folders()[1] }) end,
       "grep project files",
     },
     G = {
-      function()
-        require("telescope.builtin").live_grep({
-          cwd = vim.fn.expand("%:p:h"),
-        })
-      end,
+      function() require("telescope.builtin").live_grep({ cwd = vim.fn.expand("%:p:h") }) end,
       "grep folder files",
     },
     h = { require("telescope.builtin").help_tags, "help tags" },
@@ -130,13 +90,16 @@ require("which-key").register({
   },
   h = { ":noh<cr>", "no highlight" },
   l = {
-    name = "lsp info",
-    a = { vim.lsp.buf.code_action, "code action" },
-    i = { ":LspInfo<cr>", "current buffer LSPs" },
-    l = { ":NullLsLog<cr>", "null-ls log" },
-    m = { ":Mason<cr>", "mason info" },
-    n = { ":NullLsInfo<cr>", "null-ls info" },
-    r = { vim.lsp.buf.rename, "rename var" },
+    name = "lsp",
+    f = { ":ConformInfo<cr>", "current buffer formatter info" },
+    l = {
+      function()
+        local logfile = os.getenv("HOME") .. "/.local/state/nvim/conform.log"
+        vim.cmd("edit " .. logfile)
+      end,
+      "formatter log",
+    },
+    i = { ":LspInfo<cr>", "current buffer LSP info" },
   },
   m = { require("harpoon.mark").add_file, "mark buffer" },
   p = {

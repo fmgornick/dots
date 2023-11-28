@@ -1,15 +1,6 @@
 local dap = require("dap")
 local dapui = require("dapui")
 
-require("mason-nvim-dap").setup({
-  ensure_installed = {
-    "codelldb",
-    "go",
-    "js",
-  },
-  automatic_installation = false,
-})
-
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "RedSign", linehl = "", numhl = "" })
 vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "BlueSign", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = "", texthl = "YellowSign", linehl = "", numhl = "" })
@@ -22,7 +13,6 @@ local function executable_path()
     completion = "file",
   })
 end
-local dap_path = vim.fn.stdpath("data") .. "/mason/bin/"
 
 -- c --
 -- make sure llvm installed: brew install llvm
@@ -39,7 +29,7 @@ dap.adapters.codelldb = {
   host = "localhost",
   port = "${port}",
   executable = {
-    command = dap_path .. "codelldb",
+    command = "codelldb",
     args = { "--port", "${port}" },
   },
 }
@@ -91,7 +81,7 @@ dap.adapters["pwa-node"] = {
   port = "${port}",
   executable = {
     command = "node",
-    args = { dap_path .. "js-debug-adapter", "${port}" },
+    args = { "js-debug-adapter", "${port}" },
   },
 }
 
@@ -145,16 +135,10 @@ local function debug()
   for _, launcher in pairs(require("vstask.Parse").Launches()) do
     local is_new = true
     for i, config in pairs(configs) do
-      if string.sub(config.name, 1, 7) == "default" then
-        table.remove(configs, i)
-      end
-      if config == launcher then
-        is_new = false
-      end
+      if string.sub(config.name, 1, 7) == "default" then table.remove(configs, i) end
+      if config == launcher then is_new = false end
     end
-    if is_new then
-      table.insert(configs, launcher)
-    end
+    if is_new then table.insert(configs, launcher) end
   end
   require("dap").continue()
 end

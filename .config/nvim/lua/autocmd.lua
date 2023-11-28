@@ -3,9 +3,7 @@ vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = "YankHighlight",
   pattern = "*",
-  callback = function()
-    require("vim.highlight").on_yank({ higroup = "Search", timeout = 100 })
-  end,
+  callback = function() require("vim.highlight").on_yank({ higroup = "Search", timeout = 100 }) end,
 })
 
 -- allow save if in not-yet-created directory
@@ -13,9 +11,7 @@ vim.api.nvim_create_augroup("MkDir", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = "MkDir",
   pattern = "*",
-  callback = function()
-    vim.fn.mkdir(vim.fn.expand("%:p:h"), "p")
-  end,
+  callback = function() vim.fn.mkdir(vim.fn.expand("%:p:h"), "p") end,
 })
 
 -- wrap in readme and latex files
@@ -32,9 +28,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   group = "InsertTerm",
   pattern = "*",
   callback = function()
-    if vim.bo.buftype == "terminal" then
-      vim.cmd("startinsert")
-    end
+    if vim.bo.buftype == "terminal" then vim.cmd("startinsert") end
   end,
 })
 
@@ -45,9 +39,7 @@ local function skeleton(pattern, filetype, snippet)
     group = "Skeleton",
     pattern = pattern,
     callback = function()
-      if vim.fn.line("$") ~= 1 or vim.fn.getline(1) ~= "" then
-        return
-      end
+      if vim.fn.line("$") ~= 1 or vim.fn.getline(1) ~= "" then return end
       local snips = require("luasnip").get_snippets()[filetype]
       for _, snip in pairs(snips) do
         if snip.name == snippet then

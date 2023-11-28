@@ -49,8 +49,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
+local package_path_str = "/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.1700008891/share/lua/5.1/?.lua;/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.1700008891/share/lua/5.1/?/init.lua;/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.1700008891/lib/luarocks/rocks-5.1/?.lua;/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.1700008891/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/Users/Z00B3R5/.cache/nvim/packer_hererocks/2.1.1700008891/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -104,6 +104,11 @@ _G.packer_plugins = {
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["conform.nvim"] = {
+    loaded = true,
+    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/conform.nvim",
+    url = "https://github.com/stevearc/conform.nvim"
+  },
   ["dracula.nvim"] = {
     loaded = true,
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/dracula.nvim",
@@ -149,11 +154,6 @@ _G.packer_plugins = {
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
     url = "https://github.com/kdheepak/lazygit.nvim"
   },
-  ["lsp-zero.nvim"] = {
-    loaded = true,
-    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
-    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
-  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -164,26 +164,6 @@ _G.packer_plugins = {
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
-  ["mason-lspconfig.nvim"] = {
-    loaded = true,
-    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
-    url = "https://github.com/williamboman/mason-lspconfig.nvim"
-  },
-  ["mason-null-ls.nvim"] = {
-    loaded = true,
-    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/mason-null-ls.nvim",
-    url = "https://github.com/jay-babu/mason-null-ls.nvim"
-  },
-  ["mason-nvim-dap.nvim"] = {
-    loaded = true,
-    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/mason-nvim-dap.nvim",
-    url = "https://github.com/jay-babu/mason-nvim-dap.nvim"
-  },
-  ["mason.nvim"] = {
-    loaded = true,
-    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/mason.nvim",
-    url = "https://github.com/williamboman/mason.nvim"
-  },
   ["material.nvim"] = {
     loaded = true,
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/material.nvim",
@@ -193,11 +173,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/neodev.nvim",
     url = "https://github.com/folke/neodev.nvim"
-  },
-  ["null-ls.nvim"] = {
-    loaded = true,
-    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,

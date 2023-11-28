@@ -12,13 +12,7 @@ require("vstask").setup({
 })
 
 return {
-  list_tasks = function()
-    require("telescope").extensions.vstask.tasks(require("telescope.themes").get_ivy())
-  end,
-  open_tasks = function()
-    vim.cmd("edit " .. vim.fn.getcwd() .. "/" .. config_dir .. "/tasks.json")
-  end,
-  open_launch = function()
-    vim.cmd("edit " .. vim.fn.getcwd() .. "/" .. config_dir .. "/launch.json")
-  end,
+  list_tasks = function() require("telescope").extensions.vstask.tasks(require("telescope.themes").get_ivy()) end,
+  open_tasks = function() vim.cmd("edit " .. vim.fn.getcwd() .. "/" .. config_dir .. "/tasks.json") end,
+  open_launch = function() vim.cmd("edit " .. vim.fn.getcwd() .. "/" .. config_dir .. "/launch.json") end,
 }
