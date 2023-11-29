@@ -2,15 +2,15 @@ local lspconfig = require("lspconfig")
 
 -- stylua: ignore start
 local servers = {
-	bashls           = { binary = "bash-language-server",        install = "brew install bash-language-server"                              },
+	bashls           = { binary = "bash-language-server",        install = "npm i -g bash-language-server"                                  },
   clangd           = { binary = "clangd",                      install = "brew install llvm"                                              },
   gopls            = { binary = "gopls",                       install = "go install golang.org/x/tools/gopls@latest"                     },
   golangci_lint_ls = { binary = "golangci-lint-langserver",    install = "go install github.com/nametake/golangci-lint-langserver@latest" },
-  jsonls           = { binary = "vscode-json-languageservice", install = "brew install vscode-langservers-extracted"                      },
+  jsonls           = { binary = "vscode-json-language-server", install = "npm i -g vscode-langservers-extracted"                          },
   lua_ls           = { binary = "lua-language-server",         install = "brew install lua-language-server"                               },
   pyright          = { binary = "pyright-langserver",          install = "brew install pyright"                                           },
   rust_analyzer    = { binary = "rust-analyzer",               install = "rustup component add rust-analyzer"                             },
-  tsserver         = { binary = "typescript-language-server",  install = "brew install typescript-language-server"                        },
+  tsserver         = { binary = "typescript-language-server",  install = "npm i -g typescript typescript-language-server"                 },
   yamlls           = { binary = "yaml-language-server",        install = "brew install yaml-language-server"                              },
 }
 -- stylua: ignore end
@@ -20,16 +20,24 @@ require("which-key").register({
     S = {
       function()
         local all_installed = true
+        local install_command = ""
 
         for _, s in pairs(servers) do
           if vim.fn.executable(s.binary) ~= 1 then
             all_installed = false
-            print("installing " .. s.binary)
-            vim.cmd("!" .. s.install)
+            install_command = install_command .. "echo installing " .. s.binary .. "; "
+            install_command = install_command .. s.install .. "; "
+            install_command = install_command .. "echo '\\n'; "
           end
         end
 
-        if all_installed then print("all LSPs already installed!") end
+        if all_installed then
+          print("all LSPs already installed!")
+        else
+          vim.cmd("vert copen 100")
+          vim.cmd("set wrap")
+          vim.cmd("AsyncRun -strip " .. install_command)
+        end
       end,
       "install language servers",
     },

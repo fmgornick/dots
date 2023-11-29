@@ -17,16 +17,24 @@ require("which-key").register({
     F = {
       function()
         local all_installed = true
+        local install_command = ""
 
-        for _, f in pairs(formatters) do
-          if vim.fn.executable(f.binary) ~= 1 then
+        for _, s in pairs(formatters) do
+          if vim.fn.executable(s.binary) ~= 1 then
             all_installed = false
-            print("installing " .. f.binary)
-            vim.cmd("!" .. f.install)
+            install_command = install_command .. "echo installing " .. s.binary .. "; "
+            install_command = install_command .. s.install .. "; "
+            install_command = install_command .. "echo '\\n'; "
           end
         end
 
-        if all_installed then print("all formatters already installed!") end
+        if all_installed then
+          print("all formatters already installed!")
+        else
+          vim.cmd("vert copen 100")
+          vim.cmd("set wrap")
+          vim.cmd("AsyncRun -strip " .. install_command)
+        end
       end,
       "install formatters",
     },
@@ -69,7 +77,7 @@ require("conform").setup({
     timeout_ms = 500,
   },
 
-  log_level = vim.log.levels.DEBUG,
+  log_level = vim.log.levels.WARN,
   notify_on_error = false,
 
   formatters = {

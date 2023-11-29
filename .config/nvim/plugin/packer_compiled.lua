@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/alpha-nvim",
     url = "https://github.com/goolord/alpha-nvim"
   },
+  ["asyncrun.vim"] = {
+    loaded = true,
+    path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/asyncrun.vim",
+    url = "https://github.com/skywind3000/asyncrun.vim"
+  },
   catppuccin = {
     loaded = true,
     path = "/Users/Z00B3R5/.local/share/nvim/site/pack/packer/start/catppuccin",
