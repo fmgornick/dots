@@ -31,6 +31,7 @@ require("which-key").register({
         if all_installed then
           print("all formatters already installed!")
         else
+          install_command = install_command .. "echo done!!!"
           vim.cmd("vert copen 100")
           vim.cmd("set wrap")
           vim.cmd("AsyncRun -strip " .. install_command)
