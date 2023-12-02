@@ -5,6 +5,7 @@ return require("packer").startup(function(use)
   use({ "wbthomason/packer.nvim" })
   use({ "nvim-lua/plenary.nvim" })
   use({ "nvim-tree/nvim-web-devicons" })
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
   -- lsp stuff
   use({ "neovim/nvim-lspconfig" })
@@ -44,19 +45,17 @@ return require("packer").startup(function(use)
 
   -- OTHER PLUGINS --
   -- stylua: ignore start
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate"              }) -- syntax highlighting
-  use({ "nvim-lualine/lualine.nvim"                                       }) -- pretty statusline (with colorscheme)
-  use({ "folke/trouble.nvim", run = "TroubleToggle"                       }) -- workspace diagnostics
-  use({ "goolord/alpha-nvim"                                              }) -- cute little nvim dashboard
-  use({ "windwp/nvim-autopairs"                                           }) -- why tf is this not default
-  use({ "numToStr/Comment.nvim"                                           }) -- this too oml
-  use({ "ThePrimeagen/harpoon"                                            }) -- need that creamy coconut oil
-  use({ "phaazon/hop.nvim", as = "hop", branch = "v2"                     }) -- who uses default 's' key anyway
-  use({ "lervag/vimtex"                                                   }) -- compiles latex files
-  use({ "iamcco/markdown-preview.nvim", run = vim.fn["mkdp#util#install"] }) -- markdown viewer
-  use({ "folke/which-key.nvim"                                            }) -- shortcut cheatsheet
-  use({ "SmiteshP/nvim-navic"                                             }) -- shows current code context
-  use({ "EthanJWright/vs-tasks.nvim"                                      }) -- automated building tool
-  use({ "skywind3000/asyncrun.vim"                                        }) -- for async install repl
+  use({ "nvim-lualine/lualine.nvim"                   }) -- pretty statusline (with colorscheme)
+  use({ "folke/trouble.nvim", run = "TroubleToggle"   }) -- workspace diagnostics
+  use({ "goolord/alpha-nvim"                          }) -- cute little nvim dashboard
+  use({ "windwp/nvim-autopairs"                       }) -- why tf is this not default
+  use({ "numToStr/Comment.nvim"                       }) -- this too oml
+  use({ "ThePrimeagen/harpoon"                        }) -- need that creamy coconut oil
+  use({ "phaazon/hop.nvim", as = "hop", branch = "v2" }) -- who uses default 's' key anyway
+  use({ "lervag/vimtex"                               }) -- compiles latex files
+  use({ "folke/which-key.nvim"                        }) -- shortcut cheatsheet
+  use({ "SmiteshP/nvim-navic"                         }) -- shows current code context
+  use({ "EthanJWright/vs-tasks.nvim"                  }) -- automated building tool
+  use({ "skywind3000/asyncrun.vim"                    }) -- for async install repl
   -- stylua: ignore end
 end)

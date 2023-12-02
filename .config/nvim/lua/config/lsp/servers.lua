@@ -1,7 +1,8 @@
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 
 -- stylua: ignore start
-local servers = {
+local server_info = {
 	bashls           = { binary = "bash-language-server",        install = "npm i -g bash-language-server"                                  },
   clangd           = { binary = "clangd",                      install = "brew install llvm"                                              },
   gopls            = { binary = "gopls",                       install = "go install golang.org/x/tools/gopls@latest"                     },
@@ -15,35 +16,108 @@ local servers = {
 }
 -- stylua: ignore end
 
-require("which-key").register({
-  l = {
-    S = {
-      function()
-        local all_installed = true
-        local install_command = ""
-
-        for _, s in pairs(servers) do
-          if vim.fn.executable(s.binary) ~= 1 then
-            all_installed = false
-            install_command = install_command .. "echo installing " .. s.binary .. "; "
-            install_command = install_command .. s.install .. "; "
-            install_command = install_command .. "echo '\\n'; "
-          end
-        end
-
-        if all_installed then
-          print("all LSPs already installed!")
-        else
-          install_command = install_command .. "echo done!!!"
-          vim.cmd("vert copen 100")
-          vim.cmd("set wrap")
-          vim.cmd("AsyncRun -strip " .. install_command)
-        end
-      end,
-      "install language servers",
+local servers = {
+  bashls = {
+    cmd = { "bash-language-server", "start" },
+    filetypes = { "bash", "sh", "zsh" },
+  },
+  golangci_lint_ls = {
+    cmd = { "golangci-lint-langserver" },
+    init_options = {
+      command = {
+        "golangci-lint",
+        "run",
+        "--out-format",
+        "json",
+      },
     },
   },
-}, { prefix = "<leader>", mode = "n" })
+  gopls = {
+    cmd = { "gopls" },
+    settings = {
+      gopls = {
+        codelenses = {
+          test = true,
+          tidy = true,
+          vendor = true,
+        },
+        usePlaceholders = true,
+      },
+    },
+  },
+  jsonls = {
+    cmd = { "vscode-json-language-server", "--stdio" },
+  },
+  lua_ls = {
+    cmd = { "lua-language-server" },
+    settings = {
+      Lua = {
+        completion = {
+          callSnippet = "Replace",
+        },
+        diagnostics = {
+          globals = { "vim" },
+        },
+        runtime = {
+          path = vim.split(package.path, ";"),
+          version = "LuaJIT",
+        },
+        telemetry = { enable = false },
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.fn.expand("$VIMRUNTIME/lua"),
+            vim.fn.stdpath("config") .. "/lua",
+          },
+        },
+      },
+    },
+  },
+  pyright = {
+    cmd = { "pyright-langserver", "--stdio" },
+  },
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        cmd = { "rust-analyzer" },
+        completion = {
+          callable = {
+            snippets = "fill_arguments",
+          },
+          fullFunctionSignatures = {
+            enable = true,
+          },
+        },
+      },
+    },
+  },
+  tsserver = {
+    cmd = { "typescript-language-server", "--stdio" },
+  },
+  yamlls = {
+    cmd = { "yaml-language-server", "--stdio" },
+    settings = {
+      yaml = {
+        keyOrdering = false,
+      },
+    },
+  },
+}
+
+for name, opts in pairs(servers) do
+  if type(opts) == "function" then
+    opts()
+  else
+    local client = lspconfig[name]
+
+    client.setup(vim.tbl_extend("force", {
+      flags = { debounce_text_changes = 150 },
+      -- on_attach = Util.lsp_on_attach,
+      -- on_init = Util.lsp_on_init,
+      capabilities = capabilities,
+    }, opts))
+  end
+end
 
 local signs = {
   Error = "",
@@ -51,74 +125,10 @@ local signs = {
   Hint = "󰌶",
   Info = " ",
 }
-
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
-lspconfig.bashls.setup({
-  cmd = { "bash-language-server", "start" },
-  filetypes = { "bash", "sh", "zsh" },
-})
-
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-lspconfig.lua_ls.setup({
-  cmd = { "lua-language-server" },
-  settings = {
-    Lua = {
-      completion = {
-        callSnippet = "Replace",
-      },
-      diagnostics = {
-        globals = { "vim" },
-      },
-      runtime = {
-        path = runtime_path,
-        version = "LuaJIT",
-      },
-      telemetry = { enable = false },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          vim.fn.expand("$VIMRUNTIME/lua"),
-          vim.fn.stdpath("config") .. "/lua",
-        },
-      },
-    },
-  },
-})
-
-lspconfig.gopls.setup({ cmd = { "gopls" } })
-lspconfig.golangci_lint_ls.setup({ cmd = { "golangci-lint-langserver" } })
-lspconfig.jsonls.setup({ cmd = { "vscode-json-language-server", "--stdio" } })
-lspconfig.pyright.setup({ cmd = { "pyright-langserver", "--stdio" } })
-lspconfig.rust_analyzer.setup({
-  settings = {
-    ["rust-analyzer"] = {
-      cmd = { "rust-analyzer" },
-      completion = {
-        callable = {
-          snippets = "fill_arguments",
-        },
-        fullFunctionSignatures = {
-          enable = true,
-        },
-      },
-    },
-  },
-})
-lspconfig.tsserver.setup({ cmd = { "typescript-language-server", "--stdio" } })
-lspconfig.yamlls.setup({
-  cmd = { "yaml-language-server", "--stdio" },
-  settings = {
-    yaml = {
-      keyOrdering = false,
-    },
-  },
-})
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -145,6 +155,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
       l = {
         a = { vim.lsp.buf.code_action, "code action" },
         r = { vim.lsp.buf.rename, "rename var" },
+        S = {
+          function()
+            local all_installed = true
+            local install_command = ""
+
+            for _, s in pairs(server_info) do
+              if vim.fn.executable(s.binary) ~= 1 then
+                all_installed = false
+                install_command = install_command .. "echo installing " .. s.binary .. "; "
+                install_command = install_command .. s.install .. "; "
+                install_command = install_command .. "echo '\\n'; "
+              end
+            end
+
+            if all_installed then
+              print("all LSPs already installed!")
+            else
+              install_command = install_command .. "echo done!!!"
+              vim.cmd("vert copen 100")
+              vim.cmd("set wrap")
+              vim.cmd("AsyncRun -strip " .. install_command)
+            end
+          end,
+          "install language servers",
+        },
       },
       W = {
         a = { vim.lsp.buf.add_workspace_folder, "add workspace folder", buffer = env.buf },

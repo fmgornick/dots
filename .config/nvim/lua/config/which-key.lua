@@ -6,6 +6,17 @@ require("which-key").register({
   L = { require("harpoon.ui").nav_next, "harpoon next buffer" },
   s = { ":HopChar2<cr>", "hop char" },
   S = { ":HopWord<cr>", "hop word" },
+  v = {
+    i = {
+      f = { "<esc>ggVG", "highlight file contents" },
+    },
+  },
+  y = {
+    c = { "<esc>:let @+=expand('%:p')<cr>", "yank filepath" },
+    i = {
+      f = { "<esc>ggVGy", "yank file contents" },
+    },
+  },
   ["<F1>"] = { require("dap").step_into, "dap step in" },
   ["<F2>"] = { require("dap").step_over, "dap step over" },
   ["<F3>"] = { require("dap").step_out, "dap step out" },
@@ -92,6 +103,7 @@ require("which-key").register({
   l = {
     name = "lsp",
     f = { ":ConformInfo<cr>", "current buffer formatter info" },
+    i = { ":LspInfo<cr>", "current buffer LSP info" },
     l = {
       function()
         local logfile = os.getenv("HOME") .. "/.local/state/nvim/conform.log"
@@ -99,7 +111,8 @@ require("which-key").register({
       end,
       "formatter log",
     },
-    i = { ":LspInfo<cr>", "current buffer LSP info" },
+    L = { ":LspLog<cr>", "buffer LSP logfile" },
+    R = { ":LspRestart<cr>", "restart LSP" },
   },
   m = { require("harpoon.mark").add_file, "mark buffer" },
   p = {
@@ -153,11 +166,6 @@ require("which-key").register({
     q = { require("config.trouble").open_quickfix, "quickfix" },
     w = { require("config.trouble").open_workspace_diagnostics, "workspace diagnostics" },
     x = { require("config.trouble").open, "open trouble" },
-  },
-  y = {
-    name = "yank",
-    f = { ":let @+=expand('%:p')<cr>", "filepath" },
-    y = { "ggVGy<c-o>", "all contents" },
   },
 }, { prefix = "<leader>", mode = "n" })
 

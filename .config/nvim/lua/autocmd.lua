@@ -54,19 +54,3 @@ vim.api.nvim_create_augroup("Skeleton", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", skeleton("*.tex", "tex", "hw"))
 vim.api.nvim_create_autocmd("BufEnter", skeleton("tasks.json", "json", "tasks"))
 vim.api.nvim_create_autocmd("BufEnter", skeleton("launch.json", "json", "launch"))
-
--- only map "<leader>m" on markdown files
--- REQUIRES MARKDOWN-PREVIEW
-vim.api.nvim_create_augroup("Markdown", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  group = "Markdown",
-  pattern = "*",
-  callback = function()
-    local type = vim.api.nvim_buf_get_option(0, "filetype")
-    if type == "markdown" then
-      require("which-key").register({
-        m = { ":MarkdownPreview<cr>", "md preview" },
-      }, { prefix = "<leader>" })
-    end
-  end,
-})
