@@ -1,16 +1,45 @@
--- stylua: ignore start
 local formatters = {
-	black        = { binary = "black",        install = "brew install black"                                 },
-	clang_format = { binary = "clang-format", install = "brew install clang-format"                          },
-	gofumpt      = { binary = "gofmt",        install = "brew install gofumpt"                               },
-	goimports    = { binary = "goimports",    install = "go install golang.org/x/tools/cmd/goimports@latest" },
-	isort        = { binary = "isort",        install = "brew install isort"                                 },
-	latexindent  = { binary = "latexindent",  install = "brew install latexindent"                           },
-	prettierd    = { binary = "prettierd",    install = "brew install prettierd"                             },
-	shfmt        = { binary = "shfmt",        install = "brew install shfmt"                                 },
-	stylua       = { binary = "stylua",       install = "brew install stylua"                                },
+  black = {
+    binary = "black",
+    install = "brew install black",
+  },
+  clang_format = {
+    binary = "clang-format",
+    install = "brew install clang-format",
+  },
+  fourmolu = {
+    binary = "fourmolu",
+    install = "brew install fourmolu",
+  },
+  gofumpt = {
+    binary = "gofmt",
+    install = "brew install gofumpt",
+  },
+  goimports = {
+    binary = "goimports",
+    install = "go install golang.org/x/tools/cmd/goimports@latest",
+  },
+  isort = {
+    binary = "isort",
+    install = "brew install isort",
+  },
+  latexindent = {
+    binary = "latexindent",
+    install = "brew install latexindent",
+  },
+  prettierd = {
+    binary = "prettierd",
+    install = "brew install prettierd",
+  },
+  shfmt = {
+    binary = "shfmt",
+    install = "brew install shfmt",
+  },
+  stylua = {
+    binary = "stylua",
+    install = "brew install stylua",
+  },
 }
--- stylua: ignore end
 
 require("which-key").register({
   l = {
@@ -55,6 +84,7 @@ require("conform").setup({
 		css             = { "prettierd"                        },
 		go              = { "goimports", "gofmt"               },
 		graphql         = { "prettierd"                        },
+    haskell         = { "fourmolu"                         },
 		html            = { "prettierd"                        },
 		javascript      = { "prettierd"                        },
 		javascriptreact = { "prettierd"                        },

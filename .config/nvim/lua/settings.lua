@@ -22,6 +22,7 @@ vim.opt.backup = false
 vim.opt.undofile = true
 vim.opt.writebackup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
+vim.opt.viminfofile = os.getenv("HOME") .. "/.cache/nvim/info"
 
 -- search opts
 vim.opt.hlsearch = true

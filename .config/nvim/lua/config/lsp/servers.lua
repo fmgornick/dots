@@ -1,20 +1,52 @@
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 
--- stylua: ignore start
 local server_info = {
-	bashls           = { binary = "bash-language-server",        install = "npm i -g bash-language-server"                                  },
-  clangd           = { binary = "clangd",                      install = "brew install llvm"                                              },
-  gopls            = { binary = "gopls",                       install = "go install golang.org/x/tools/gopls@latest"                     },
-  golangci_lint_ls = { binary = "golangci-lint-langserver",    install = "go install github.com/nametake/golangci-lint-langserver@latest" },
-  jsonls           = { binary = "vscode-json-language-server", install = "npm i -g vscode-langservers-extracted"                          },
-  lua_ls           = { binary = "lua-language-server",         install = "brew install lua-language-server"                               },
-  pyright          = { binary = "pyright-langserver",          install = "brew install pyright"                                           },
-  rust_analyzer    = { binary = "rust-analyzer",               install = "rustup component add rust-analyzer"                             },
-  tsserver         = { binary = "typescript-language-server",  install = "npm i -g typescript typescript-language-server"                 },
-  yamlls           = { binary = "yaml-language-server",        install = "brew install yaml-language-server"                              },
+  bashls = {
+    binary = "bash-language-server",
+    install = "npm i -g bash-language-server",
+  },
+  clangd = {
+    binary = "clangd",
+    install = "brew install llvm",
+  },
+  gopls = {
+    binary = "gopls",
+    install = "go install golang.org/x/tools/gopls@latest",
+  },
+  golangci_lint_ls = {
+    binary = "golangci-lint-langserver",
+    install = "go install github.com/nametake/golangci-lint-langserver@latest",
+  },
+  hls = {
+    binary = "haskell-language-server-wrapper",
+    install = "brew install haskell-language-server-wrapper",
+  },
+  jsonls = {
+    binary = "vscode-json-language-server",
+    install = "npm i -g vscode-langservers-extracted",
+  },
+  lua_ls = {
+    binary = "lua-language-server",
+    install = "brew install lua-language-server",
+  },
+  pyright = {
+    binary = "pyright-langserver",
+    install = "brew install pyright",
+  },
+  rust_analyzer = {
+    binary = "rust-analyzer",
+    install = "rustup component add rust-analyzer",
+  },
+  tsserver = {
+    binary = "typescript-language-server",
+    install = "npm i -g typescript typescript-language-server",
+  },
+  yamlls = {
+    binary = "yaml-language-server",
+    install = "brew install yaml-language-server",
+  },
 }
--- stylua: ignore end
 
 local servers = {
   bashls = {
@@ -44,6 +76,9 @@ local servers = {
         usePlaceholders = true,
       },
     },
+  },
+  hls = {
+    cmd = { "haskell-language-server-wrapper", "--lsp" },
   },
   jsonls = {
     cmd = { "vscode-json-language-server", "--stdio" },

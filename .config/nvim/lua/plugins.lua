@@ -1,61 +1,60 @@
-vim.cmd("packadd packer.nvim")
+return {
+  -- shortcuts
+  { "folke/which-key.nvim", event = "VeryLazy" },
 
-return require("packer").startup(function(use)
   -- dependencies
-  use({ "wbthomason/packer.nvim" })
-  use({ "nvim-lua/plenary.nvim" })
-  use({ "nvim-tree/nvim-web-devicons" })
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+  { "nvim-lua/plenary.nvim" },
+  { "nvim-tree/nvim-web-devicons" },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
   -- lsp stuff
-  use({ "neovim/nvim-lspconfig" })
-  use({ "folke/neodev.nvim" })
+  { "neovim/nvim-lspconfig" },
+  { "folke/neodev.nvim" },
 
   -- debugging
-  use({ "mfussenegger/nvim-dap" })
-  use({ "rcarriga/nvim-dap-ui" })
+  { "mfussenegger/nvim-dap" },
+  { "rcarriga/nvim-dap-ui" },
 
   -- formatting and linting
-  use({ "stevearc/conform.nvim" })
+  { "stevearc/conform.nvim" },
 
   -- code completion
-  use({ "hrsh7th/nvim-cmp" })
-  use({ "hrsh7th/cmp-nvim-lsp" })
-  use({ "L3MON4D3/LuaSnip", run = "make install_jsregexp" })
-  use({ "saadparwaiz1/cmp_luasnip" })
-  use({ "rafamadriz/friendly-snippets" })
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "rafamadriz/friendly-snippets" },
+  { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+  { "saadparwaiz1/cmp_luasnip" },
 
   -- fuzzy finder + extension(s)
-  use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" })
-  use({ "nvim-telescope/telescope-file-browser.nvim" })
+  { "nvim-telescope/telescope.nvim" },
+  { "nvim-telescope/telescope-file-browser.nvim" },
 
   -- git integration
-  use({ "lewis6991/gitsigns.nvim" })
-  use({ "kdheepak/lazygit.nvim" })
+  { "lewis6991/gitsigns.nvim" },
+  { "kdheepak/lazygit.nvim" },
 
   -- colorschemes
-  use({ "catppuccin/nvim", as = "catppuccin" })
-  use({ "folke/tokyonight.nvim", as = "tokyonight" })
-  use({ "marko-cerovac/material.nvim" })
-  use({ "Mofiqul/dracula.nvim" })
-  use({ "morhetz/gruvbox" })
-  use({ "nyoom-engineering/oxocarbon.nvim" })
-  use({ "sainnhe/edge" })
-  use({ "sainnhe/everforest" })
+  { "catppuccin/nvim", name = "catppuccin" },
+  { "folke/tokyonight.nvim", name = "tokyonight" },
+  { "marko-cerovac/material.nvim" },
+  { "Mofiqul/dracula.nvim" },
+  { "morhetz/gruvbox" },
+  { "nyoom-engineering/oxocarbon.nvim" },
+  { "sainnhe/edge" },
+  { "sainnhe/everforest" },
 
-  -- OTHER PLUGINS --
   -- stylua: ignore start
-  use({ "nvim-lualine/lualine.nvim"                   }) -- pretty statusline (with colorscheme)
-  use({ "folke/trouble.nvim", run = "TroubleToggle"   }) -- workspace diagnostics
-  use({ "goolord/alpha-nvim"                          }) -- cute little nvim dashboard
-  use({ "windwp/nvim-autopairs"                       }) -- why tf is this not default
-  use({ "numToStr/Comment.nvim"                       }) -- this too oml
-  use({ "ThePrimeagen/harpoon"                        }) -- need that creamy coconut oil
-  use({ "phaazon/hop.nvim", as = "hop", branch = "v2" }) -- who uses default 's' key anyway
-  use({ "lervag/vimtex"                               }) -- compiles latex files
-  use({ "folke/which-key.nvim"                        }) -- shortcut cheatsheet
-  use({ "SmiteshP/nvim-navic"                         }) -- shows current code context
-  use({ "EthanJWright/vs-tasks.nvim"                  }) -- automated building tool
-  use({ "skywind3000/asyncrun.vim"                    }) -- for async install repl
+  { "nvim-lualine/lualine.nvim"       }, -- pretty statusline (with colorscheme)
+  { "folke/trouble.nvim"              }, -- workspace diagnostics
+  { "goolord/alpha-nvim"              }, -- cute little nvim dashboard
+  { "windwp/nvim-autopairs"           }, -- why tf is this not default
+  { "numToStr/Comment.nvim"           }, -- this too oml
+  { "ThePrimeagen/harpoon"            }, -- need that creamy coconut oil
+  { "phaazon/hop.nvim", name = "hop"  }, -- who uses default 's' key anyway
+  { "lervag/vimtex"                   }, -- compiles latex files
+  { "SmiteshP/nvim-navic"             }, -- shows current code context
+  { "EthanJWright/vs-tasks.nvim"      }, -- automated building tool
+  { "skywind3000/asyncrun.vim"        }, -- for async install repl
+  { "eandrju/cellular-automaton.nvim", lazy = false }, -- actually useless
   -- stylua: ignore end
-end)
+}

@@ -3,6 +3,10 @@ require("neodev").setup()
 require("Comment").setup()
 require("hop").setup()
 require("harpoon").setup()
+-- require("cellular-automaton").register_animation({
+--   fps = 50,
+--   name = "slide",
+-- })
 
 require("config.alpha")
 require("config.colors")

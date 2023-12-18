@@ -100,28 +100,34 @@ require("which-key").register({
     q = { require("telescope.builtin").quickfix, "quickfix list" },
   },
   h = { ":noh<cr>", "no highlight" },
+  i = {
+    name = "info",
+    f = { ":ConformInfo<cr>", "formatter (conform)" },
+    l = { ":LspInfo<cr>", "language servers (nvim-lsp)" },
+    p = { ":Lazy<cr>", "package manager (lazy)" },
+  },
   l = {
-    name = "lsp",
-    f = { ":ConformInfo<cr>", "current buffer formatter info" },
-    i = { ":LspInfo<cr>", "current buffer LSP info" },
-    l = {
+    name = "log",
+    f = {
       function()
         local logfile = os.getenv("HOME") .. "/.local/state/nvim/conform.log"
         vim.cmd("edit " .. logfile)
       end,
-      "formatter log",
+      "formatter(s)",
     },
-    L = { ":LspLog<cr>", "buffer LSP logfile" },
-    R = { ":LspRestart<cr>", "restart LSP" },
+    p = { ":Lazy log<cr>", "package(s)" },
+    s = { ":LspLog<cr>", "language server(s)" },
   },
   m = { require("harpoon.mark").add_file, "mark buffer" },
-  p = {
-    name = "packer",
-    s = { require("packer").sync, "sync" },
-  },
   q = { ":q!<cr>", "quit" },
   Q = { ":qa!<cr>", "quit all" },
-  r = { ":source $MYVIMRC<cr>", "reload config" },
+  r = {
+    name = "reload",
+    i = { ":source $MYVIMRC<cr>", "init.lua" },
+    l = { ":LspRestart<cr>", "language servers" },
+    p = { ":Lazy reload<cr>", "packages" },
+    t = { ":TSInstallSync<cr>", "treesitter" },
+  },
   t = {
     name = "terminal",
     h = {
