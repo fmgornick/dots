@@ -17,13 +17,14 @@ keyset("n", "<c-s-l>", ":vertical resize +2<cr>", { desc = "window resize right"
 
 -- yank stuff
 keyset("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })
-keyset("n", "yif", "<esc>ggVy", { desc = "yank file contents" })
-keyset("n", "vif", "<esc>ggVG", { desc = "highlight file contents" })
+keyset("n", "yiF", "<esc>ggVy", { desc = "yank file contents" })
+keyset("n", "viF", "<esc>ggVG", { desc = "highlight file contents" })
 
 --leader commands
 keyset("n", "<leader>c",  ":bn|bd!#<cr>", { desc = "close buffer" })
 keyset("n", "<leader>w",  ":w<cr>", { desc = "write buffer" })
-keyset("n", "<leader>q",  ":q<cr>", { desc = "quit buffer" })
+keyset("n", "<leader>q",  ":q!<cr>", { desc = "quit" })
+keyset("n", "<leader>Q",  ":qa!<cr>", { desc = "quit all" })
 keyset("n", "<leader>h",  ":noh<cr>", { desc = "no highlight" })
 
 -- for clicking on links (mac, { desc = "" })

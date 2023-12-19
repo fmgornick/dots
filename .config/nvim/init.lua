@@ -6,15 +6,16 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("fmgornick.core")
 require("lazy").setup({
   { import = "fmgornick.plugins" },
-  -- { import = "fmgornick.plugins.lsp" },
+  { import = "fmgornick.plugins.lsp" },
 }, {
   debug = false,
   defaults = {
@@ -26,4 +27,5 @@ require("lazy").setup({
   },
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
 })
-require("fmgornick.core")
+
+vim.keymap.set("n", "<leader>ip", vim.cmd.Lazy, { desc = "plugins" })

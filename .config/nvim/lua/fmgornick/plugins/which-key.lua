@@ -11,6 +11,7 @@ return {
       prefix = "<leader>",
       d = { name = "debug" },
       f = { name = "fuzzy-find" },
+      g = { name = "git" },
       i = { name = "info" },
       l = { name = "language" },
       L = { name = "log" },

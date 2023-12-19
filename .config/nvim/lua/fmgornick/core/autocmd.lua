@@ -1,5 +1,7 @@
+local api = vim.api
+
 -- highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
+api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank({
       higroup = "Search",
@@ -9,24 +11,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- allow save if in not-yet-created directory
-vim.api.nvim_create_augroup("MkDir", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
+api.nvim_create_augroup("MkDir", { clear = true })
+api.nvim_create_autocmd("BufWritePre", {
   group = "MkDir",
   pattern = "*",
   callback = function() vim.fn.mkdir(vim.fn.expand("%:p:h"), "p") end,
 })
 
 -- wrap in readme and latex files
-vim.api.nvim_create_augroup("SetWrap", { clear = true })
-vim.api.nvim_create_autocmd("BufEnter", {
+api.nvim_create_augroup("SetWrap", { clear = true })
+api.nvim_create_autocmd("BufEnter", {
   pattern = { "*.md", "*.tex" },
   group = "SetWrap",
   command = "setlocal wrap linebreak nolist",
 })
 
 -- automatically enter insert mode on terminal buffer
-vim.api.nvim_create_augroup("InsertTerm", { clear = true })
-vim.api.nvim_create_autocmd("BufEnter", {
+api.nvim_create_augroup("InsertTerm", { clear = true })
+api.nvim_create_autocmd("BufEnter", {
   group = "InsertTerm",
   pattern = "*",
   callback = function()
@@ -52,7 +54,7 @@ local function skeleton(pattern, filetype, snippet)
     end,
   }
 end
-vim.api.nvim_create_augroup("Skeleton", { clear = true })
-vim.api.nvim_create_autocmd("BufEnter", skeleton("*.tex", "tex", "hw"))
-vim.api.nvim_create_autocmd("BufEnter", skeleton("tasks.json", "json", "tasks"))
-vim.api.nvim_create_autocmd("BufEnter", skeleton("launch.json", "json", "launch"))
+api.nvim_create_augroup("Skeleton", { clear = true })
+api.nvim_create_autocmd("BufEnter", skeleton("*.tex", "tex", "hw"))
+api.nvim_create_autocmd("BufEnter", skeleton("tasks.json", "json", "tasks"))
+api.nvim_create_autocmd("BufEnter", skeleton("launch.json", "json", "launch"))

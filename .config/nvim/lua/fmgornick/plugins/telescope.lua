@@ -12,7 +12,6 @@ return {
       pickers = {
         buffers = {
           theme = "ivy",
-          mappings = {},
         },
       },
       extensions = {
