@@ -1,3 +1,4 @@
+local keyset = vim.keymap.set
 local formatters = {
   black = {
     binary = "black",
@@ -41,7 +42,7 @@ local formatters = {
   },
 }
 
-vim.keymap.set("n", "<leader>lF", function()
+keyset("n", "<leader>lF", function()
   local all_installed = true
   local install_command = ""
 
@@ -64,11 +65,12 @@ vim.keymap.set("n", "<leader>lF", function()
   end
 end, { desc = "install formatters" })
 
-vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { desc = "format region" })
+keyset("v", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { desc = "format region" })
 
 return {
   "stevearc/conform.nvim",
   lazy = false,
+  keys = { { "<leader>if", ":ConformInfo<cr>", desc = "formatters (conform)", mode = "n" } },
   opts = {
     formatters_by_ft = {
       bash = { "shfmt" },

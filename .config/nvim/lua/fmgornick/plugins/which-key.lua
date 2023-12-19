@@ -26,4 +26,3 @@ return {
     wk.register(opts.groups)
   end,
 }
-

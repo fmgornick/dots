@@ -25,7 +25,7 @@ return {
   {
     "phaazon/hop.nvim",
     config = true,
-    keys = { "s", ":HopWord<cr>", desc = "hop", mode = "n" },
+    keys = { { "s", ":HopWord<cr>", desc = "hop", mode = "n" } },
   },
   { "skywind3000/asyncrun.vim", lazy = false },
   { "eandrju/cellular-automaton.nvim", lazy = false },

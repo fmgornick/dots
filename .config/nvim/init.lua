@@ -28,4 +28,4 @@ require("lazy").setup({
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
 })
 
-vim.keymap.set("n", "<leader>ip", vim.cmd.Lazy, { desc = "plugins" })
+vim.keymap.set("n", "<leader>ip", vim.cmd.Lazy, { desc = "plugins (lazy)" })
