@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 -- i kinda like the mouse :o
 vim.opt.mousescroll = "ver:1,hor:0"
 
