@@ -29,4 +29,24 @@ return {
   },
   { "skywind3000/asyncrun.vim", lazy = false },
   { "eandrju/cellular-automaton.nvim", lazy = false },
+  {
+    "rest-nvim/rest.nvim",
+    ft = "http",
+    dependencies = "nvim-lua/plenary.nvim",
+    keys = { { "<leader>x", "<Plug>RestNvim", desc = "http request", mode = { "n", "v" } } },
+    config = true,
+  },
+  {
+    "toppair/peek.nvim",
+    event = "VeryLazy",
+    ft = "markdown",
+    build = "deno task --quiet build:fast",
+    config = function()
+      require("peek").setup()
+      -- refer to `configuration to change defaults`
+      vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+      vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+    end,
+  },
+  { "tpope/vim-abolish", lazy = false },
 }

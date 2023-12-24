@@ -1,13 +1,13 @@
-local telescope = require("telescope")
 local builtin = require("telescope.builtin")
+local telescope = require("telescope")
 
 return {
   {
-    'nvim-telescope/telescope.nvim',
+    "nvim-telescope/telescope.nvim",
     lazy = true,
     event = "VeryLazy",
     cmd = "Telescope",
-    dependencies = 'nvim-lua/plenary.nvim',
+    dependencies = "nvim-lua/plenary.nvim",
     opts = {
       pickers = {
         buffers = {
@@ -33,20 +33,21 @@ return {
         end,
         desc = "file explorer",
       },
-      { 
-        "<leader>fc", 
-        function() builtin.find_files({ cwd = "~/.config/nvim" }) end, 
-        desc = "nvim config files" 
+      { "<leader>fb", builtin.buffers, desc = "buffers" },
+      {
+        "<leader>fc",
+        function() builtin.find_files({ cwd = "~/.config/nvim" }) end,
+        desc = "nvim config files",
       },
       { "<leader>fC", builtin.colorscheme, desc = "color schemes" },
       { "<leader>fd", builtin.diagnostics, desc = "buffer diagnostics" },
-      { 
-        "<leader>ff", 
+      {
+        "<leader>ff",
         function() builtin.find_files({ cwd = vim.fn.expand("%:p:h") }) end,
-        desc = "find project files" 
+        desc = "find project files",
       },
-      { 
-        "<leader>fF", 
+      {
+        "<leader>fF",
         function() builtin.find_files({ cwd = vim.fn.expand("%:p:h") }) end,
         desc = "find folder files",
       },
@@ -72,7 +73,7 @@ return {
   },
   {
     "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = 'nvim-telescope/telescope.nvim',
-    cmd = "Telescope file_browser"
+    dependencies = "nvim-telescope/telescope.nvim",
+    cmd = "Telescope file_browser",
   },
 }
