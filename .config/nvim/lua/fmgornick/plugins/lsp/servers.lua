@@ -1,6 +1,3 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require("lspconfig")
-
 local server_info = {
   bashls = {
     binary = "bash-language-server",
@@ -139,21 +136,6 @@ local servers = {
   },
 }
 
-for name, opts in pairs(servers) do
-  if type(opts) == "function" then
-    opts()
-  else
-    local client = lspconfig[name]
-
-    client.setup(vim.tbl_extend("force", {
-      flags = { debounce_text_changes = 150 },
-      -- on_attach = Util.lsp_on_attach,
-      -- on_init = Util.lsp_on_init,
-      capabilities = capabilities,
-    }, opts))
-  end
-end
-
 local signs = {
   Error = "",
   Warn = "",
@@ -165,62 +147,69 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(env)
-    -- enable completion triggered by <c-x><c-o>
-    vim.bo[env.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+return {
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "folke/neodev.nvim",
+    "hrsh7th/cmp-nvim-lsp",
+  },
+  lazy = false,
+  keys = { { "<leader>il", ":LspInfo<cr>", desc = "language servers (nvim-lsp)", mode = "n" } },
+  config = function()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    local lspconfig = require("lspconfig")
+    local keyset = vim.keymap.set
 
-    -- buffer local mappings
-    -- see `:help vim.lsp.*` for documentation on any of the below functions
-    require("which-key").register({
-      g = {
-        a = { vim.diagnostic.setloclist, "loclist diagnostics" },
-        d = { vim.lsp.buf.definition, "definition", buffer = env.buf },
-        D = { vim.lsp.buf.declaration, "declaration", buffer = env.buf },
-        i = { vim.lsp.buf.implementation, "implementation", buffer = env.buf },
-        l = { vim.diagnostic.open_float, "float diagnostics" },
-        n = { vim.diagnostic.goto_next, "next diagnostic" },
-      },
-      K = { vim.lsp.buf.hover, "hover", buffer = env.buf },
-    }, { prefix = "", mode = "n" })
+    for name, opts in pairs(servers) do
+      if type(opts) == "function" then
+        opts()
+      else
+        local client = lspconfig[name]
 
-    require("which-key").register({
-      D = { vim.lsp.buf.type_definition, "type definition", buffer = env.buf },
-      l = {
-        a = { vim.lsp.buf.code_action, "code action" },
-        r = { vim.lsp.buf.rename, "rename var" },
-        S = {
-          function()
-            local all_installed = true
-            local install_command = ""
+        client.setup(vim.tbl_extend("force", {
+          flags = { debounce_text_changes = 150 },
+          capabilities = capabilities,
+        }, opts))
+      end
+    end
 
-            for _, s in pairs(server_info) do
-              if vim.fn.executable(s.binary) ~= 1 then
-                all_installed = false
-                install_command = install_command .. "echo installing " .. s.binary .. "; "
-                install_command = install_command .. s.install .. "; "
-                install_command = install_command .. "echo '\\n'; "
-              end
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+      callback = function(env)
+        vim.bo[env.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+        keyset("n", "ga", vim.diagnostic.setloclist, { desc = "loclist diagnostics" })
+        keyset("n", "gd", vim.lsp.buf.definition, { desc = "definition", buffer = env.buf })
+        keyset("n", "gD", vim.lsp.buf.declaration, { desc = "declaration", buffer = env.buf })
+        keyset("n", "gi", vim.lsp.buf.implementation, { desc = "implementation", buffer = env.buf })
+        keyset("n", "gl", vim.diagnostic.open_float, { desc = "float diagnostics" })
+        keyset("n", "gn", vim.diagnostic.goto_next, { desc = "next diagnostic" })
+        keyset("n", "K", vim.lsp.buf.hover, { desc = "hover", buffer = env.buf })
+        keyset("n", "<leader>la", vim.lsp.buf.code_action, { desc = "code action" })
+        keyset("n", "<leader>lr", vim.lsp.buf.rename, { desc = "rename var" })
+        keyset("n", "<leader>lS", function()
+          local all_installed = true
+          local install_command = ""
+
+          for _, s in pairs(server_info) do
+            if vim.fn.executable(s.binary) ~= 1 then
+              all_installed = false
+              install_command = install_command .. "echo installing " .. s.binary .. "; "
+              install_command = install_command .. s.install .. "; "
+              install_command = install_command .. "echo '\\n'; "
             end
+          end
 
-            if all_installed then
-              print("all LSPs already installed!")
-            else
-              install_command = install_command .. "echo done!!!"
-              vim.cmd("vert copen 100")
-              vim.cmd("set wrap")
-              vim.cmd("AsyncRun -strip " .. install_command)
-            end
-          end,
-          "install language servers",
-        },
-      },
-      W = {
-        a = { vim.lsp.buf.add_workspace_folder, "add workspace folder", buffer = env.buf },
-        l = { vim.lsp.buf.list_workspace_folders, "list workspace folders", buffer = env.buf },
-        r = { vim.lsp.buf.remove_workspace_folder, "remove workspace folder", buffer = env.buf },
-      },
-    }, { prefix = "<leader>", mode = "n" })
+          if all_installed then
+            print("all LSPs already installed!")
+          else
+            install_command = install_command .. "echo done!!!"
+            vim.cmd("vert copen 100")
+            vim.cmd("set wrap")
+            vim.cmd("AsyncRun -strip " .. install_command)
+          end
+        end, { desc = "install language servers" })
+      end,
+    })
   end,
-})
+}
