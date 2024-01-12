@@ -1,0 +1,15 @@
+[user]
+  name = Fletcher Gornick
+  email = Fletcher.Gornick@target.com
+[user]
+  name = Fletcher Gornick
+  email = fletchermgornick@gmail.com
+
+[url "git@git.target.com:"]
+	insteadOf = https://git.target.com/
+
+[core]
+  pager = "less -x4"
+[pager]
+  branch = false
+  stash = false
