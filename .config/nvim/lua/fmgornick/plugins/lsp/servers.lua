@@ -50,6 +50,9 @@ local servers = {
     cmd = { "bash-language-server", "start" },
     filetypes = { "bash", "sh", "zsh" },
   },
+  clangd = {
+    cmd = { "clangd" },
+  },
   golangci_lint_ls = {
     cmd = { "golangci-lint-langserver" },
     init_options = {
