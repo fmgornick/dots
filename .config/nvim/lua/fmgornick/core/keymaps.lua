@@ -21,11 +21,11 @@ keyset("n", "yiF", "<esc>ggVy", { desc = "yank file contents" })
 keyset("n", "viF", "<esc>ggVG", { desc = "highlight file contents" })
 
 --leader commands
-keyset("n", "<leader>c",  ":bn|bd!#<cr>", { desc = "close buffer" })
-keyset("n", "<leader>w",  ":w<cr>", { desc = "write buffer" })
-keyset("n", "<leader>q",  ":q!<cr>", { desc = "quit" })
-keyset("n", "<leader>Q",  ":qa!<cr>", { desc = "quit all" })
-keyset("n", "<leader>h",  ":noh<cr>", { desc = "no highlight" })
+keyset("n", "<leader>c", ":bn|bd!#<cr>", { desc = "close buffer" })
+keyset("n", "<leader>w", ":w<cr>", { desc = "write buffer" })
+keyset("n", "<leader>q", ":q!<cr>", { desc = "quit" })
+keyset("n", "<leader>Q", ":qa!<cr>", { desc = "quit all" })
+keyset("n", "<leader>h", ":noh<cr>", { desc = "no highlight" })
 
 -- for clicking on links (mac, { desc = "" })
 keyset("n", "<M-LeftMouse>", "<LeftMouse>", { desc = "click link" })
@@ -38,7 +38,7 @@ keyset("v", ">", ">gv", { desc = "move block right" })
 
 -- terminal stuff
 keyset("t", "<c-q>", "<c-\\><c-n>:bd!<cr>", { desc = "quit term" })
-keyset("t", "˙", "<c-\\><c-n><c-w>h", { desc = "window left" })
-keyset("t", "∆", "<c-\\><c-n><c-w>j", { desc = "window down" })
-keyset("t", "˚", "<c-\\><c-n><c-w>k", { desc = "window up" })
-keyset("t", "¬", "<c-\\><c-n><c-w>l", { desc = "window right" })
+keyset("t", "<m-h>", "<c-\\><c-n><c-w>h", { desc = "window left" })
+keyset("t", "<m-j>", "<c-\\><c-n><c-w>j", { desc = "window down" })
+keyset("t", "<m-k>", "<c-\\><c-n><c-w>k", { desc = "window up" })
+keyset("t", "<m-l>", "<c-\\><c-n><c-w>l", { desc = "window right" })
