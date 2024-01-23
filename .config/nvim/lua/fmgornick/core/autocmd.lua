@@ -21,7 +21,7 @@ api.nvim_create_autocmd("BufWritePre", {
 -- wrap in readme and latex files
 api.nvim_create_augroup("SetWrap", { clear = true })
 api.nvim_create_autocmd("BufEnter", {
-  pattern = { "*.md", "*.tex" },
+  pattern = { "*.md", "*.tex", "*.http" },
   group = "SetWrap",
   command = "setlocal wrap linebreak nolist",
 })

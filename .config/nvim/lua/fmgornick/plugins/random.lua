@@ -49,4 +49,5 @@ return {
     end,
   },
   { "tpope/vim-abolish", lazy = false },
+  { "xiyaowong/transparent.nvim", lazy = false },
 }
