@@ -20,6 +20,8 @@ return {
       { "<leader>gb", ":Gitsigns blame_line<cr>", desc = "blame line", mode = "n" },
       { "<leader>gd", ":Gitsigns diffthis<cr>", desc = "get diff", mode = "n" },
       { "<leader>gg", ":LazyGit<cr>", desc = "lazy git", mode = "n" },
+      { "<leader>gn", ":Gitsigns next_hunk<cr>", desc = "next hunk", mode = "n" },
+      { "<leader>gN", ":Gitsigns prev_hunk<cr>", desc = "previous hunk", mode = "n" },
       { "<leader>gp", ":Gitsigns preview_hunk<cr>", desc = "preview hunk", mode = "n" },
       { "<leader>gr", ":Gitsigns reset_hunk<cr>", desc = "reset hunk", mode = { "n", "v" } },
       { "<leader>gR", ":Gitsigns reset_buffer<cr>", desc = "reset buffer", mode = "n" },

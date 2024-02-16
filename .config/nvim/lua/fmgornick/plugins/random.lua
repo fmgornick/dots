@@ -50,4 +50,6 @@ return {
   },
   { "tpope/vim-abolish", lazy = false },
   { "xiyaowong/transparent.nvim", lazy = false },
+  { "norcalli/nvim-colorizer.lua", lazy = false },
+  { "tpope/vim-surround", lazy = false },
 }
