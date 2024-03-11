@@ -157,7 +157,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   lazy = false,
-  keys = { { "<leader>il", ":LspInfo<cr>", desc = "language servers (nvim-lsp)", mode = "n" } },
+  keys = { { "<leader>is", ":LspInfo<cr>", desc = "language servers (nvim-lsp)", mode = "n" } },
   config = function()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local lspconfig = require("lspconfig")
