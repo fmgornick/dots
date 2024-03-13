@@ -10,12 +10,6 @@ end
 -- no format save
 map("n", "<c-s>", ":noa w<cr>", { desc = "no format save" })
 
--- window navigation
-map("n", "<c-h>", "<c-w>h", { desc = "window left" })
-map("n", "<c-j>", "<c-w>j", { desc = "window down" })
-map("n", "<c-k>", "<c-w>k", { desc = "window up" })
-map("n", "<c-l>", "<c-w>l", { desc = "window right" })
-
 -- window resizing
 map("n", "<c-s-h>", ":vertical resize -2<cr>", { desc = "window resize left" })
 map("n", "<c-s-j>", ":resize +2<cr>", { desc = "window resize down" })
