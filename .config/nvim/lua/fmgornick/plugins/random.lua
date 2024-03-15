@@ -34,7 +34,6 @@ return {
     ft = "http",
     dependencies = "nvim-lua/plenary.nvim",
     keys = { { "<leader>x", "<Plug>RestNvim", desc = "http request", mode = { "n", "v" } } },
-    config = true,
   },
   {
     "toppair/peek.nvim",

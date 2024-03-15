@@ -1,3 +1,6 @@
+local function next_select() require("diffview.actions").select_next_entry() end
+local function prev_select() require("diffview.actions").select_prev_entry() end
+
 return {
   {
     "lewis6991/gitsigns.nvim",
@@ -36,5 +39,34 @@ return {
     "kdheepak/lazygit.nvim",
     dependencies = "lewis6991/gitsigns.nvim",
     keys = { { "<leader>gg", ":LazyGit<cr>", desc = "lazy git", mode = "n" } },
+  },
+  {
+    "sindrets/diffview.nvim",
+    lazy = false,
+    opts = {
+      file_panel = {
+        listing_style = "list",
+        win_config = {
+          position = "bottom",
+          height = 16,
+          win_opts = {},
+        },
+      },
+      keymaps = {
+        file_panel = {
+          { "n", "j", next_select, { desc = "next file entry + select" } },
+          { "n", "<down>", next_select, { desc = "next file entry + select" } },
+          { "n", "k", prev_select, { desc = "previous file entry + select" } },
+          { "n", "<up>", prev_select, { desc = "previous file entry + select" } },
+        },
+        file_history_panel = {
+          { "n", "j", next_select, { desc = "next file entry + select" } },
+          { "n", "<down>", next_select, { desc = "next file entry + select" } },
+          { "n", "k", prev_select, { desc = "previous file entry + select" } },
+          { "n", "<up>", prev_select, { desc = "previous file entry + select" } },
+        },
+      },
+    },
+    config = function(_, opts) require("diffview").setup(opts) end,
   },
 }

@@ -19,14 +19,12 @@ return {
     config = function() require("tokyonight").setup({ style = "moon" }) end,
   },
   {
-    "neanias/everforest-nvim",
+    "sainnhe/everforest",
     lazy = false,
     priority = 1000,
     config = function()
-      require("everforest").setup({
-        background = "soft",
-      })
       vim.cmd.colorscheme("everforest")
+      vim.g.everforest_background = "soft"
     end,
   },
 }
