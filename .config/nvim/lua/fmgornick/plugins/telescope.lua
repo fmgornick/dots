@@ -20,6 +20,9 @@ return {
           theme = "ivy",
           hijack_netrw = true,
         },
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown(),
+        },
       },
     },
     keys = {
@@ -69,6 +72,7 @@ return {
     config = function(_, opts)
       telescope.setup(opts)
       telescope.load_extension("file_browser")
+      telescope.load_extension("ui-select")
     end,
   },
   {
@@ -76,4 +80,5 @@ return {
     dependencies = "nvim-telescope/telescope.nvim",
     cmd = "Telescope file_browser",
   },
+  { "nvim-telescope/telescope-ui-select.nvim" },
 }

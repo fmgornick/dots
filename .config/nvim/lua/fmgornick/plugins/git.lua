@@ -1,5 +1,33 @@
+-- require("string.")
+
 local function next_select() require("diffview.actions").select_next_entry() end
 local function prev_select() require("diffview.actions").select_prev_entry() end
+
+local function diff_view()
+  local out = assert(io.popen('git branch -a --format="%(refname:short)"'))
+  local branches = { "HEAD" }
+  for line in out:lines() do
+    table.insert(branches, line)
+  end
+
+  vim.ui.select(branches, { prompt = "branch to compare" }, function(branch1) vim.cmd(":DiffviewOpen " .. branch1) end)
+end
+
+local function advanced_diff_view()
+  local out = assert(io.popen('git branch -a --format="%(refname:short)"'))
+  local branches = { "HEAD" }
+  for line in out:lines() do
+    table.insert(branches, line)
+  end
+
+  vim.ui.select(branches, { prompt = "branch 1 (old)" }, function(branch1)
+    vim.ui.select(
+      branches,
+      { prompt = "branch 2 (new)" },
+      function(branch2) vim.cmd(":DiffviewOpen " .. branch1 .. ".." .. branch2) end
+    )
+  end)
+end
 
 return {
   {
@@ -21,7 +49,6 @@ return {
     end,
     keys = {
       { "<leader>gb", ":Gitsigns blame_line<cr>", desc = "blame line", mode = "n" },
-      { "<leader>gd", ":Gitsigns diffthis<cr>", desc = "get diff", mode = "n" },
       { "<leader>gg", ":LazyGit<cr>", desc = "lazy git", mode = "n" },
       { "<leader>gn", ":Gitsigns next_hunk<cr>", desc = "next hunk", mode = "n" },
       { "<leader>gN", ":Gitsigns prev_hunk<cr>", desc = "previous hunk", mode = "n" },
@@ -58,15 +85,21 @@ return {
           { "n", "<down>", next_select, { desc = "next file entry + select" } },
           { "n", "k", prev_select, { desc = "previous file entry + select" } },
           { "n", "<up>", prev_select, { desc = "previous file entry + select" } },
+          { "n", "q", ":DiffviewClose<cr>", { desc = "close diff view" } },
         },
         file_history_panel = {
           { "n", "j", next_select, { desc = "next file entry + select" } },
           { "n", "<down>", next_select, { desc = "next file entry + select" } },
           { "n", "k", prev_select, { desc = "previous file entry + select" } },
           { "n", "<up>", prev_select, { desc = "previous file entry + select" } },
+          { "n", "q", ":DiffviewClose<cr>", { desc = "close diff view" } },
         },
       },
     },
     config = function(_, opts) require("diffview").setup(opts) end,
+    keys = {
+      { "<leader>gd", diff_view, desc = "git diff", mode = "n" },
+      { "<leader>gD", advanced_diff_view, desc = "advanced git diff", mode = "n" },
+    },
   },
 }
