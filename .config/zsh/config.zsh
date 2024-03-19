@@ -6,28 +6,23 @@ export PATH="/usr/local/go-dev/bin":$PATH
 export PATH="/usr/local/cargo/bin":$PATH
 
 export ZSH="$HOME/.config/zsh"
-source "$ZSH/env.zsh"
+source "$ZSH/env.sh"
 source "$ZSH/omz.sh"
 source "$ZSH/prompt.zsh"
 
 bindkey -v
 bindkey '^N' autosuggest-accept
+compinit -d "$HOME/.cache/zsh/zcompdump"
 
 # SHORTCUTS
 alias v="nvim"
 alias pip="python3 -m pip"
-compinit -d "$HOME/.cache/zsh/zcompdump"
 
 # update packages
 update() {
   brew update
   brew upgrade
   npx npm-check --global --update-all
-}
-
-nodsstore() {
-  defaults write com.apple.desktopservices DSDontWriteNetworkStores true
-  find . -name ".DS_Store" | xargs rm
 }
 
 # alias for all the different ssh commands
