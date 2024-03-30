@@ -29,12 +29,18 @@ return {
   },
   { "skywind3000/asyncrun.vim", lazy = false },
   { "eandrju/cellular-automaton.nvim", lazy = false },
-  {
-    "rest-nvim/rest.nvim",
-    ft = "http",
-    dependencies = "nvim-lua/plenary.nvim",
-    keys = { { "<leader>x", "<Plug>RestNvim", desc = "http request", mode = { "n", "v" } } },
-  },
+  -- {
+  --   "rest-nvim/rest.nvim",
+  --   ft = "http",
+  --   -- opts = {
+  --   --   result = {
+  --   --     horizontal = true,
+  --   --     stay_in_current_window_after_split = false,
+  --   --   },
+  --   -- },
+  --   config = function() require("rest-nvim").setup() end,
+  --   keys = { { "<leader>r", ":Rest run<cr>", desc = "http request", mode = { "n", "v" } } },
+  -- },
   {
     "toppair/peek.nvim",
     event = "VeryLazy",

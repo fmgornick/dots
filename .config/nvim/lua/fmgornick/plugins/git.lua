@@ -10,7 +10,9 @@ local function diff_view()
     table.insert(branches, line)
   end
 
-  vim.ui.select(branches, { prompt = "branch to compare" }, function(branch1) vim.cmd(":DiffviewOpen " .. branch1) end)
+  vim.ui.select(branches, { prompt = "branch to compare" }, function(branch1)
+    if branch1 ~= nil then vim.cmd(":DiffviewOpen " .. branch1) end
+  end)
 end
 
 local function advanced_diff_view()
@@ -21,11 +23,11 @@ local function advanced_diff_view()
   end
 
   vim.ui.select(branches, { prompt = "branch 1 (old)" }, function(branch1)
-    vim.ui.select(
-      branches,
-      { prompt = "branch 2 (new)" },
-      function(branch2) vim.cmd(":DiffviewOpen " .. branch1 .. ".." .. branch2) end
-    )
+    if branch1 ~= nil then
+      vim.ui.select(branches, { prompt = "branch 2 (new)" }, function(branch2)
+        if branch2 ~= nil then vim.cmd(":DiffviewOpen " .. branch1 .. ".." .. branch2) end
+      end)
+    end
   end)
 end
 

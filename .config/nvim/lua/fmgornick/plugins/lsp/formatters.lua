@@ -78,6 +78,7 @@ return {
       cpp = { "clang_format" },
       css = { "prettierd" },
       go = { "goimports", "gofmt" },
+      glsl = { "clang_format" },
       graphql = { "prettierd" },
       haskell = { "fourmolu" },
       html = { "prettierd" },
@@ -110,9 +111,10 @@ return {
             .gsub(
               [[--style={
                 BasedOnStyle: llvm,
-                ColumnLimit: 100,
+                ColumnLimit: 120,
                 AllowShortCaseLabelsOnASingleLine: true,
-                AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+                AllowShortIfStatementsOnASingleLine: AllIfsAndElse,
+                SortIncludes: false
             }]],
               "\n +",
               " "
