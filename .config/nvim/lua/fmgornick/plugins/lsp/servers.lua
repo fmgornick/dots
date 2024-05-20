@@ -11,10 +11,6 @@ local server_info = {
     binary = "gopls",
     install = "go install golang.org/x/tools/gopls@latest",
   },
-  golangci_lint_ls = {
-    binary = "golangci-lint-langserver",
-    install = "go install github.com/nametake/golangci-lint-langserver@latest",
-  },
   hls = {
     binary = "haskell-language-server-wrapper",
     install = "brew install haskell-language-server-wrapper",
@@ -52,17 +48,6 @@ local servers = {
   },
   clangd = {
     cmd = { "clangd" },
-  },
-  golangci_lint_ls = {
-    cmd = { "golangci-lint-langserver" },
-    init_options = {
-      command = {
-        "golangci-lint",
-        "run",
-        "--out-format",
-        "json",
-      },
-    },
   },
   gopls = {
     cmd = { "gopls" },

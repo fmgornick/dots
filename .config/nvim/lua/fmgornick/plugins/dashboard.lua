@@ -95,7 +95,7 @@ return {
           val = {
             opts.button("f", "󰱽  find file", ":Telescope find_files<cr>"),
             opts.button("n", "  new file", ":ene<cr>"),
-            opts.button("p", "  projects", ":Telescope projects<cr>"),
+            -- opts.button("p", "  projects", ":Telescope projects<cr>"),
             opts.button("r", "󱑁  recent files", ":Telescope oldfiles<cr>"),
             opts.button("t", "󰊄  find text", ":Telescope live_grep<cr>"),
             opts.button("c", "  configuration", ":Telescope find_files cwd=~/.config/nvim<cr>"),

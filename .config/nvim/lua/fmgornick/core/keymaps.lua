@@ -1,7 +1,7 @@
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true }
   if opts then
-    if opts.desc then opts.desc = "keymaps.lua: " .. opts.desc end
+    if opts.desc then opts.desc = opts.desc end
     options = vim.tbl_extend("force", options, opts)
   end
   vim.keymap.set(mode, lhs, rhs, options)
@@ -37,12 +37,8 @@ map("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
 map("v", "<", "<gv", { desc = "move block left" })
 map("v", ">", ">gv", { desc = "move block right" })
 
--- terminal stuff
-map("t", "<c-q>", "<c-\\><c-n>:bd!<cr>", { desc = "quit term" })
-map("t", "<m-h>", "<c-\\><c-n><c-w>h", { desc = "window left" })
-map("t", "<m-j>", "<c-\\><c-n><c-w>j", { desc = "window down" })
-map("t", "<m-k>", "<c-\\><c-n><c-w>k", { desc = "window up" })
-map("t", "<m-l>", "<c-\\><c-n><c-w>l", { desc = "window right" })
+-- toggle relativ number
+map("n", "<leader>r", ":set relativenumber!<cr>", { desc = "toggle relativ number" })
 
 -- emacs keybinds
 map("c", "<c-x>", "<c-f>")

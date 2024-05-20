@@ -1,10 +1,10 @@
 return {
   "ThePrimeagen/harpoon",
   keys = {
-    { 
-      "H", 
-      ":lua require('harpoon.ui').nav_prev()<cr>", 
-      desc = "harpoon previous buffer", 
+    {
+      "H",
+      ":lua require('harpoon.ui').nav_prev()<cr>",
+      desc = "harpoon previous buffer",
       mode = "n",
     },
     {

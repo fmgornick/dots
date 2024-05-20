@@ -29,34 +29,23 @@ return {
   },
   { "skywind3000/asyncrun.vim", lazy = false },
   { "eandrju/cellular-automaton.nvim", lazy = false },
-  -- {
-  --   "rest-nvim/rest.nvim",
-  --   ft = "http",
-  --   -- opts = {
-  --   --   result = {
-  --   --     horizontal = true,
-  --   --     stay_in_current_window_after_split = false,
-  --   --   },
-  --   -- },
-  --   config = function() require("rest-nvim").setup() end,
-  --   keys = { { "<leader>r", ":Rest run<cr>", desc = "http request", mode = { "n", "v" } } },
-  -- },
   {
-    "toppair/peek.nvim",
-    event = "VeryLazy",
-    ft = "markdown",
-    build = "deno task --quiet build:fast",
+    "diepm/vim-rest-console",
+    ft = "rest",
     config = function()
-      require("peek").setup()
-      -- refer to `configuration to change defaults`
-      vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-      vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+      vim.g.vrc_set_default_mapping = 0
+      vim.g.vrc_response_default_content_type = "application/json"
+      vim.g.vrc_output_buffer_name = "__out__.http"
+      vim.g.vrc_auto_format_response_patterns = {
+        json = "jq",
+      }
     end,
+    keys = { { "<leader>x", ":call VrcQuery()<cr>", desc = "http request", mode = { "n", "v" } } },
   },
   { "tpope/vim-abolish", lazy = false },
+  { "tpope/vim-surround", lazy = false },
   { "xiyaowong/transparent.nvim", lazy = false },
   { "norcalli/nvim-colorizer.lua", lazy = false },
-  { "tpope/vim-surround", lazy = false },
   {
     "alexghergh/nvim-tmux-navigation",
     lazy = false,
@@ -68,4 +57,5 @@ return {
       vim.keymap.set("n", "<M-l>", ntnav.NvimTmuxNavigateRight)
     end,
   },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, ft = "yaml" },
 }

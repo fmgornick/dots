@@ -77,7 +77,7 @@ return {
       c = { "clang_format" },
       cpp = { "clang_format" },
       css = { "prettierd" },
-      go = { "goimports", "gofmt" },
+      go = { "gofmt", "goimports" },
       glsl = { "clang_format" },
       graphql = { "prettierd" },
       haskell = { "fourmolu" },

@@ -1,35 +1,6 @@
 local builtin = require("telescope.builtin")
 local telescope = require("telescope")
-
-local function parent_dir(dir) return vim.fn.fnamemodify(dir, ":h") end
-
-local function match(dir, pattern)
-  if string.sub(pattern, 1, 1) == "=" then
-    return vim.fn.fnamemodify(dir, ":t") == string.sub(pattern, 2, #pattern)
-  else
-    return vim.fn.globpath(dir, pattern) ~= ""
-  end
-end
-
-local function get_root()
-  local root = vim.lsp.buf.list_workspace_folders()[1]
-  if root ~= nil then return root end
-
-  local patterns = { ".git", ".hg", ".svn" }
-
-  local current = vim.api.nvim_buf_get_name(0)
-  local parent = parent_dir(current)
-
-  while 1 do
-    for _, pattern in ipairs(patterns) do
-      if match(parent, pattern) then return parent end
-    end
-
-    current, parent = parent, parent_dir(parent)
-    if parent == current then break end
-  end
-  return nil
-end
+local utils = require("fmgornick.core.utils")
 
 return {
   {
@@ -45,27 +16,12 @@ return {
         },
       },
       extensions = {
-        file_browser = {
-          grouped = true,
-          theme = "ivy",
-          hijack_netrw = true,
-        },
         ["ui-select"] = {
           require("telescope.themes").get_dropdown(),
         },
       },
     },
     keys = {
-      {
-        "<leader>e",
-        function()
-          telescope.extensions.file_browser.file_browser({
-            cwd = vim.fn.expand("%:p:h"),
-            respect_gitignore = false,
-          })
-        end,
-        desc = "file explorer",
-      },
       { "<leader>fb", builtin.buffers, desc = "buffers" },
       {
         "<leader>fc",
@@ -76,7 +32,7 @@ return {
       { "<leader>fd", builtin.diagnostics, desc = "buffer diagnostics" },
       {
         "<leader>ff",
-        function() builtin.find_files({ cwd = get_root() }) end,
+        function() builtin.find_files({ cwd = utils.get_root() }) end,
         desc = "find project files",
       },
       {
@@ -86,7 +42,7 @@ return {
       },
       {
         "<leader>fg",
-        function() builtin.live_grep({ cwd = get_root() }) end,
+        function() builtin.live_grep({ cwd = utils.get_root() }) end,
         desc = "grep project files",
       },
       {
@@ -101,14 +57,8 @@ return {
     },
     config = function(_, opts)
       telescope.setup(opts)
-      telescope.load_extension("file_browser")
       telescope.load_extension("ui-select")
     end,
-  },
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = "nvim-telescope/telescope.nvim",
-    cmd = "Telescope file_browser",
   },
   { "nvim-telescope/telescope-ui-select.nvim" },
 }

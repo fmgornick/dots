@@ -1,35 +1,7 @@
--- require("string.")
+local utils = require("fmgornick.core.utils")
 
 local function next_select() require("diffview.actions").select_next_entry() end
 local function prev_select() require("diffview.actions").select_prev_entry() end
-
-local function diff_view()
-  local out = assert(io.popen('git branch -a --format="%(refname:short)"'))
-  local branches = { "HEAD" }
-  for line in out:lines() do
-    table.insert(branches, line)
-  end
-
-  vim.ui.select(branches, { prompt = "branch to compare" }, function(branch1)
-    if branch1 ~= nil then vim.cmd(":DiffviewOpen " .. branch1) end
-  end)
-end
-
-local function advanced_diff_view()
-  local out = assert(io.popen('git branch -a --format="%(refname:short)"'))
-  local branches = { "HEAD" }
-  for line in out:lines() do
-    table.insert(branches, line)
-  end
-
-  vim.ui.select(branches, { prompt = "branch 1 (old)" }, function(branch1)
-    if branch1 ~= nil then
-      vim.ui.select(branches, { prompt = "branch 2 (new)" }, function(branch2)
-        if branch2 ~= nil then vim.cmd(":DiffviewOpen " .. branch1 .. ".." .. branch2) end
-      end)
-    end
-  end)
-end
 
 return {
   {
@@ -100,8 +72,8 @@ return {
     },
     config = function(_, opts) require("diffview").setup(opts) end,
     keys = {
-      { "<leader>gd", diff_view, desc = "git diff", mode = "n" },
-      { "<leader>gD", advanced_diff_view, desc = "advanced git diff", mode = "n" },
+      { "<leader>gd", utils.diff_view, desc = "git diff", mode = "n" },
+      { "<leader>gD", utils.advanced_diff_view, desc = "advanced git diff", mode = "n" },
     },
   },
 }
