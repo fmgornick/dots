@@ -57,5 +57,23 @@ return {
       vim.keymap.set("n", "<M-l>", ntnav.NvimTmuxNavigateRight)
     end,
   },
+<<<<<<< Updated upstream
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, ft = "yaml" },
+=======
+  {
+    "folke/todo-comments.nvim",
+    lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      colors = {
+        error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
+        warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
+        info = { "DiagnosticInfo", "#00DDDD" },
+        hint = { "DiagnosticHint", "#10B981" },
+        default = { "Identifier", "#7C3AED" },
+        test = { "Identifier", "#FF00FF" },
+      },
+    },
+  },
+>>>>>>> Stashed changes
 }

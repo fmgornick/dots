@@ -48,6 +48,7 @@ local servers = {
   },
   clangd = {
     cmd = { "clangd" },
+    filetypes = { "c", "cpp", "objc", "objcpp" },
   },
   gopls = {
     cmd = { "gopls" },
