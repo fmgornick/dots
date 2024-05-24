@@ -57,9 +57,7 @@ return {
       vim.keymap.set("n", "<M-l>", ntnav.NvimTmuxNavigateRight)
     end,
   },
-<<<<<<< Updated upstream
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, ft = "yaml" },
-=======
   {
     "folke/todo-comments.nvim",
     lazy = false,
@@ -75,5 +73,4 @@ return {
       },
     },
   },
->>>>>>> Stashed changes
 }

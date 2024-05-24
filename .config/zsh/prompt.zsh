@@ -1,9 +1,9 @@
 # personal theme
 
 function info() {
-  main_prompt=" %{$fg[green]%}󰠖$rc %{$fg_bold[magenta]%}%n$rc %{$fg_bold[cyan]%} %3~ $rc"
+  main_prompt=" %{$fg[yellow]%}󰠖$rc %{$fg_bold[magenta]%}%n$rc %{$fg_bold[cyan]%} %3~ $rc"
   if [[ ! -z "${TMUX}" ]]; then
-    main_prompt=" %{$fg[yellow]%}󰠖$rc %{$fg_bold[magenta]%}%n$rc %{$fg_bold[cyan]%} %3~ $rc"
+    main_prompt=" %{$fg[green]%}󰠖$rc %{$fg_bold[magenta]%}%n$rc %{$fg_bold[cyan]%} %3~ $rc"
   fi
   if git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"; then
     untracked="%{$fg_bold[red]%} $git_branch 󰔑$rc"
