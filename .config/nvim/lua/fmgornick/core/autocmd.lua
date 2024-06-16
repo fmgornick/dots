@@ -15,7 +15,10 @@ api.nvim_create_augroup("MkDir", { clear = true })
 api.nvim_create_autocmd("BufWritePre", {
   group = "MkDir",
   pattern = "*",
-  callback = function() vim.fn.mkdir(vim.fn.expand("%:p:h"), "p") end,
+  callback = function()
+    local dir = vim.fn.expand("%:p:h")
+    if not dir:find("^oil:///") then vim.fn.mkdir(dir, "p") end
+  end,
 })
 
 -- wrap in readme and latex files

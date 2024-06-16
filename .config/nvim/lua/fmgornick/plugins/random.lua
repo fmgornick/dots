@@ -29,19 +29,6 @@ return {
   },
   { "skywind3000/asyncrun.vim", lazy = false },
   { "eandrju/cellular-automaton.nvim", lazy = false },
-  {
-    "diepm/vim-rest-console",
-    ft = "rest",
-    config = function()
-      vim.g.vrc_set_default_mapping = 0
-      vim.g.vrc_response_default_content_type = "application/json"
-      vim.g.vrc_output_buffer_name = "__out__.http"
-      vim.g.vrc_auto_format_response_patterns = {
-        json = "jq",
-      }
-    end,
-    keys = { { "<leader>x", ":call VrcQuery()<cr>", desc = "http request", mode = { "n", "v" } } },
-  },
   { "tpope/vim-abolish", lazy = false },
   { "tpope/vim-surround", lazy = false },
   { "xiyaowong/transparent.nvim", lazy = false },
