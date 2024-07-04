@@ -9,12 +9,20 @@ return {
     event = "BufEnter",
     opts = {
       signs = {
-        add = { text = "│", hl = "GreenSign" },
-        change = { text = "│", hl = "YellowSign" },
-        delete = { text = "_", hl = "RedSign" },
-        untracked = { text = "┆", hl = "BlueSign" },
-        topdelete = { text = "‾" },
-        changedelete = { text = "~" },
+        add = { text = "┃" },
+        change = { text = "│" },
+        delete = { text = "_", show_count = true },
+        topdelete = { text = "‾", show_count = true },
+        changedelete = { text = "~", show_count = true },
+        untracked = { text = "┆" },
+      },
+      signs_staged = {
+        add = { text = "┃" },
+        change = { text = "│" },
+        delete = { text = "_", show_count = true },
+        topdelete = { text = "‾", show_count = true },
+        changedelete = { text = "~", show_count = true },
+        untracked = { text = "┆" },
       },
     },
     config = function(_, opts)

@@ -16,6 +16,12 @@ export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 export LESSHISTFILE="$HOME/.cache/less/history"
 export JULIA_DEPOT_PATH="$HOME/.cache/julia"
 
+# rust
 export CARGO_HOME="/usr/local/cargo"
 export RUSTUP_HOME="/usr/local/rustup"
+
+# go
 export GOPATH="/usr/local/go-dev"
+
+# docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"

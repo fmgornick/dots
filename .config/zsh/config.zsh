@@ -16,7 +16,6 @@ compinit -d "$HOME/.cache/zsh/zcompdump"
 
 # SHORTCUTS
 alias v="nvim"
-alias pip="python3 -m pip"
 
 # update packages
 update() {

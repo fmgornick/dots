@@ -1,9 +1,5 @@
 local keyset = vim.keymap.set
 local formatters = {
-  black = {
-    binary = "black",
-    install = "brew install black",
-  },
   clang_format = {
     binary = "clang-format",
     install = "brew install clang-format",
@@ -19,10 +15,6 @@ local formatters = {
   goimports = {
     binary = "goimports",
     install = "go install golang.org/x/tools/cmd/goimports@latest",
-  },
-  isort = {
-    binary = "isort",
-    install = "brew install isort",
   },
   latexindent = {
     binary = "latexindent",
@@ -89,7 +81,7 @@ return {
       tex = { "latexindent" },
       lua = { "stylua" },
       markdown = { "prettierd" },
-      python = { "isort", "black" },
+      -- python = { "ruff" },
       sh = { "shfmt" },
       typescript = { "prettierd" },
       typescriptreact = { "prettierd" },
