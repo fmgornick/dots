@@ -23,6 +23,10 @@ local server_info = {
     binary = "lua-language-server",
     install = "brew install lua-language-server",
   },
+  pyright = {
+    binary = "basedpyright",
+    install = "pipx install basedpyright",
+  },
   rust_analyzer = {
     binary = "rust-analyzer",
     install = "rustup component add rust-analyzer",
@@ -89,6 +93,9 @@ local servers = {
         },
       },
     },
+  },
+  pyright = {
+    cmd = { "basedpyright-langserver", "--stdio" },
   },
   rust_analyzer = {
     settings = {

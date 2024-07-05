@@ -13,7 +13,7 @@ return {
         change = { text = "│" },
         delete = { text = "_", show_count = true },
         topdelete = { text = "‾", show_count = true },
-        changedelete = { text = "~", show_count = true },
+        changedelete = { text = "~" },
         untracked = { text = "┆" },
       },
       signs_staged = {
@@ -21,7 +21,7 @@ return {
         change = { text = "│" },
         delete = { text = "_", show_count = true },
         topdelete = { text = "‾", show_count = true },
-        changedelete = { text = "~", show_count = true },
+        changedelete = { text = "~" },
         untracked = { text = "┆" },
       },
     },

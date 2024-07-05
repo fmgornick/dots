@@ -2,8 +2,9 @@
 export PATH="$HOME/.local/bin":$PATH
 export PATH="/opt/homebrew/bin":$PATH
 export PATH="/opt/homebrew/sbin":$PATH
-export PATH="/usr/local/go-dev/bin":$PATH
+export PATH="/usr/local/go/bin":$PATH
 export PATH="/usr/local/cargo/bin":$PATH
+export PATH="/usr/local/pipx/bin":$PATH
 
 export ZSH="$HOME/.config/zsh"
 source "$ZSH/env.sh"
@@ -19,9 +20,10 @@ alias v="nvim"
 
 # update packages
 update() {
-  brew update
-  brew upgrade
-  npx npm-check --global --update-all
+  brew update && brew upgrade         # brew
+  cargo install-update -a             # rust
+  pipx upgrade-all                    # pip
+  npx npm-check --global --update-all # npm
 }
 
 # alias for all the different ssh commands

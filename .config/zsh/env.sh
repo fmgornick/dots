@@ -21,7 +21,12 @@ export CARGO_HOME="/usr/local/cargo"
 export RUSTUP_HOME="/usr/local/rustup"
 
 # go
-export GOPATH="/usr/local/go-dev"
+export GOPATH="/usr/local/go"
+
+# python
+export PIPX_HOME="/usr/local/pipx"
+export PIPX_BIN_DIR="$PIPX_HOME/bin"
+export PIPX_MAN_DIR="$PIPX_HOME/man"
 
 # docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"

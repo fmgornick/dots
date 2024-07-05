@@ -24,6 +24,10 @@ local formatters = {
     binary = "prettierd",
     install = "brew install prettierd",
   },
+  ruff = {
+    binary = "ruff",
+    install = "pipx install ruff",
+  },
   shfmt = {
     binary = "shfmt",
     install = "brew install shfmt",
@@ -81,7 +85,7 @@ return {
       tex = { "latexindent" },
       lua = { "stylua" },
       markdown = { "prettierd" },
-      -- python = { "ruff" },
+      python = { "ruff_format" },
       sh = { "shfmt" },
       typescript = { "prettierd" },
       typescriptreact = { "prettierd" },
