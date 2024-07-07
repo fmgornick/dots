@@ -64,3 +64,4 @@ vim.opt.laststatus = 3
 vim.opt.ruler = false
 vim.opt.showcmd = false
 vim.opt.showtabline = 0
+vim.opt.inccommand = "split"

@@ -1,0 +1,21 @@
+import = [
+  "~/.config/alacritty/everforest.toml" # colorscheme
+]
+
+[shell]
+program = "/opt/homebrew/bin/tmux"
+args    = [ "-2", "new-session", "-A", "-s", "alacritty" ]
+
+[window]
+startup_mode  = "Fullscreen"
+option_as_alt = "Both"
+
+[font]
+normal      = { family = "Hurmit Nerd Font Propo", style = "Regular"     }
+bold        = { family = "Hurmit Nerd Font Propo", style = "Bold"        }
+italic      = { family = "Hurmit Nerd Font Propo", style = "Italic"      }
+bold_italic = { family = "Hurmit Nerd Font Propo", style = "Bold Italic" }
+size        = 12
+
+[env]
+TERM = "xterm-256color"

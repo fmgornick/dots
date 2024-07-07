@@ -2,8 +2,8 @@
 export PATH="$HOME/.local/bin":$PATH
 export PATH="/opt/homebrew/bin":$PATH
 export PATH="/opt/homebrew/sbin":$PATH
-export PATH="/usr/local/go/bin":$PATH
 export PATH="/usr/local/cargo/bin":$PATH
+export PATH="/usr/local/go/bin":$PATH
 export PATH="/usr/local/pipx/bin":$PATH
 
 export ZSH="$HOME/.config/zsh"

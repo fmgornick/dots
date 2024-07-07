@@ -12,12 +12,6 @@ end
 -- no format save
 map("n", "<c-s>", ":noa w<cr>", { desc = "no format save" })
 
--- window resizing
-map("n", "<c-s-h>", ":vertical resize -2<cr>", { desc = "window resize left" })
-map("n", "<c-s-j>", ":resize +2<cr>", { desc = "window resize down" })
-map("n", "<c-s-k>", ":resize -2<cr>", { desc = "window resize up" })
-map("n", "<c-s-l>", ":vertical resize +2<cr>", { desc = "window resize right" })
-
 -- yank stuff
 map("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })
 map("n", "yiF", "<esc>ggVGy", { desc = "yank file contents" })
@@ -41,21 +35,18 @@ map("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
 map("v", "<", "<gv", { desc = "move block left" })
 map("v", ">", ">gv", { desc = "move block right" })
 
--- vertical help menu shortcut
+-- buffer info
+map("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
+
+-- command mode stuff
 map("ca", "vh", "vert help", { desc = "vertical help menu" })
 
 -- emacs keybinds
-map("c", "<c-x>", "<c-f>")
-
-map("i", "<c-n>", "<down>")
-map("i", "<c-p>", "<up>")
-map("!", "<c-f>", "<right>")
-map("!", "<c-b>", "<left>")
-map("!", "<m-f>", "<s-right>")
-map("!", "<m-b>", "<s-left>")
-
-map("!", "<c-a>", "<home>")
-map("!", "<c-e>", "<end>")
-
-map("!", "<c-k>", "<home>")
-map("!", "<c-u>", "<end>")
+map({ "n", "i", "v" }, "<c-n>", "<down>")
+map({ "n", "i", "v" }, "<c-p>", "<up>")
+map({ "n", "i", "v" }, "<c-f>", "<right>")
+map({ "n", "i", "v" }, "<c-b>", "<left>")
+map({ "n", "i", "v" }, "<m-f>", "<s-right>")
+map({ "n", "i", "v" }, "<m-b>", "<s-left>")
+map({ "i", "v" }, "<c-a>", "<home>")
+map({ "i", "v" }, "<c-e>", "<end>")

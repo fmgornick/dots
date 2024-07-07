@@ -30,3 +30,4 @@ export PIPX_MAN_DIR="$PIPX_HOME/man"
 
 # docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export COLIMA_HOME="$XDG_CONFIG_HOME/colima"

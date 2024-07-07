@@ -10,6 +10,14 @@ return {
     cmd = "Telescope",
     dependencies = "nvim-lua/plenary.nvim",
     opts = {
+      defaults = {
+        layout_config = {
+          vertical = {
+            height = 1,
+            width = 1,
+          },
+        },
+      },
       pickers = {
         buffers = {
           theme = "ivy",
