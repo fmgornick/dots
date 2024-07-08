@@ -1,4 +1,4 @@
-local custom = require("fmgornick.core.custom")
+local utils = require("fmgornick.core.utils")
 
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true, silent = true }
@@ -19,7 +19,7 @@ map("n", "viF", "<esc>ggVG", { desc = "highlight file contents" })
 
 --leader commands
 map("n", "<leader>c", ":bn|bd!#<cr>", { desc = "close buffer" })
-map("n", "<leader>d", custom.toggle_diff, { desc = "diff windows" })
+map("n", "<leader>d", utils.toggle_diff, { desc = "diff windows" })
 map("n", "<leader>w", ":w<cr>", { desc = "write buffer" })
 map("n", "<leader>q", ":q!<cr>", { desc = "quit" })
 map("n", "<leader>Q", ":qa!<cr>", { desc = "quit all" })

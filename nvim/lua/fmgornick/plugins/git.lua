@@ -5,6 +5,10 @@ local function prev_select() require("diffview.actions").select_prev_entry() end
 
 return {
   {
+    "tpope/vim-fugitive",
+    lazy = false,
+  },
+  {
     "lewis6991/gitsigns.nvim",
     event = "BufEnter",
     opts = {
@@ -31,7 +35,6 @@ return {
     end,
     keys = {
       { "<leader>gb", ":Gitsigns blame_line<cr>", desc = "blame line", mode = "n" },
-      { "<leader>gg", ":LazyGit<cr>", desc = "lazy git", mode = "n" },
       { "<leader>gn", ":Gitsigns next_hunk<cr>", desc = "next hunk", mode = "n" },
       { "<leader>gN", ":Gitsigns prev_hunk<cr>", desc = "previous hunk", mode = "n" },
       { "<leader>gp", ":Gitsigns preview_hunk<cr>", desc = "preview hunk", mode = "n" },
@@ -43,11 +46,6 @@ return {
       { "<leader>gT", ":Gitsigns toggle_deleted<cr>", desc = "toggle deleted", mode = "n" },
       { "<leader>gu", ":Gitsigns undo_stage_hunk<cr>", desc = "undo stage hunk", mode = "n" },
     },
-  },
-  {
-    "kdheepak/lazygit.nvim",
-    dependencies = "lewis6991/gitsigns.nvim",
-    keys = { { "<leader>gg", ":LazyGit<cr>", desc = "lazy git", mode = "n" } },
   },
   {
     "sindrets/diffview.nvim",
@@ -80,8 +78,9 @@ return {
     },
     config = function(_, opts) require("diffview").setup(opts) end,
     keys = {
-      { "<leader>gd", utils.diff_view, desc = "git diff", mode = "n" },
-      { "<leader>gD", utils.advanced_diff_view, desc = "advanced git diff", mode = "n" },
+      { "<leader>gd", utils.diff_view, desc = "diff", mode = "n" },
+      { "<leader>gD", utils.advanced_diff_view, desc = "advanced diff", mode = "n" },
+      { "<leader>gm", ":DiffviewOpen<cr>", desc = "merge tool", mode = "n" },
     },
   },
 }

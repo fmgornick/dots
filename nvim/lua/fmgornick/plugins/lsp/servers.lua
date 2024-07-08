@@ -35,6 +35,10 @@ local server_info = {
     binary = "typescript-language-server",
     install = "npm i -g typescript typescript-language-server",
   },
+  vimls = {
+    binary = "vim-language-server",
+    install = "npm i -g vim-language-server",
+  },
   yamlls = {
     binary = "yaml-language-server",
     install = "brew install yaml-language-server",
@@ -114,6 +118,10 @@ local servers = {
   },
   tsserver = {
     cmd = { "typescript-language-server", "--stdio" },
+  },
+  vimls = {
+    cmd = { "vim-language-server", "--stdio" },
+    filetypes = { "vim" },
   },
   yamlls = {
     cmd = { "yaml-language-server", "--stdio" },

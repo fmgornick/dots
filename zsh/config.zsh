@@ -16,13 +16,15 @@ bindkey '^N' autosuggest-accept
 compinit -d "$HOME/.cache/zsh/zcompdump"
 
 # SHORTCUTS
+alias env="env | sort"
+alias l="eza -ailhH"
 alias v="nvim"
 
 # update packages
 update() {
   brew update && brew upgrade         # brew
   cargo install-update -a             # rust
-  pipx upgrade-all                    # pip
+  pipx upgrade-all -f                 # python
   npx npm-check --global --update-all # npm
 }
 

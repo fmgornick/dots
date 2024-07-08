@@ -13,7 +13,7 @@ local function match(dir, pattern)
 end
 
 -- search up through project for specific project defining files / dirs
-function M.get_root()
+M.get_root = function()
   local root = vim.lsp.buf.list_workspace_folders()[1]
   if root ~= nil then return root end
 
@@ -34,7 +34,7 @@ function M.get_root()
 end
 
 -- check head with other branches
-function M.diff_view()
+M.diff_view = function()
   local out = assert(io.popen('git branch -a --format="%(refname:short)"'))
   local branches = { "HEAD" }
   for line in out:lines() do
@@ -47,7 +47,7 @@ function M.diff_view()
 end
 
 -- check one branch with another
-function M.advanced_diff_view()
+M.advanced_diff_view = function()
   local out = assert(io.popen('git branch -a --format="%(refname:short)"'))
   local branches = { "HEAD" }
   for line in out:lines() do
@@ -61,6 +61,33 @@ function M.advanced_diff_view()
       end)
     end
   end)
+end
+
+-- toggle diff view of two windows
+M.toggle_diff = function()
+  local windows = vim.api.nvim_list_wins()
+  if #windows ~= 2 then
+    vim.notify("must be exactly two windows to diff", vim.log.levels.WARN)
+    return
+  end
+
+  local this_window = vim.api.nvim_get_current_win()
+  local other_window
+  for _, window in ipairs(windows) do
+    if this_window ~= window then other_window = window end
+  end
+
+  local diff_command
+  if vim.o.diff then
+    diff_command = "diffoff"
+  else
+    diff_command = "diffthis"
+  end
+
+  vim.cmd(diff_command)
+  vim.api.nvim_set_current_win(other_window)
+  vim.cmd(diff_command)
+  vim.api.nvim_set_current_win(this_window)
 end
 
 return M
