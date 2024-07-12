@@ -36,7 +36,6 @@ return {
     config = true,
     keys = { { "s", ":HopWord<cr>", desc = "hop", mode = "n" } },
   },
-  { "skywind3000/asyncrun.vim", lazy = false },
   { "tpope/vim-abolish", lazy = false },
   { "tpope/vim-surround", lazy = false },
   {
