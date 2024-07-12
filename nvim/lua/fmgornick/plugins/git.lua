@@ -4,13 +4,9 @@ local function next_select() require("diffview.actions").select_next_entry() end
 local function prev_select() require("diffview.actions").select_prev_entry() end
 
 return {
-  {
-    "tpope/vim-fugitive",
-    lazy = false,
-  },
+  { "tpope/vim-fugitive", cmd = "G" },
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufEnter",
     opts = {
       signs = {
         add = { text = "┃" },

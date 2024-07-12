@@ -10,9 +10,9 @@ return {
       vim.keymap.set("n", "<M-l>", ntnav.NvimTmuxNavigateRight)
     end,
   },
-  { "eandrju/cellular-automaton.nvim", lazy = false },
+  { "eandrju/cellular-automaton.nvim", cmd = "CellularAutomaton" },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, ft = "yaml" },
-  { "norcalli/nvim-colorizer.lua", lazy = false },
+  { "norcalli/nvim-colorizer.lua", cmd = { "ColorizerAttachToBuffer", "ColorizerToggle" } },
   {
     "numToStr/Comment.nvim",
     event = "BufEnter",
