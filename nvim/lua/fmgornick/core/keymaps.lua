@@ -9,9 +9,6 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- no format save
-map("n", "<c-s>", ":noa w<cr>", { desc = "no format save" })
-
 -- yank stuff
 map("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })
 map("n", "yiF", "<esc>ggVGy", { desc = "yank file contents" })
@@ -35,12 +32,6 @@ map("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
 map("v", "<", "<gv", { desc = "move block left" })
 map("v", ">", ">gv", { desc = "move block right" })
 
--- buffer info
-map("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
-
--- command mode stuff
-map("ca", "vh", "vert help", { desc = "vertical help menu" })
-
 -- emacs keybinds
 map({ "n", "i", "v" }, "<c-n>", "<down>")
 map({ "n", "i", "v" }, "<c-p>", "<up>")
@@ -50,3 +41,8 @@ map({ "n", "i", "v" }, "<m-f>", "<s-right>")
 map({ "n", "i", "v" }, "<m-b>", "<s-left>")
 map({ "i", "v" }, "<c-a>", "<home>")
 map({ "i", "v" }, "<c-e>", "<end>")
+
+-- random
+map("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
+map("n", "<c-s>", ":noa w<cr>", { desc = "no format save" })
+map("n", "<c-w>t", "<c-w>T", { desc = "move to new tab" })
