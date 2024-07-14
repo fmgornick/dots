@@ -16,20 +16,9 @@ return {
       { "<leader>r", group = "reload" },
       { "<leader>t", group = "trouble" },
       { "<leader>v", group = "vstasks" },
-
-      -- mode = { "n", "v" },
-      -- prefix = "<leader>",
-      -- d = { name = "debug" },
-      -- f = { name = "fuzzy-find" },
-      -- g = { name = "git" },
-      -- i = { name = "info" },
-      -- l = { name = "language" },
-      -- L = { name = "log" },
-      -- r = { name = "reload" },
-      -- t = { name = "trouble" },
-      -- v = { name = "vstasks" },
     },
     icons = { rules = false },
+    modes = { x = false },
   },
   config = function(_, opts)
     local wk = require("which-key")
