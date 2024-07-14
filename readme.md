@@ -31,4 +31,10 @@
 
 - `c` (preinstalled most likely)
 - `rust` (`curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`)
+  - `cargo-update` - managing cargo installs (`cargo install cargo-update`)
+- `go` (`brew install go`)
+  - `go-global-update` - managing go installs (`go install github.com/Gelio/go-global-update@latest`)
 - `python` (`brew install python3`)
+  - `pipx` - python global package manager (`brew install pipx`)
+
+### lsp

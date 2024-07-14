@@ -5,6 +5,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_RUNTIME_DIR="/tmp"
 
+# add autocomplete path location(s)
+export FPATH="/opt/homebrew/share/zsh/site-functions":$FPATH
+
 # hell yeah
 export EDITOR="nvim"
 

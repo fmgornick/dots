@@ -24,6 +24,7 @@ alias v="nvim"
 update() {
   brew update && brew upgrade         # brew
   cargo install-update -a             # rust
+  go-global-update                    # go
   pipx upgrade-all -f                 # python
   npx npm-check --global --update-all # npm
 }
