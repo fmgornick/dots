@@ -18,7 +18,8 @@ return {
       { "<leader>v", group = "vstasks" },
     },
     icons = { rules = false },
-    modes = { x = false },
+    notify = false,
+    triggers = { x = false },
   },
   config = function(_, opts)
     local wk = require("which-key")

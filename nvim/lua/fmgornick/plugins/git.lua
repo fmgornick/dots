@@ -7,6 +7,7 @@ return {
   { "tpope/vim-fugitive", cmd = "G" },
   {
     "lewis6991/gitsigns.nvim",
+    lazy = false,
     opts = {
       signs = {
         add = { text = "┃" },
@@ -25,10 +26,7 @@ return {
         untracked = { text = "┆" },
       },
     },
-    config = function(_, opts)
-      require("gitsigns").setup(opts)
-      require("which-key").register({ g = { name = "git" } })
-    end,
+    config = function(_, opts) require("gitsigns").setup(opts) end,
     keys = {
       { "<leader>gb", ":Gitsigns blame_line<cr>", desc = "blame line", mode = "n" },
       { "<leader>gn", ":Gitsigns next_hunk<cr>", desc = "next hunk", mode = "n" },
