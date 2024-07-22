@@ -19,7 +19,6 @@ return {
     },
     icons = { rules = false },
     notify = false,
-    triggers = { x = false },
   },
   config = function(_, opts)
     local wk = require("which-key")

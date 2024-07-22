@@ -33,7 +33,17 @@ return {
       { "<leader>fb", builtin.buffers, desc = "buffers" },
       {
         "<leader>fc",
-        function() builtin.find_files({ cwd = "~/.config/nvim" }) end,
+        function()
+          builtin.find_files({
+            search_dirs = {
+              "~/.config/alacritty",
+              "~/.config/git",
+              "~/.config/nvim",
+              "~/.config/tmux",
+              "~/.config/zsh",
+            },
+          })
+        end,
         desc = "nvim config files",
       },
       { "<leader>fC", builtin.colorscheme, desc = "color schemes" },
