@@ -8,7 +8,6 @@ return {
     prompt_save_on_select_new_entry = true,
     cleanup_delay_ms = false,
     view_options = {
-      -- show_ignored = true,
       show_hidden = true,
     },
     keymaps = {
@@ -19,7 +18,6 @@ return {
       ["-"] = "actions.parent",
       ["<leader>p"] = "actions.preview",
       ["H"] = "actions.toggle_hidden",
-      -- ["gI"] = "actions.toggle_ignored",
       q = "actions.close",
     },
     use_default_keymaps = false,
