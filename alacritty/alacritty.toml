@@ -6,6 +6,9 @@ import = [
 program = "/opt/homebrew/bin/tmux"
 args    = [ "-2", "new-session", "-A", "-s", "alacritty" ]
 
+[env]
+TERM = "alacritty"
+
 [window]
 startup_mode  = "Fullscreen"
 option_as_alt = "Both"
@@ -17,9 +20,15 @@ italic      = { family = "Hurmit Nerd Font Propo", style = "Italic"      }
 bold_italic = { family = "Hurmit Nerd Font Propo", style = "Bold Italic" }
 size        = 12
 
+[keyboard]
+bindings = [
+  { key = "Tab",                 mode = "Search", action = "SearchFocusNext"     },
+  { key = "Tab", mods = "Shift", mode = "Search", action = "SearchFocusPrevious" }
+]
+
 [selection]
 semantic_escape_chars = ",.│`|:\"' ()[]{}<>\t"
 save_to_clipboard     = true
 
-[env]
-TERM = "xterm-256color"
+[scrolling]
+multiplier = 2
