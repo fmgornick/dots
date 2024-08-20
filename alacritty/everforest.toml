@@ -22,3 +22,7 @@ blue    = "#7fbbb3"
 magenta = "#d699b6"
 cyan    = "#83c092"
 white   = "#d3c6aa"
+
+[colors.search]
+matches.background = "#e67e80"
+focused_match.background = "#dbbc7f"
