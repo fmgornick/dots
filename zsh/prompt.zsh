@@ -1,48 +1,64 @@
-# personal theme
-
-function info() {
-  main_prompt=" %{$fg[yellow]%}󰠖$rc %{$fg_bold[magenta]%}%n$rc %{$fg_bold[cyan]%} %3~ $rc"
+# clover color tells me if i'm running tmux
+function tmux() {
   if [[ ! -z "${TMUX}" ]]; then
-    main_prompt=" %{$fg[green]%}󰠖$rc %{$fg_bold[magenta]%}%n$rc %{$fg_bold[cyan]%} %3~ $rc"
+    echo "%{$fg[green]%}\U000f0816$rc"
+  else
+    echo "%{$fg[yellow]%}\U000f0816$rc"
   fi
-  if git_branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"; then
-    untracked="%{$fg_bold[red]%} $git_branch 󰔑$rc"
-    modified="%{$fg_bold[yellow]%} $git_branch 󰔕$rc"
-    clean="%{$fg_bold[green]%} $git_branch 󰔓$rc"
+}
 
-    local git_status="$(git status --short 2>/dev/null)"
-    if [ ${#git_status[@]} -eq 0 ]; then
-      main_prompt+="$clean "
-    else
-      untracked_files=false
-      for line in $git_status; do
-        if [[ $line =~ "\?\?" ]]; then
-          untracked_files=true
-        fi
-      done
-      if $untracked_files; then
-        main_prompt+="$untracked "
-      else
-        main_prompt+="$modified "
+# user profile
+function user() {
+  echo "%{$fg_bold[magenta]%}%n$rc"
+}
+
+# directory path
+function path() {
+  echo "%{$fg_bold[cyan]%}\uf07c %3~$rc"
+}
+
+# version control info
+function vcs() {
+  # exit if not in git dir
+  if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) != 'true' ]]; then
+    return
+  fi
+
+  # set branch name
+  local gbranch=$(git symbolic-ref --short HEAD 2>/dev/null)
+  local gstatus=$(git status --short 2>/dev/null)
+
+  if [ ${#gstatus[@]} -eq 0 ]; then
+    # green if clean
+    echo "%{$fg_bold[green]%}\uf418 $gbranch \U000f0513$rc"
+  else
+    untracked_files=false
+    for line in $gstatus; do
+      if [[ $line =~ "\?\?" ]]; then
+        untracked_files=true
       fi
+    done
+
+    if $untracked_files; then
+      # red if there are untracked files
+      echo "%{$fg_bold[red]%}\uf418 $gbranch \U000f0511$rc"
+    else
+      # yellow if modified
+      echo "%{$fg_bold[yellow]%}\uf418 $gbranch \U000f0515$rc"
     fi
   fi
-  echo $main_prompt
+}
+
+# status code of previous command
+function code() {
+  echo "%(?:%{$fg_bold[green]%}❯:%{$fg_bold[red]%}%? ❯)$rc%b"
 }
 
 function set-prompt() {
   emulate -L zsh
-  PROMPT="$(info)"$'\n'" %(?:%{$fg_bold[green]%}❯:%{$fg_bold[red]%}%? ❯)$rc%b "
+  PROMPT=" $(tmux) $(user) $(path) $(vcs)"$'\n'" $(code) "
 }
 
 preexec_interactive_mode="yes"
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd set-prompt
-
-# fwalch theme (oh my zsh)
-# PROMPT='%{$fg_bold[green]%} %{$fg[cyan]%}%c%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-#
-# ZSH_THEME_GIT_PROMPT_PREFIX=" (%{$fg[red]%}"
-# ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗%{$reset_color%}"
-# ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
