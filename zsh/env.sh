@@ -10,6 +10,7 @@ export FPATH="/opt/homebrew/share/zsh/site-functions":$FPATH
 
 # hell yeah
 export EDITOR="nvim"
+export MANPAGER="nvim -c 'Man!' -o -"
 
 # move zsh dump files into .cache directory
 export ZDOTDIR="$HOME/.cache/zsh"

@@ -12,6 +12,7 @@ TERM = "alacritty"
 [window]
 startup_mode  = "Fullscreen"
 option_as_alt = "Both"
+decorations = "Buttonless"
 
 [font]
 normal      = { family = "Hurmit Nerd Font Propo", style = "Regular"     }

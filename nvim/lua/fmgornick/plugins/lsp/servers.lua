@@ -31,6 +31,10 @@ local server_info = {
     binary = "rust-analyzer",
     install = "rustup component add rust-analyzer",
   },
+  texlab = {
+    binary = "texlab",
+    install = "cargo install --git https://github.com/latex-lsp/texlab",
+  },
   tsserver = {
     binary = "typescript-language-server",
     install = "npm i -g typescript typescript-language-server",
@@ -116,7 +120,16 @@ local servers = {
       },
     },
   },
-  tsserver = {
+  texlab = {
+    settings = {
+      texlab = {
+        build = {
+          onSave = true,
+        },
+      },
+    },
+  },
+  ts_ls = {
     cmd = { "typescript-language-server", "--stdio" },
   },
   vimls = {
