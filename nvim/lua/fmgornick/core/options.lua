@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 -- i kinda like the mouse :o
 vim.opt.mousescroll = "ver:1,hor:0"
