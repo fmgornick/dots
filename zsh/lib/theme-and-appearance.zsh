@@ -21,7 +21,7 @@ if [[ "$DISABLE_LS_COLORS" != "true" ]]; then
     colorls -G -d . &>/dev/null && alias ls='colorls -G'
   elif [[ "$OSTYPE" == (darwin|freebsd)* ]]; then
     # this is a good alias, it works by default just using $LSCOLORS
-    ls -G . &>/dev/null && alias ls='ls -G'
+    ls -G . &>/dev/null && alias ls='eza'
 
     # only use coreutils ls if there is a dircolors customization present ($LS_COLORS or .dircolors file)
     # otherwise, gls will use the default color scheme which is ugly af

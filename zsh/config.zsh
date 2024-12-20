@@ -10,6 +10,7 @@ export ZSH="$HOME/.config/zsh"
 source "$ZSH/env.sh"
 source "$ZSH/omz.sh"
 source "$ZSH/prompt.zsh"
+source "$ZSH/custom/fzf.zsh"
 
 bindkey -v
 bindkey '^N' autosuggest-accept

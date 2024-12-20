@@ -1,8 +1,8 @@
-import = [
+general.import = [
   "~/.config/alacritty/everforest.toml" # colorscheme
 ]
 
-[shell]
+[terminal.shell]
 program = "/opt/homebrew/bin/tmux"
 args    = [ "-2", "new-session", "-A", "-s", "alacritty" ]
 
