@@ -2,8 +2,8 @@
 	name = Fletcher Gornick
 	email = fletcher@gornick.dev
 
-# [url "git@github.com:"]
-#   insteadOf = https://github.com/
+[url "git@github.com:"]
+  insteadOf = https://github.com/
 
 [alias]
   l = "log --graph --oneline"

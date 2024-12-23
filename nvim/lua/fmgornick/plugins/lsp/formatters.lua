@@ -106,11 +106,16 @@ return {
           string
             .gsub(
               [[--style={
-                BasedOnStyle: GNU,
+                BasedOnStyle: Google,
                 IndentWidth: 4,
-                ColumnLimit: 120,
-                BreakBeforeBraces: Allman
+                ColumnLimit: 132,
+                SortIncludes: false
             }]],
+              -- BasedOnStyle: GNU,
+              -- IndentWidth: 4,
+              -- ColumnLimit: 200,
+              -- BreakBeforeBraces: Allman,
+              -- AlignEscapedNewlines: LeftWithLastLine
               "\n +",
               " "
             )
