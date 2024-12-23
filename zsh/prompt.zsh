@@ -1,5 +1,5 @@
 # clover color tells me if i'm running tmux
-function tmux() {
+function tmux_active() {
   if [[ ! -z "${TMUX}" ]]; then
     echo "%{$fg[green]%}\U000f0816$rc"
   else
@@ -56,7 +56,7 @@ function code() {
 
 function set-prompt() {
   emulate -L zsh
-  PROMPT=" $(tmux) $(user) $(path) $(vcs)"$'\n'" $(code) "
+  PROMPT=" $(tmux_active) $(user) $(path) $(vcs)"$'\n'" $(code) "
 }
 
 preexec_interactive_mode="yes"
