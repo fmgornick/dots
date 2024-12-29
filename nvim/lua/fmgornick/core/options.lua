@@ -12,7 +12,6 @@ vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.showtabline = 2
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
@@ -35,7 +34,6 @@ vim.opt.ignorecase = true
 
 -- looks
 vim.opt.termguicolors = true
-vim.opt.guifont = "monospace:h17"
 vim.opt.title = true
 
 -- keep cursor centered more while scrolling
@@ -46,23 +44,22 @@ vim.opt.signcolumn = "yes"
 -- yank to clipboard
 vim.opt.clipboard = "unnamedplus"
 
+-- always change working dir
+vim.opt.autochdir = true
+
 -- popup menu
 vim.opt.pumheight = 10
 
 -- insert mode completion
 vim.opt.completeopt = { "menuone", "noselect" }
 
--- don't show mode
-vim.opt.showmode = false
-
 -- always split right or below
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.opt.autochdir = true
+-- statusline shit
 vim.opt.cursorline = false
+vim.opt.inccommand = "split"
 vim.opt.laststatus = 3
-vim.opt.ruler = false
 vim.opt.showcmd = false
 vim.opt.showtabline = 0
-vim.opt.inccommand = "split"
