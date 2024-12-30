@@ -1,2 +1,3 @@
+.DS_Store
 zsh/functions/*
 lazy-lock.json
