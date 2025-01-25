@@ -33,36 +33,6 @@ M.get_root = function()
   return nil
 end
 
--- check head with other branches
-M.diff_view = function()
-  local out = assert(io.popen('git branch -a --format="%(refname:short)"'))
-  local branches = { "HEAD" }
-  for line in out:lines() do
-    table.insert(branches, line)
-  end
-
-  vim.ui.select(branches, { prompt = "branch to compare" }, function(branch1)
-    if branch1 ~= nil then vim.cmd(":DiffviewOpen " .. branch1) end
-  end)
-end
-
--- check one branch with another
-M.advanced_diff_view = function()
-  local out = assert(io.popen('git branch -a --format="%(refname:short)"'))
-  local branches = { "HEAD" }
-  for line in out:lines() do
-    table.insert(branches, line)
-  end
-
-  vim.ui.select(branches, { prompt = "branch 1 (old)" }, function(branch1)
-    if branch1 ~= nil then
-      vim.ui.select(branches, { prompt = "branch 2 (new)" }, function(branch2)
-        if branch2 ~= nil then vim.cmd(":DiffviewOpen " .. branch1 .. ".." .. branch2) end
-      end)
-    end
-  end)
-end
-
 -- toggle diff view of two windows
 M.toggle_diff = function()
   local windows = vim.api.nvim_list_wins()

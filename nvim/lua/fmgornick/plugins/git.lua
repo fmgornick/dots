@@ -1,10 +1,8 @@
-local utils = require("fmgornick.core.utils")
-
 local function next_select() require("diffview.actions").select_next_entry() end
 local function prev_select() require("diffview.actions").select_prev_entry() end
 
 return {
-  { "tpope/vim-fugitive", cmd = "G" },
+  { "tpope/vim-fugitive", lazy = false },
   {
     "lewis6991/gitsigns.nvim",
     lazy = false,
@@ -72,9 +70,7 @@ return {
     },
     config = function(_, opts) require("diffview").setup(opts) end,
     keys = {
-      { "<leader>gd", utils.diff_view, desc = "diff", mode = "n" },
-      { "<leader>gD", utils.advanced_diff_view, desc = "advanced diff", mode = "n" },
-      { "<leader>gm", ":DiffviewOpen<cr>", desc = "merge tool", mode = "n" },
+      { "<leader>gd", ":GDiff<cr>", desc = "git diff", mode = "n" },
     },
   },
 }

@@ -7,15 +7,10 @@ return {
   end,
   opts = {
     groups = {
-      { "<leader>L", group = "log" },
-      { "<leader>d", group = "debug" },
-      { "<leader>f", group = "fuzzy-find" },
+      { "<leader>f", group = "fzf" },
       { "<leader>g", group = "git" },
       { "<leader>i", group = "info" },
       { "<leader>l", group = "language" },
-      { "<leader>r", group = "reload" },
-      { "<leader>t", group = "trouble" },
-      { "<leader>v", group = "vstasks" },
     },
     icons = { rules = false },
     notify = false,
