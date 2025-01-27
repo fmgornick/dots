@@ -196,6 +196,7 @@ return {
         keyset("n", "gn", vim.diagnostic.goto_next, { desc = "next diagnostic" })
         keyset("n", "K", vim.lsp.buf.hover, { desc = "hover", buffer = env.buf })
         keyset("n", "<leader>la", vim.lsp.buf.code_action, { desc = "code action" })
+        keyset("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "show erors in qf" })
         keyset("n", "<leader>lr", vim.lsp.buf.rename, { desc = "rename var" })
         keyset("n", "<leader>lS", function()
           local all_installed = true

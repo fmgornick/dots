@@ -1,10 +1,18 @@
-# add path locations
+# binary path locations
 export PATH="/opt/homebrew/bin":$PATH
 export PATH="/opt/homebrew/sbin":$PATH
 export PATH="/usr/local/cargo/bin":$PATH
 export PATH="/usr/local/go/bin":$PATH
 export PATH="/usr/local/pipx/bin":$PATH
 export PATH="$HOME/.local/bin":$PATH
+
+# include path locations
+export C_INCLUDE_PATH="/usr/local/include"
+export C_INCLUDE_PATH="/opt/homebrew/include":$C_INCLUDE_PATH
+
+# library path locations
+export LIBRARY_PATH="/usr/local/lib"
+export LIBRARY_PATH="/opt/homebrew/lib":$LIBRARY_PATH
 
 # set xdg standard environment variables
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -28,9 +36,6 @@ export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 # other random environment variables
 export LESSHISTFILE="$HOME/.cache/less/history"
 export JULIA_DEPOT_PATH="$HOME/.cache/julia"
-
-# vulkan
-export DYLD_LIBRARY_PATH="/usr/local/lib"
 
 # rust
 export CARGO_HOME="/usr/local/cargo"
