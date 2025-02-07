@@ -14,30 +14,21 @@ return {
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, ft = "yaml" },
   { "norcalli/nvim-colorizer.lua", cmd = { "ColorizerAttachToBuffer", "ColorizerToggle" } },
   {
-    "numToStr/Comment.nvim",
-    event = "BufEnter",
-    keys = {
-      {
-        "<leader>/",
-        "<Plug>(comment_toggle_linewise_current)",
-        desc = "toggle comment",
-        mode = "n",
-      },
-      {
-        "<leader>/",
-        "<Plug>(comment_toggle_linewise_visual)gv",
-        desc = "toggle comment",
-        mode = "v",
-      },
-    },
-  },
-  {
     "phaazon/hop.nvim",
     config = true,
     keys = { { "s", ":HopWord<cr>", desc = "hop", mode = "n" } },
   },
   { "tpope/vim-abolish", lazy = false },
+  {
+    "tpope/vim-commentary",
+    lazy = false,
+    keys = {
+      { "<leader>/", ":Commentary<cr>", desc = "toggle comment", mode = "n" },
+      { "<leader>/", ":'<,'>Commentary<cr>gv", desc = "toggle comment", mode = "v" },
+    },
+  },
   { "tpope/vim-surround", lazy = false },
+  { "tpope/vim-repeat", lazy = false },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",

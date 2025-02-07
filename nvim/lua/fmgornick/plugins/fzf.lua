@@ -8,7 +8,7 @@ return {
     { "<leader>fb", ":Buffers<cr>", desc = "buffers" },
     { "<leader>ff", ":PFiles<cr>", desc = "find files" },
     { "<leader>fF", ":Files<cr>", desc = "find files in current dir" },
-    -- { "<leader>fg", ":PRG<cr>", desc = "grep files" },
+    { "<leader>fg", ":PRG<cr>", desc = "grep files" },
     { "<leader>fG", ":RG<cr>", desc = "grep files in current dir" },
     { "<c-r>", ":History:<cr>", mode = "c", desc = "old commands" },
   },
@@ -29,15 +29,22 @@ return {
     )
 
     -- search files in project root directory
-    vim.api.nvim_create_user_command("PFiles", function(arg)
-      local dir = require("fmgornick.core.utils").get_root()
-      vim.fn["fzf#vim#files"](arg.qargs, {
-        source = "fd . " .. dir,
-        options = "--scheme=path --tiebreak=index",
-      }, arg.bang)
-    end, { bang = true, nargs = "?", complete = "dir" })
+    vim.api.nvim_create_user_command(
+      "PFiles",
+      function() vim.fn["fzf#vim#files"](require("fmgornick.core.utils").get_root()) end,
+      { bang = true }
+    )
 
-    -- TODO: grep for files in root directory
+    -- grep for files in root directory
+    vim.cmd([[
+    command! -bang -nargs=* PRG
+      \ call fzf#vim#grep(
+      \   "rg --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 
+      \   1, 
+      \   fzf#vim#with_preview({'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]}), 
+      \   <bang>0
+      \ )
+    ]])
 
     -- git diff
     vim.api.nvim_create_user_command(
