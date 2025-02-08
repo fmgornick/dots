@@ -109,7 +109,8 @@ return {
                 BasedOnStyle: LLVM,
                 IndentWidth: 4,
                 ColumnLimit: 132,
-                AlignEscapedNewlines: LeftWithLastLine
+                AlignEscapedNewlines: LeftWithLastLine,
+                AllowShortIfStatementsOnASingleLine: AllIfsAndElse
               }]],
               "\n +",
               " "
