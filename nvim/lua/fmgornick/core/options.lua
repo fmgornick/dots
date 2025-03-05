@@ -6,7 +6,6 @@ vim.opt.mousescroll = "ver:1,hor:0"
 
 -- line numbering
 vim.opt.number = true
-vim.opt.relativenumber = true
 
 -- 2 spaces = correct
 vim.opt.tabstop = 2

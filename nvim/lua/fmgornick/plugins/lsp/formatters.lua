@@ -102,21 +102,7 @@ return {
     formatters = {
       clang_format = {
         command = "clang-format",
-        prepend_args = {
-          string
-            .gsub(
-              [[--style={
-                BasedOnStyle: LLVM,
-                IndentWidth: 4,
-                ColumnLimit: 132,
-                AlignEscapedNewlines: LeftWithLastLine,
-                AllowShortIfStatementsOnASingleLine: AllIfsAndElse
-              }]],
-              "\n +",
-              " "
-            )
-            :sub(0, -1),
-        },
+        prepend_args = { "--style=InheritParentConfig" },
       },
       latexindent = {
         prepend_args = {

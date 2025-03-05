@@ -1,0 +1,17 @@
+BasedOnStyle: GNU
+IndentWidth: 4
+
+ColumnLimit: 160
+AlignEscapedNewlines: LeftWithLastLine
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterControlStatement: Always
+  AfterFunction: true
+  BeforeElse: true
+
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterFunctionDefinitionName: false
