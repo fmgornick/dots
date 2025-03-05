@@ -1,226 +1,226 @@
 local server_info = {
-  bashls = {
-    binary = "bash-language-server",
-    install = "npm i -g bash-language-server",
-  },
-  clangd = {
-    binary = "clangd",
-    install = "brew install llvm",
-  },
-  gopls = {
-    binary = "gopls",
-    install = "go install golang.org/x/tools/gopls@latest",
-  },
-  hls = {
-    binary = "haskell-language-server-wrapper",
-    install = "brew install haskell-language-server-wrapper",
-  },
-  jsonls = {
-    binary = "vscode-json-language-server",
-    install = "npm i -g vscode-langservers-extracted",
-  },
-  lua_ls = {
-    binary = "lua-language-server",
-    install = "brew install lua-language-server",
-  },
-  pyright = {
-    binary = "basedpyright",
-    install = "pipx install basedpyright",
-  },
-  rust_analyzer = {
-    binary = "rust-analyzer",
-    install = "rustup component add rust-analyzer",
-  },
-  texlab = {
-    binary = "texlab",
-    install = "cargo install --git https://github.com/latex-lsp/texlab",
-  },
-  tsserver = {
-    binary = "typescript-language-server",
-    install = "npm i -g typescript typescript-language-server",
-  },
-  vimls = {
-    binary = "vim-language-server",
-    install = "npm i -g vim-language-server",
-  },
-  yamlls = {
-    binary = "yaml-language-server",
-    install = "brew install yaml-language-server",
-  },
+    bashls = {
+        binary = "bash-language-server",
+        install = "npm i -g bash-language-server",
+    },
+    clangd = {
+        binary = "clangd",
+        install = "brew install llvm",
+    },
+    gopls = {
+        binary = "gopls",
+        install = "go install golang.org/x/tools/gopls@latest",
+    },
+    hls = {
+        binary = "haskell-language-server-wrapper",
+        install = "brew install haskell-language-server-wrapper",
+    },
+    jsonls = {
+        binary = "vscode-json-language-server",
+        install = "npm i -g vscode-langservers-extracted",
+    },
+    lua_ls = {
+        binary = "lua-language-server",
+        install = "brew install lua-language-server",
+    },
+    pyright = {
+        binary = "basedpyright",
+        install = "pipx install basedpyright",
+    },
+    rust_analyzer = {
+        binary = "rust-analyzer",
+        install = "rustup component add rust-analyzer",
+    },
+    texlab = {
+        binary = "texlab",
+        install = "cargo install --git https://github.com/latex-lsp/texlab",
+    },
+    tsserver = {
+        binary = "typescript-language-server",
+        install = "npm i -g typescript typescript-language-server",
+    },
+    vimls = {
+        binary = "vim-language-server",
+        install = "npm i -g vim-language-server",
+    },
+    yamlls = {
+        binary = "yaml-language-server",
+        install = "brew install yaml-language-server",
+    },
 }
 
 local servers = {
-  bashls = {
-    cmd = { "bash-language-server", "start" },
-    filetypes = { "bash", "sh", "zsh" },
-  },
-  clangd = {
-    cmd = { "clangd" },
-    filetypes = { "c", "cpp", "objc", "objcpp" },
-  },
-  gopls = {
-    cmd = { "gopls" },
-    settings = {
-      gopls = {
-        codelenses = {
-          test = true,
-          tidy = true,
-          vendor = true,
-        },
-        usePlaceholders = true,
-      },
+    bashls = {
+        cmd = { "bash-language-server", "start" },
+        filetypes = { "bash", "sh", "zsh" },
     },
-  },
-  hls = {
-    cmd = { "haskell-language-server-wrapper", "--lsp" },
-  },
-  jsonls = {
-    cmd = { "vscode-json-language-server", "--stdio" },
-  },
-  lua_ls = {
-    cmd = { "lua-language-server" },
-    settings = {
-      Lua = {
-        completion = {
-          callSnippet = "Replace",
-        },
-        diagnostics = {
-          globals = { "vim" },
-        },
-        runtime = {
-          path = vim.split(package.path, ";"),
-          version = "LuaJIT",
-        },
-        telemetry = { enable = false },
-        workspace = {
-          checkThirdParty = false,
-          library = {
-            vim.fn.expand("$VIMRUNTIME/lua"),
-            vim.fn.stdpath("config") .. "/lua",
-          },
-        },
-      },
+    clangd = {
+        cmd = { "clangd" },
+        filetypes = { "c", "cpp", "objc", "objcpp" },
     },
-  },
-  pyright = {
-    cmd = { "basedpyright-langserver", "--stdio" },
-  },
-  rust_analyzer = {
-    settings = {
-      ["rust-analyzer"] = {
-        cmd = { "rust-analyzer" },
-        completion = {
-          callable = {
-            snippets = "fill_arguments",
-          },
-          fullFunctionSignatures = {
-            enable = true,
-          },
+    gopls = {
+        cmd = { "gopls" },
+        settings = {
+            gopls = {
+                codelenses = {
+                    test = true,
+                    tidy = true,
+                    vendor = true,
+                },
+                usePlaceholders = true,
+            },
         },
-      },
     },
-  },
-  texlab = {
-    settings = {
-      texlab = {
-        build = {
-          onSave = true,
+    hls = {
+        cmd = { "haskell-language-server-wrapper", "--lsp" },
+    },
+    jsonls = {
+        cmd = { "vscode-json-language-server", "--stdio" },
+    },
+    lua_ls = {
+        cmd = { "lua-language-server" },
+        settings = {
+            Lua = {
+                completion = {
+                    callSnippet = "Replace",
+                },
+                diagnostics = {
+                    globals = { "vim" },
+                },
+                runtime = {
+                    path = vim.split(package.path, ";"),
+                    version = "LuaJIT",
+                },
+                telemetry = { enable = false },
+                workspace = {
+                    checkThirdParty = false,
+                    library = {
+                        vim.fn.expand("$VIMRUNTIME/lua"),
+                        vim.fn.stdpath("config") .. "/lua",
+                    },
+                },
+            },
         },
-      },
     },
-  },
-  ts_ls = {
-    cmd = { "typescript-language-server", "--stdio" },
-  },
-  vimls = {
-    cmd = { "vim-language-server", "--stdio" },
-    filetypes = { "vim" },
-  },
-  yamlls = {
-    cmd = { "yaml-language-server", "--stdio" },
-    settings = {
-      yaml = {
-        keyOrdering = false,
-      },
+    pyright = {
+        cmd = { "basedpyright-langserver", "--stdio" },
     },
-  },
+    rust_analyzer = {
+        settings = {
+            ["rust-analyzer"] = {
+                cmd = { "rust-analyzer" },
+                completion = {
+                    callable = {
+                        snippets = "fill_arguments",
+                    },
+                    fullFunctionSignatures = {
+                        enable = true,
+                    },
+                },
+            },
+        },
+    },
+    texlab = {
+        settings = {
+            texlab = {
+                build = {
+                    onSave = true,
+                },
+            },
+        },
+    },
+    ts_ls = {
+        cmd = { "typescript-language-server", "--stdio" },
+    },
+    vimls = {
+        cmd = { "vim-language-server", "--stdio" },
+        filetypes = { "vim" },
+    },
+    yamlls = {
+        cmd = { "yaml-language-server", "--stdio" },
+        settings = {
+            yaml = {
+                keyOrdering = false,
+            },
+        },
+    },
 }
 
 local signs = {
-  Error = "",
-  Warn = "",
-  Hint = "󰌶",
-  Info = " ",
+    Error = "",
+    Warn = "",
+    Hint = "󰌶",
+    Info = " ",
 }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    "folke/neodev.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-  },
-  lazy = false,
-  keys = { { "<leader>is", ":LspInfo<cr>", desc = "language servers (nvim-lsp)", mode = "n" } },
-  config = function()
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local lspconfig = require("lspconfig")
-    local keyset = vim.keymap.set
+    "neovim/nvim-lspconfig",
+    dependencies = {
+        "folke/neodev.nvim",
+        "hrsh7th/cmp-nvim-lsp",
+    },
+    lazy = false,
+    keys = { { "<leader>is", ":LspInfo<cr>", desc = "language servers (nvim-lsp)", mode = "n" } },
+    config = function()
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local lspconfig = require("lspconfig")
+        local keyset = vim.keymap.set
 
-    for name, opts in pairs(servers) do
-      if type(opts) == "function" then
-        opts()
-      else
-        local client = lspconfig[name]
+        for name, opts in pairs(servers) do
+            if type(opts) == "function" then
+                opts()
+            else
+                local client = lspconfig[name]
 
-        client.setup(vim.tbl_extend("force", {
-          flags = { debounce_text_changes = 150 },
-          capabilities = capabilities,
-        }, opts))
-      end
-    end
-
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-      callback = function(env)
-        vim.bo[env.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-        keyset("n", "ga", vim.diagnostic.setloclist, { desc = "loclist diagnostics" })
-        keyset("n", "gd", vim.lsp.buf.definition, { desc = "definition", buffer = env.buf })
-        keyset("n", "gD", vim.lsp.buf.declaration, { desc = "declaration", buffer = env.buf })
-        keyset("n", "gi", vim.lsp.buf.implementation, { desc = "implementation", buffer = env.buf })
-        keyset("n", "gl", vim.diagnostic.open_float, { desc = "float diagnostics" })
-        keyset("n", "gn", vim.diagnostic.goto_next, { desc = "next diagnostic" })
-        keyset("n", "K", vim.lsp.buf.hover, { desc = "hover", buffer = env.buf })
-        keyset("n", "<leader>la", vim.lsp.buf.code_action, { desc = "code action" })
-        keyset("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "show erors in qf" })
-        keyset("n", "<leader>lr", vim.lsp.buf.rename, { desc = "rename var" })
-        keyset("n", "<leader>lS", function()
-          local all_installed = true
-          local install_command = ""
-
-          for _, s in pairs(server_info) do
-            if vim.fn.executable(s.binary) ~= 1 then
-              all_installed = false
-              install_command = install_command .. "echo installing " .. s.binary .. "; "
-              install_command = install_command .. s.install .. "; "
-              install_command = install_command .. "echo '\\n'; "
+                client.setup(vim.tbl_extend("force", {
+                    flags = { debounce_text_changes = 150 },
+                    capabilities = capabilities,
+                }, opts))
             end
-          end
+        end
 
-          if all_installed then
-            print("all LSPs already installed!")
-          else
-            install_command = install_command .. "echo done!!!"
-            vim.cmd("vert copen 100")
-            vim.cmd("set wrap")
-            vim.cmd("AsyncRun -strip " .. install_command)
-          end
-        end, { desc = "install language servers" })
-      end,
-    })
-  end,
+        vim.api.nvim_create_autocmd("LspAttach", {
+            group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+            callback = function(env)
+                vim.bo[env.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+                keyset("n", "ga", vim.diagnostic.setloclist, { desc = "loclist diagnostics" })
+                keyset("n", "gd", vim.lsp.buf.definition, { desc = "definition", buffer = env.buf })
+                keyset("n", "gD", vim.lsp.buf.declaration, { desc = "declaration", buffer = env.buf })
+                keyset("n", "gi", vim.lsp.buf.implementation, { desc = "implementation", buffer = env.buf })
+                keyset("n", "gl", vim.diagnostic.open_float, { desc = "float diagnostics" })
+                keyset("n", "gn", vim.diagnostic.goto_next, { desc = "next diagnostic" })
+                keyset("n", "K", vim.lsp.buf.hover, { desc = "hover", buffer = env.buf })
+                keyset("n", "<leader>la", vim.lsp.buf.code_action, { desc = "code action" })
+                keyset("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "show erors in qf" })
+                keyset("n", "<leader>lr", vim.lsp.buf.rename, { desc = "rename var" })
+                keyset("n", "<leader>lS", function()
+                    local all_installed = true
+                    local install_command = ""
+
+                    for _, s in pairs(server_info) do
+                        if vim.fn.executable(s.binary) ~= 1 then
+                            all_installed = false
+                            install_command = install_command .. "echo installing " .. s.binary .. "; "
+                            install_command = install_command .. s.install .. "; "
+                            install_command = install_command .. "echo '\\n'; "
+                        end
+                    end
+
+                    if all_installed then
+                        print("all LSPs already installed!")
+                    else
+                        install_command = install_command .. "echo done!!!"
+                        vim.cmd("vert copen 100")
+                        vim.cmd("set wrap")
+                        vim.cmd("AsyncRun -strip " .. install_command)
+                    end
+                end, { desc = "install language servers" })
+            end,
+        })
+    end,
 }

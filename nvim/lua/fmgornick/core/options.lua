@@ -7,10 +7,10 @@ vim.opt.mousescroll = "ver:1,hor:0"
 -- line numbering
 vim.opt.number = true
 
--- 2 spaces = correct
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+-- 4 spaces
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
