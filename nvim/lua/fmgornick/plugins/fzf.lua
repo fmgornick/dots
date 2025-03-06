@@ -13,7 +13,12 @@ return {
         { "<c-r>", ":History:<cr>", mode = "c", desc = "old commands" },
     },
     config = function()
-        vim.g.fzf_layout = { tmux = "100%,100%" }
+        vim.g.fzf_layout = {
+            window = {
+                width = 1.0,
+                height = 1.0,
+            },
+        }
         vim.g.fzf_vim = { preview_window = {} }
 
         -- search for config files
@@ -53,7 +58,10 @@ return {
                 vim.fn["fzf#run"]({
                     source = "echo HEAD; git branches",
                     sink = "DiffviewOpen",
-                    tmux = "100%,100%",
+                    window = {
+                        width = 1.0,
+                        height = 1.0,
+                    },
                 })
             end,
             {}
