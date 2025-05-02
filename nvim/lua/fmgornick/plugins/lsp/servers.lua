@@ -95,17 +95,6 @@ local servers = {
     },
 }
 
-local signs = {
-    Error = "",
-    Warn = "",
-    Hint = "󰌶",
-    Info = " ",
-}
-for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -132,6 +121,17 @@ return {
             end
         end
 
+        vim.diagnostic.config({
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = "",
+                    [vim.diagnostic.severity.WARN] = "",
+                    [vim.diagnostic.severity.INFO] = " ",
+                    [vim.diagnostic.severity.HINT] = "󰌶",
+                },
+            },
+        })
+
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(env)
@@ -140,8 +140,14 @@ return {
                 keyset("n", "gd", vim.lsp.buf.definition, { desc = "definition", buffer = env.buf })
                 keyset("n", "gD", vim.lsp.buf.declaration, { desc = "declaration", buffer = env.buf })
                 keyset("n", "gi", vim.lsp.buf.implementation, { desc = "implementation", buffer = env.buf })
+                keyset("n", "gr", vim.lsp.buf.references, { desc = "list references", buffer = env.buf })
                 keyset("n", "gl", vim.diagnostic.open_float, { desc = "float diagnostics" })
-                keyset("n", "gn", vim.diagnostic.goto_next, { desc = "next diagnostic" })
+                keyset(
+                    "n",
+                    "gn",
+                    function() vim.diagnostic.jump({ count = 1, float = true }) end,
+                    { desc = "next diagnostic" }
+                )
                 keyset("n", "K", vim.lsp.buf.hover, { desc = "hover", buffer = env.buf })
                 keyset("n", "<leader>la", vim.lsp.buf.code_action, { desc = "code action" })
                 keyset("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "show erors in qf" })
