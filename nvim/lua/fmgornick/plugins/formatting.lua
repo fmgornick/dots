@@ -1,5 +1,3 @@
-vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.format({ async = true }) end, { desc = "format region" })
-
 return {
     "stevearc/conform.nvim",
     lazy = false,
@@ -36,33 +34,8 @@ return {
         log_level = vim.log.levels.WARN,
         notify_on_error = false,
         formatters = {
-            clang_format = {
-                command = "clang-format",
-                prepend_args = { "--style=InheritParentConfig" },
-            },
-            latexindent = {
-                prepend_args = {
-                    "-y=defaultIndent:' '",
-                },
-            },
-            prettierd = {
-                prepend_args = {
-                    -- "--tab-width=4",
-                    -- "--bracket-same-line",
-                },
-                range_args = function(ctx)
-                    return {
-                        "--line-start",
-                        ctx.range.start[1],
-                        "--line-end",
-                        ctx.range["end"][1],
-                    }
-                end,
-            },
-            shfmt = {
-                filetypes = { "bash", "sh", "zsh" },
-                prepend_args = { "-i", "2" },
-            },
+            clang_format = { prepend_args = { "--style=InheritParentConfig" } },
+            latexindent = { prepend_args = { "-y=defaultIndent:' '" } },
             stylua = {
                 prepend_args = {
                     "--collapse-simple-statement=Always",
@@ -70,14 +43,6 @@ return {
                     "--quote-style=AutoPreferDouble",
                     "--sort-requires",
                 },
-                range_args = function(ctx)
-                    return {
-                        "--range-start",
-                        ctx.range.start[1],
-                        "--range-end",
-                        ctx.range["end"][1],
-                    }
-                end,
             },
         },
     },

@@ -1,13 +1,5 @@
 local utils = require("fmgornick.core.utils")
-
-local function map(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        if opts.desc then opts.desc = opts.desc end
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.keymap.set(mode, lhs, rhs, options)
-end
+local map = utils.keymap
 
 -- yank stuff
 map("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })

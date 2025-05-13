@@ -24,7 +24,6 @@ return {
                 untracked = { text = "┆" },
             },
         },
-        config = function(_, opts) require("gitsigns").setup(opts) end,
         keys = {
             { "<leader>gb", ":Gitsigns blame_line<cr>", desc = "blame line", mode = "n" },
             { "<leader>gn", ":Gitsigns next_hunk<cr>", desc = "next hunk", mode = "n" },
@@ -68,9 +67,7 @@ return {
                 },
             },
         },
-        config = function(_, opts) require("diffview").setup(opts) end,
-        keys = {
-            { "<leader>gd", ":GDiff<cr>", desc = "git diff", mode = "n" },
-        },
+        -- :GDiff depends on fzf plugin enabled
+        keys = { { "<leader>gd", ":GDiff<cr>", desc = "git diff", mode = "n" } },
     },
 }
