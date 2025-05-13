@@ -39,5 +39,3 @@ require("lazy").setup({
         notify = false,
     },
 })
-
-vim.keymap.set("n", "<leader>ip", vim.cmd.Lazy, { desc = "plugins (lazy)" })

@@ -15,13 +15,10 @@ map("n", "yiF", "<esc>ggVGy", { desc = "yank file contents" })
 map("n", "viF", "<esc>ggVG", { desc = "highlight file contents" })
 
 --leader commands
-map("n", "<leader>c", ":bn|bd!#<cr>", { desc = "close buffer" })
 map("n", "<leader>d", utils.toggle_diff, { desc = "diff windows" })
-map("n", "<leader>w", ":w<cr>", { desc = "write buffer" })
-map("n", "<leader>q", ":q!<cr>", { desc = "quit" })
-map("n", "<leader>Q", ":qa!<cr>", { desc = "quit all" })
 map("n", "<leader>h", ":noh<cr>", { desc = "no highlight" })
-map("n", "<leader>r", ":set relativenumber!<cr>", { desc = "toggle relativ number" })
+map("n", "<leader>r", ":e!<cr>", { desc = "reset to last saved change" })
+map("n", "<leader>R", ":set relativenumber!<cr>", { desc = "toggle relative number" })
 
 -- for clicking on links (mac, { desc = "" })
 map("n", "<M-LeftMouse>", "<LeftMouse>", { desc = "click link" })

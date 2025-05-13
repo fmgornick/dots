@@ -3,7 +3,6 @@ vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.format({ async = true })
 return {
     "stevearc/conform.nvim",
     lazy = false,
-    keys = { { "<leader>if", ":ConformInfo<cr>", desc = "formatters (conform)", mode = "n" } },
     opts = {
         formatters_by_ft = {
             bash = { "shfmt" },
@@ -70,7 +69,6 @@ return {
                     "--indent-type=Spaces",
                     "--quote-style=AutoPreferDouble",
                     "--sort-requires",
-                    -- "--indent-width=2",
                 },
                 range_args = function(ctx)
                     return {

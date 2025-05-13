@@ -26,26 +26,3 @@ vim.api.nvim_create_autocmd("BufEnter", {
     group = "SetWrap",
     command = "setlocal wrap linebreak nolist",
 })
-
--- open certain files with skeleton code snippets
--- REQUIRES LUASNIP
-local function skeleton(pattern, filetype, snippet)
-    return {
-        group = "Skeleton",
-        pattern = pattern,
-        callback = function()
-            if vim.fn.line("$") ~= 1 or vim.fn.getline(1) ~= "" then return end
-            local snips = require("luasnip").get_snippets()[filetype]
-            for _, snip in pairs(snips) do
-                if snip.name == snippet then
-                    require("luasnip").snip_expand(snip)
-                    return true
-                end
-            end
-        end,
-    }
-end
-vim.api.nvim_create_augroup("Skeleton", { clear = true })
-vim.api.nvim_create_autocmd("BufEnter", skeleton("*.tex", "tex", "hw"))
-vim.api.nvim_create_autocmd("BufEnter", skeleton("tasks.json", "json", "tasks"))
-vim.api.nvim_create_autocmd("BufEnter", skeleton("launch.json", "json", "launch"))

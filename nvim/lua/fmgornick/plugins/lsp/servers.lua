@@ -102,7 +102,6 @@ return {
         "hrsh7th/cmp-nvim-lsp",
     },
     lazy = false,
-    keys = { { "<leader>is", ":LspInfo<cr>", desc = "language servers (nvim-lsp)", mode = "n" } },
     config = function()
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         local lspconfig = require("lspconfig")
@@ -150,7 +149,7 @@ return {
                 )
                 keyset("n", "K", vim.lsp.buf.hover, { desc = "hover", buffer = env.buf })
                 keyset("n", "<leader>la", vim.lsp.buf.code_action, { desc = "code action" })
-                keyset("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "show erors in qf" })
+                keyset("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "show erors in quickfix list" })
                 keyset("n", "<leader>lr", vim.lsp.buf.rename, { desc = "rename var" })
             end,
         })

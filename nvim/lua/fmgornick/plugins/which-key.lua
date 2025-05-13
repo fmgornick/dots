@@ -9,7 +9,6 @@ return {
         groups = {
             { "<leader>f", group = "fzf" },
             { "<leader>g", group = "git" },
-            { "<leader>i", group = "info" },
             { "<leader>l", group = "language" },
         },
         icons = { rules = false },

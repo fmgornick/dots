@@ -42,14 +42,14 @@ return {
 
         -- grep for files in root directory
         vim.cmd([[
-    command! -bang -nargs=* PRG
-      \ call fzf#vim#grep(
-      \   "rg --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 
-      \   1, 
-      \   fzf#vim#with_preview({'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]}), 
-      \   <bang>0
-      \ )
-    ]])
+            command! -bang -nargs=* PRG
+              \ call fzf#vim#grep(
+              \   "rg --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 
+              \   1, 
+              \   fzf#vim#with_preview({'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]}), 
+              \   <bang>0
+              \ )
+        ]])
 
         -- git diff
         vim.api.nvim_create_user_command(
