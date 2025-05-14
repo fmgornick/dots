@@ -22,7 +22,23 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- wrap in readme and latex files
 vim.api.nvim_create_augroup("SetWrap", { clear = true })
 vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = { "*.md", "*.tex", "*.http" },
     group = "SetWrap",
+    pattern = { "*.md", "*.tex", "*.http" },
     command = "setlocal wrap linebreak nolist",
+})
+
+-- follow symbolic link to referenced file
+vim.api.nvim_create_augroup("FollowSymlink", { clear = true })
+vim.api.nvim_create_autocmd("BufReadPost", {
+    group = "FollowSymlink",
+    pattern = "*",
+    callback = function()
+        local file = vim.fn.expand("%")
+        if not file:find("^oil:///") then
+            vim.cmd("enew")
+            vim.cmd.bwipeout("#")
+            vim.cmd.edit(vim.fn.resolve(file))
+            vim.cmd("filetype detect")
+        end
+    end,
 })

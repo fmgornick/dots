@@ -73,4 +73,10 @@ end
 M.next_diagnostic = function() vim.diagnostic.jump({ count = 1, float = true }) end
 M.prev_diagnostic = function() vim.diagnostic.jump({ count = -1, float = true }) end
 
+-- turn off lsp snippet highlighting
+M.disable_snippet = function()
+    vim.snippet.stop()
+    vim.api.nvim_input("<esc>")
+end
+
 return M

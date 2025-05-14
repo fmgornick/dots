@@ -24,8 +24,9 @@ return {
                     workspace = {
                         checkThirdParty = false,
                         library = {
-                            vim.fn.expand("$VIMRUNTIME/lua"), -- nvim auto-complete
+                            vim.env.VIMRUNTIME .. "/lua", -- nvim auto-complete
                             vim.fn.stdpath("config") .. "/lua", -- my config auto-complete
+                            "${3rd}/luv/library", -- lua stdlib
                         },
                     },
                 },

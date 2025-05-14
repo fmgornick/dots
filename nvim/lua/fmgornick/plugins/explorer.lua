@@ -1,15 +1,15 @@
 return {
     "stevearc/oil.nvim",
+    lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = { { "<leader>e", "<cmd>Oil<cr>", desc = "file explorer", mode = { "n", "v" } } },
     opts = {
-        default_file_explorer = true,
-        skip_confirm_for_simple_edits = true,
-        prompt_save_on_select_new_entry = true,
         cleanup_delay_ms = false,
-        view_options = {
-            show_hidden = true,
-        },
+        default_file_explorer = true,
+        prompt_save_on_select_new_entry = true,
+        skip_confirm_for_simple_edits = true,
+        use_default_keymaps = false,
+        view_options = { show_hidden = true },
         keymaps = {
             ["g?"] = { "actions.show_help", mode = "n" },
             ["<cr>"] = "actions.select",
@@ -29,7 +29,5 @@ return {
             ["<leader>h"] = { "actions.toggle_hidden", mode = "n" },
             ["g\\"] = { "actions.toggle_trash", mode = "n" },
         },
-        use_default_keymaps = false,
     },
-    config = function(_, opts) require("oil").setup(opts) end,
 }
