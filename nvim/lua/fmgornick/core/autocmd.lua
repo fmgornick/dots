@@ -33,11 +33,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     group = "FollowSymlink",
     pattern = "*",
     callback = function()
-        local file = vim.fn.expand("%")
-        if not file:find("^oil:///") then
+        local file = vim.fn.expand("%:p")
+        local resolved = vim.fn.resolve(file)
+        if resolved ~= "" and file ~= resolved and not file:find("^oil:///") then
             vim.cmd("enew")
             vim.cmd.bwipeout("#")
-            vim.cmd.edit(vim.fn.resolve(file))
+            vim.cmd.edit(resolved)
             vim.cmd("filetype detect")
         end
     end,
