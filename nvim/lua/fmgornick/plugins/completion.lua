@@ -4,6 +4,7 @@ return {
     lazy = false,
     opts = {
         completion = { completeopt = "menu,menuone,select" },
+        experimental = { ghost_text = true },
         sources = {
             { name = "nvim_lsp" },
             { name = "buffer" },
@@ -18,7 +19,7 @@ return {
             ["<c-b>"] = cmp.mapping.scroll_docs(-4),
             ["<c-e>"] = cmp.mapping.abort(),
             ["<c-space>"] = cmp.mapping.complete(),
-            ["<cr>"] = cmp.mapping.confirm({ select = true }),
+            ["<cr>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
         })
         cmp.setup(opts)
     end,
