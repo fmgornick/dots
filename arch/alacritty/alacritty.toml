@@ -1,0 +1,26 @@
+general.import = [
+  "~/.config/alacritty/everforest.toml" # colorscheme
+]
+
+[env]
+TERM = "alacritty"
+
+[font]
+normal      = { family = "Hurmit Nerd Font Propo", style = "Regular"     }
+bold        = { family = "Hurmit Nerd Font Propo", style = "Bold"        }
+italic      = { family = "Hurmit Nerd Font Propo", style = "Italic"      }
+bold_italic = { family = "Hurmit Nerd Font Propo", style = "Bold Italic" }
+size        = 12
+
+[keyboard]
+bindings = [
+  { key = "Tab",                 mode = "Search", action = "SearchFocusNext"     },
+  { key = "Tab", mods = "Shift", mode = "Search", action = "SearchFocusPrevious" }
+]
+
+[selection]
+semantic_escape_chars = ",.│`|:\"' ()[]{}<>\t"
+save_to_clipboard     = true
+
+[scrolling]
+multiplier = 2
