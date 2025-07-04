@@ -1,30 +1,23 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
+# Default config for sway (`man 5 sway`)
+font pango:Hurmit Nerd Font Propo Regular 10
 
 ### Variables
-#
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
-# Home row direction keys, like vim
+
+# Home row direction keys
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+
+# preferred terminal emulator
 set $term alacritty
-# Your preferred application launcher
-set $menu wmenu-run -f "Hurmit Nerd Font Propo Bold 10"
+
+# preferred application launcher
+set $menu fuzzel
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# output * bg /usr/share/backgrounds/sway/bg.png fill
-
-#
-# Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
@@ -43,30 +36,12 @@ set $menu wmenu-run -f "Hurmit Nerd Font Propo Bold 10"
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input type:touchpad {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-#   input type:keyboard {
-#       xkb_layout "eu"
-#   }
-#
-# You can also configure each device individually.
-# Read `man 5 sway-input` for more information about this section.
-    input type:keyboard {
-        repeat_delay  250
-        repeat_rate   40
-        xkb_options   caps:escape
-    }
-
-    font pango:Hurmit Nerd Font Propo Regular 10
+### Input configuration (`man 5 sway-input`)
+input type:keyboard {
+    repeat_delay  250
+    repeat_rate   40
+    xkb_options   caps:escape
+}
 
 ### Key bindings
 #
@@ -82,6 +57,7 @@ set $menu wmenu-run -f "Hurmit Nerd Font Propo Bold 10"
     bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
@@ -91,7 +67,7 @@ set $menu wmenu-run -f "Hurmit Nerd Font Propo Bold 10"
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec 'swaymsg exit'
+    bindsym $mod+Shift+e exec swaymsg exit
 #
 # Moving around:
 #
@@ -235,7 +211,5 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
-
-# export GTK_THEME='Adwaita:dark'
 
 include /etc/sway/config.d/*

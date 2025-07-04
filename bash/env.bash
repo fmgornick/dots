@@ -6,6 +6,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 export XDG_STATE_HOME="$HOME/.local/state"
 
+# misc.
 export EDITOR="nvim"
 export HISTFILE="$XDG_CACHE_HOME/bash/history"
 export HISTSIZE=100000
