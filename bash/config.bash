@@ -1,4 +1,4 @@
-source ~/.config/bash/env.sh
+source ~/.config/bash/env.bash
 source ~/.config/bash/prompt.bash
 source ~/.config/bash/completion/fzf.bash
 

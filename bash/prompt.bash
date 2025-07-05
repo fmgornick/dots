@@ -1,31 +1,17 @@
-function gstatus() {
+function __gstatus() {
     status=$(git status --porcelain)
-    if [[ $status =~ "??" ]]; then
-        return 1 # untracked files
-    elif [[ ${#status} -ne 0 ]]; then
-        return 2 # changes not commited
-    else
-        return 3 # clean
-    fi
+    if [[ $status =~ "??" ]]; then echo '\e[0;31m\]'    # untracked files      => RED
+    elif [[ ${#status} -ne 0 ]]; then echo '\e[0;33m\]' # changes not commited => YELLOW
+    else echo '\e[0;35m\]'; fi                          # clean                => MAGENTA
 }
 
 function prompt() {
-    if [[ $? -eq 0 || $? -eq 130 ]]; then
-        status=''
-    else
-        status='\[\e[0;31m\]$?\[\e[0m\] '
-    fi
+    if [[ $? -eq 0 || $? -eq 130 ]]; then status='' # 0/130 code => don't print return code
+    else status='\[\e[0;31m\]$?\[\e[0m\] '; fi      # else       => print return code in red
 
     gbranch=$(git symbolic-ref --short HEAD 2>/dev/null)
     if [[ $? -eq 0 ]]; then
-        gstatus=$(gstatus; echo $?)
-        if [[ $gstatus -eq 1 ]]; then
-            export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\][\[\e[0;31m\]$gbranch\[\e[0m\]]\$ "
-        elif [[ $gstatus -eq 2 ]]; then
-            export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\][\[\e[0;33m\]$gbranch\[\e[0m\]]\$ "
-        else
-            export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\][\[\e[0;35m\]$gbranch\[\e[0m\]]\$ "
-        fi
+        export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\][\[$(__gstatus)$gbranch\[\e[0m\]]\$ "
     else
         export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\]\$ "
     fi
