@@ -1,0 +1,36 @@
+# black    "#333c43"
+# blue     "#7fbbb3"
+# cyan     "#83c092"
+# green    "#a7c080"
+# gray     "#4d5960"
+# magenta  "#d699b6"
+# red      "#e67e80"
+# white    "#d3c6aa"
+# yellow   "#dbbc7f"
+
+set  font "Hurmit Nerd Font Propo 12"
+
+set  default-bg               "#333c43" # black
+set  default-fg               "#d3c6aa" # white
+set  statusbar-bg             "#333c43" # black
+set  statusbar-fg             "#d3c6aa" # white
+set  inputbar-bg              "#333c43" # black
+set  inputbar-fg              "#d3c6aa" # white
+set  index-bg                 "#4d5960" # gray
+set  index-fg                 "#d3c6aa" # white
+set  index-active-bg          "#a7c080" # green
+set  index-active-fg          "#d3c6aa" # white
+set  completion-bg            "#333c43" # black
+set  completion-fg            "#d3c6aa" # white
+set  completion-group-bg      "#4d5960" # gray
+set  completion-group-fg      "#d3c6aa" # white
+set  completion-highlight-bg  "#a7c080" # green
+set  completion-highlight-fg  "#333c43" # black
+set  notification-bg          "#7fbbb3" # blue
+set  notification-fg          "#333c43" # black
+set  notification-warning-bg  "#dbbc7f" # yellow
+set  notification-warning-fg  "#333c43" # black
+set  notification-error-bg    "#e67e80" # red
+set  notification-error-fg    "#333c43" # black
+set  render-loading-bg        "#d3c6aa" # white
+set  render-loading-fg        "#333c43" # black

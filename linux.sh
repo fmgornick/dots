@@ -9,6 +9,7 @@ rm  -rf  ~/.config/fuzzel
 rm  -rf  ~/.config/git
 rm  -rf  ~/.config/nvim
 rm  -rf  ~/.config/sway
+rm  -rf  ~/.config/zathura
 
 ln  -sf  ~/.config/bash/config.bash      ~/.bashrc
 ln  -sf  ~/.config/bash/profile.bash     ~/.bash_profile
@@ -19,3 +20,4 @@ ln  -s   $(pwd)/fuzzel                   ~/.config/fuzzel
 ln  -s   $(pwd)/git                      ~/.config/git
 ln  -s   $(pwd)/nvim                     ~/.config/nvim
 ln  -s   $(pwd)/sway                     ~/.config/sway
+ln  -s   $(pwd)/zathura                  ~/.config/zathura
