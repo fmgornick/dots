@@ -54,24 +54,13 @@ input type:keyboard {
 #
 # Basics:
 #
-    # Start terminal
-    bindsym $mod+Return exec $term
+    bindsym  $mod+Return   exec $term
+    bindsym  $mod+d        exec $menu
+    bindsym  $mod+q        kill
+    bindsym  $mod+Shift+c  reload
+    bindsym  $mod+Shift+e  exec swaymsg exit
 
-    # Kill focused window
-    bindsym $mod+q kill
-
-    # Start launcher
-    bindsym $mod+d exec $menu
-
-    # left-mouse  = drag
-    # right-mouse = resize
     floating_modifier $mod normal
-
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaymsg exit
 
 #
 # Moving around:
@@ -134,15 +123,15 @@ input type:keyboard {
     bindsym  $mod+e            layout      toggle split
     bindsym  $mod+s            layout      stacking
     bindsym  $mod+w            layout      tabbed
-    bindsym  $mod+Shift+space  floating    toggle
     bindsym  $mod+space        focus       mode_toggle
+    bindsym  $mod+Shift+space  floating    toggle
     bindsym  $mod+a            focus       parent
 
 #
 # Scratchpad:
 #
-    bindsym  $mod+Shift+minus  move        scratchpad
     bindsym  $mod+minus        scratchpad  show
+    bindsym  $mod+Shift+minus  move        scratchpad
 
 #
 # Resizing containers:
@@ -185,11 +174,11 @@ bar {
     position top
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
     colors {
-        statusline $white
-        background $gray
-        focused_workspace $white $white $gray
-        inactive_workspace $gray $gray $white
-        urgent_workspace $red $red $gray
+        statusline          $white
+        background          $gray
+        focused_workspace   $white  $white  $gray
+        inactive_workspace  $gray   $gray   $white
+        urgent_workspace    $red    $red    $gray
     }
 }
 
