@@ -23,7 +23,7 @@ set  $yellow   "#dbbc7f"
 # background color
 output * background $black solid_color
 # pixel border size
-default_border pixel 2
+default_border pixel 3
 # window border colors
 client.focused           $gray   $gray   $white  $gray   $gray
 client.focused_inactive  $black  $black  $white  $black  $black

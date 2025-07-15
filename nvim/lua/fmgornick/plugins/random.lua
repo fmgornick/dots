@@ -5,5 +5,4 @@ return {
     { "tpope/vim-abolish", lazy = false },
     { "tpope/vim-surround", lazy = false },
     { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
-    { "xiyaowong/transparent.nvim", lazy = false },
 }
