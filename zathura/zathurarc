@@ -1,36 +1,55 @@
-# black    "#333c43"
-# blue     "#7fbbb3"
-# cyan     "#83c092"
-# green    "#a7c080"
-# gray     "#4d5960"
-# magenta  "#d699b6"
-# red      "#e67e80"
-# white    "#d3c6aa"
-# yellow   "#dbbc7f"
+# bg_dim       "#293136"
+# bg0          "#333c43"
+# bg1          "#3a464c"
+# bg2          "#434f55"
+# bg3          "#4d5960"
+# bg4          "#555f66"
+# bg5          "#5d6b66"
+# bg_red       "#5c3f4f"
+# bg_visual    "#59464c"
+# bg_yellow    "#55544a"
+# bg_green     "#48584e"
+# bg_blue      "#3f5865"
+# red          "#e67e80"
+# orange       "#e69875"
+# yellow       "#dbbc7f"
+# green        "#a7c080"
+# blue         "#7fbbb3"
+# aqua         "#83c092"
+# purple       "#d699b6"
+# fg           "#d3c6aa"
+# statusline1  "#a7c080"
+# statusline2  "#d3c6aa"
+# statusline3  "#e67e80"
+# gray0        "#7a8478"
+# gray1        "#859289"
+# gray2        "#9da9a0"
 
 set  font "Hurmit Nerd Font Propo 12"
 
-set  default-bg               "#333c43" # black
-set  default-fg               "#d3c6aa" # white
-set  statusbar-bg             "#333c43" # black
-set  statusbar-fg             "#d3c6aa" # white
-set  inputbar-bg              "#333c43" # black
-set  inputbar-fg              "#d3c6aa" # white
-set  index-bg                 "#4d5960" # gray
-set  index-fg                 "#d3c6aa" # white
-set  index-active-bg          "#a7c080" # green
-set  index-active-fg          "#d3c6aa" # white
-set  completion-bg            "#333c43" # black
-set  completion-fg            "#d3c6aa" # white
-set  completion-group-bg      "#4d5960" # gray
-set  completion-group-fg      "#d3c6aa" # white
-set  completion-highlight-bg  "#a7c080" # green
-set  completion-highlight-fg  "#333c43" # black
-set  notification-bg          "#7fbbb3" # blue
-set  notification-fg          "#333c43" # black
-set  notification-warning-bg  "#dbbc7f" # yellow
-set  notification-warning-fg  "#333c43" # black
-set  notification-error-bg    "#e67e80" # red
-set  notification-error-fg    "#333c43" # black
-set  render-loading-bg        "#d3c6aa" # white
-set  render-loading-fg        "#333c43" # black
+set  default-bg               "#333c43"
+set  default-fg               "#d3c6aa"
+set  statusbar-bg             "#333c43"
+set  statusbar-fg             "#d3c6aa"
+set  inputbar-bg              "#333c43"
+set  inputbar-fg              "#d3c6aa"
+set  index-bg                 "#4d5960"
+set  index-fg                 "#d3c6aa"
+set  index-active-bg          "#a7c080"
+set  index-active-fg          "#d3c6aa"
+set  completion-bg            "#333c43"
+set  completion-fg            "#d3c6aa"
+set  completion-group-bg      "#4d5960"
+set  completion-group-fg      "#d3c6aa"
+set  completion-highlight-bg  "#a7c080"
+set  completion-highlight-fg  "#333c43"
+set  notification-bg          "#7fbbb3"
+set  notification-fg          "#333c43"
+set  notification-warning-bg  "#dbbc7f"
+set  notification-warning-fg  "#333c43"
+set  notification-error-bg    "#e67e80"
+set  notification-error-fg    "#333c43"
+set  render-loading-bg        "#d3c6aa"
+set  render-loading-fg        "#333c43"
+
+set selection-notification false
