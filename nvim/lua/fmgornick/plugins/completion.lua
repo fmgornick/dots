@@ -13,13 +13,12 @@ return {
     config = function(_, opts)
         local cmp = require("cmp")
         opts.mapping = cmp.mapping.preset.insert({
-            ["<c-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-            ["<c-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+            ["<c-n>"] = cmp.mapping.select_next_item(),
+            ["<c-p>"] = cmp.mapping.select_prev_item(),
             ["<c-f>"] = cmp.mapping.scroll_docs(4),
             ["<c-b>"] = cmp.mapping.scroll_docs(-4),
             ["<c-e>"] = cmp.mapping.abort(),
-            ["<c-space>"] = cmp.mapping.complete(),
-            ["<cr>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+            ["<cr>"] = cmp.mapping.confirm(),
         })
         cmp.setup(opts)
     end,

@@ -10,7 +10,6 @@ return {
         { "<leader>fF", ":Files<cr>", desc = "find files in current dir" },
         { "<leader>fg", ":PRG<cr>", desc = "grep files" },
         { "<leader>fG", ":RG<cr>", desc = "grep files in current dir" },
-        { "<c-r>", ":History:<cr>", mode = "c", desc = "old commands" },
     },
     config = function()
         vim.g.fzf_layout = {
