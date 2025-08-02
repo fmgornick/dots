@@ -1,32 +1,28 @@
 local utils = require("fmgornick.core.utils")
-local map = utils.keymap
 
 --leader commands
-map("n", "<leader>d", utils.toggle_diff, { desc = "diff windows" })
-map("n", "<leader>h", ":noh<cr>", { desc = "no highlight" })
-map("n", "<leader>r", ":e!<cr>", { desc = "reset to last saved change" })
-map("n", "<leader>R", ":set relativenumber!<cr>", { desc = "toggle relative number" })
+vim.keymap.set("n", "<leader>d", utils.toggle_diff, { desc = "diff windows" })
+vim.keymap.set("n", "<leader>h", ":nohlsearch<cr>", { desc = "no highlight" })
+vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
+vim.keymap.set("n", "<leader>R", ":set relativenumber!<cr>", { desc = "toggle relative number" })
+
+-- lsp commands
+vim.keymap.set("n", "grl", vim.diagnostic.setloclist, { desc = "vim.diagnostic.setloclist()" })
+vim.keymap.set("n", "grq", vim.diagnostic.setqflist, { desc = "vim.diagnostic.setqflist()" })
+vim.keymap.set("n", "grd", vim.lsp.buf.declaration, { desc = "vim.lsp.buf.declaration()" })
+vim.keymap.set("n", "<c-j>", "<c-]>", { desc = "jump to definition of keyword under cursor" })
+vim.keymap.set("n", "<c-k>", "<c-t>", { desc = "jump to [count] older entry in tag stack" })
 
 -- move visual blocks better
-map("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
-map("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
-map("v", "<", "<gv", { desc = "move block left" })
-map("v", ">", ">gv", { desc = "move block right" })
-
--- emacs keybinds
-map({ "n", "i", "v" }, "<c-n>", "<down>")
-map({ "n", "i", "v" }, "<c-p>", "<up>")
-map({ "n", "i", "v" }, "<c-f>", "<right>")
-map({ "n", "i", "v" }, "<c-b>", "<left>")
-map({ "n", "i", "v" }, "<m-f>", "<s-right>")
-map({ "n", "i", "v" }, "<m-b>", "<s-left>")
-map({ "i", "v" }, "<c-a>", "<home>")
-map({ "i", "v" }, "<c-e>", "<end>")
+vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
+vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
+vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
+vim.keymap.set("v", "L", ">gv", { desc = "move block right" })
 
 -- random
-map("n", "<M-LeftMouse>", "<LeftMouse>", { desc = "click link" })
-map("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
-map("n", "<c-s>", ":noa w<cr>", { desc = "no format save" })
-map("n", "<c-w>t", "<c-w>T", { desc = "move to new tab" })
-map("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
-map("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })
+vim.keymap.set("n", "<M-LeftMouse>", "<LeftMouse>", { desc = "click link" })
+vim.keymap.set("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
+vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "no format save" })
+vim.keymap.set("n", "<c-w>t", "<c-w>T", { desc = "move to new tab" })
+vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
+vim.keymap.set("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })

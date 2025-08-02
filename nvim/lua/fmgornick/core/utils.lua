@@ -12,15 +12,6 @@ local function match(dir, pattern)
     end
 end
 
-M.keymap = function(mode, lhs, rhs, opts)
-    local options = { noremap = true, silent = true }
-    if opts then
-        if opts.desc then opts.desc = opts.desc end
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.keymap.set(mode, lhs, rhs, options)
-end
-
 -- search up through project for specific project defining files / dirs
 M.get_root = function()
     local root = vim.lsp.buf.list_workspace_folders()[1]
@@ -67,16 +58,6 @@ M.toggle_diff = function()
     vim.api.nvim_set_current_win(other_window)
     vim.cmd(diff_command)
     vim.api.nvim_set_current_win(this_window)
-end
-
--- lsp diagnostic jump helper commands
-M.next_diagnostic = function() vim.diagnostic.jump({ count = 1, float = true }) end
-M.prev_diagnostic = function() vim.diagnostic.jump({ count = -1, float = true }) end
-
--- turn off lsp snippet highlighting
-M.disable_snippet = function()
-    vim.snippet.stop()
-    vim.api.nvim_input("<esc>")
 end
 
 return M
