@@ -69,10 +69,6 @@ M.toggle_diff = function()
     vim.api.nvim_set_current_win(this_window)
 end
 
--- lsp diagnostic jump helper commands
-M.next_diagnostic = function() vim.diagnostic.jump({ count = 1, float = true }) end
-M.prev_diagnostic = function() vim.diagnostic.jump({ count = -1, float = true }) end
-
 -- turn off lsp snippet highlighting
 M.disable_snippet = function()
     vim.snippet.stop()
