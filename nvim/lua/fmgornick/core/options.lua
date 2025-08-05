@@ -1,9 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-vim.opt.autochdir = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt = { "fuzzy", "menuone", "noselect" }
 vim.opt.expandtab = true
+vim.opt.ignorecase = true
 vim.opt.inccommand = "split"
 vim.opt.laststatus = 3
 vim.opt.mousescroll = { "ver:1", "hor:1" }

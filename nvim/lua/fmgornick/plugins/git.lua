@@ -67,7 +67,5 @@ return {
                 },
             },
         },
-        -- :GDiff depends on fzf plugin enabled
-        keys = { { "<leader>gd", ":GDiff<cr>", desc = "git diff", mode = "n" } },
     },
 }
