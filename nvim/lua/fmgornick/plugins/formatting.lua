@@ -38,6 +38,7 @@ return {
             latexindent = { prepend_args = { "-y=defaultIndent:' '" } },
             stylua = {
                 prepend_args = {
+                    "--column-width=200",
                     "--collapse-simple-statement=Always",
                     "--indent-type=Spaces",
                     "--quote-style=AutoPreferDouble",

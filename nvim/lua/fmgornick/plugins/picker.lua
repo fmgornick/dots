@@ -31,13 +31,14 @@ return {
                 },
             },
         })
-        vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "find files" })
-        vim.keymap.set("n", "<leader>fc", fzf.config_files, { desc = "config files" })
-        vim.keymap.set("n", "<leader>fg", fzf.live_grep_native, { desc = "grep files" })
-        vim.keymap.set("n", "<leader>fo", fzf.oldfiles, { desc = "old files" })
         vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "buffers" })
-        vim.keymap.set("n", "<leader>fq", fzf.quickfix, { desc = "quickfix list" })
+        vim.keymap.set("n", "<leader>fc", fzf.config_files, { desc = "config files" })
+        vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "files" })
+        vim.keymap.set("n", "<leader>fg", fzf.live_grep_native, { desc = "grep" })
+        vim.keymap.set("n", "<leader>fk", fzf.keymaps, { desc = "keymaps" })
         vim.keymap.set("n", "<leader>fl", fzf.loclist, { desc = "location list" })
+        vim.keymap.set("n", "<leader>fo", fzf.oldfiles, { desc = "old files" })
+        vim.keymap.set("n", "<leader>fq", fzf.quickfix, { desc = "quickfix list" })
         vim.keymap.set("n", "<leader>fr", fzf.resume, { desc = "resume search" })
         vim.keymap.set("n", "<leader>gd", fzf.git_branches, { desc = "git diff" })
     end,

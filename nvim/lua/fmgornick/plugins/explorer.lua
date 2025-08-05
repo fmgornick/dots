@@ -2,31 +2,17 @@ return {
     "stevearc/oil.nvim",
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = { { "<leader>e", "<cmd>Oil<cr>", desc = "file explorer", mode = { "n", "v" } } },
-    opts = {
-        cleanup_delay_ms = false,
-        default_file_explorer = true,
-        prompt_save_on_select_new_entry = true,
-        skip_confirm_for_simple_edits = true,
-        use_default_keymaps = false,
-        view_options = { show_hidden = true },
-        keymaps = {
-            ["g?"] = { "actions.show_help", mode = "n" },
-            ["<cr>"] = "actions.select",
-            ["<c-s>"] = { "actions.select", opts = { vertical = true } },
-            ["<c-h>"] = { "actions.select", opts = { horizontal = true } },
-            ["<c-t>"] = { "actions.select", opts = { tab = true } },
-            ["<c-p>"] = "actions.preview",
-            ["<c-c>"] = { "actions.close", mode = "n" },
-            ["<c-l>"] = "actions.refresh",
-            ["-"] = { "actions.parent", mode = "n" },
-            ["_"] = { "actions.open_cwd", mode = "n" },
-            ["`"] = { "actions.cd", mode = "n" },
-            ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
-            ["gs"] = { "actions.change_sort", mode = "n" },
-            ["gx"] = "actions.open_external",
-            ["g."] = { "actions.toggle_hidden", mode = "n" },
-            ["g\\"] = { "actions.toggle_trash", mode = "n" },
-        },
-    },
+    config = function()
+        local oil = require("oil")
+        oil.setup({
+            cleanup_delay_ms = false,
+            default_file_explorer = true,
+            prompt_save_on_select_new_entry = true,
+            skip_confirm_for_simple_edits = true,
+            view_options = {
+                show_hidden = true,
+            },
+        })
+        vim.keymap.set({ "n", "v" }, "<leader>e", oil.open, { desc = "file explorer" })
+    end,
 }
