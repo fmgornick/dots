@@ -48,16 +48,5 @@ return {
             group = vim.api.nvim_create_augroup("UserLspConfig", {}),
             callback = function(env) vim.bo[env.buf].omnifunc = "v:lua.vim.lsp.omnifunc" end,
         })
-
-        vim.diagnostic.config({
-            signs = {
-                text = {
-                    [vim.diagnostic.severity.ERROR] = "",
-                    [vim.diagnostic.severity.WARN] = "",
-                    [vim.diagnostic.severity.INFO] = "",
-                    [vim.diagnostic.severity.HINT] = "",
-                },
-            },
-        })
     end,
 }

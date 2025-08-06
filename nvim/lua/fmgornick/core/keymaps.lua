@@ -7,11 +7,12 @@ vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved cha
 vim.keymap.set("n", "<leader>R", ":set relativenumber!<cr>", { desc = "toggle relative number" })
 
 -- lsp commands
-vim.keymap.set("n", "grl", vim.diagnostic.setloclist, { desc = "vim.diagnostic.setloclist()" })
-vim.keymap.set("n", "grq", vim.diagnostic.setqflist, { desc = "vim.diagnostic.setqflist()" })
-vim.keymap.set("n", "grd", vim.lsp.buf.declaration, { desc = "vim.lsp.buf.declaration()" })
+vim.keymap.set("n", "grl", utils.setloclist, { desc = "local list" })
+vim.keymap.set("n", "grq", utils.setqflist, { desc = "quickfix list" })
+vim.keymap.set("n", "grd", vim.lsp.buf.declaration, { desc = "jump to declaration" })
 vim.keymap.set("n", "<c-j>", "<c-]>", { desc = "jump to definition of keyword under cursor" })
 vim.keymap.set("n", "<c-k>", "<c-t>", { desc = "jump to [count] older entry in tag stack" })
+vim.keymap.set("n", "<c-w><c-j>", "<c-w><c-]>", { desc = "jump to definition in split" })
 
 -- move visual blocks better
 vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
@@ -26,3 +27,4 @@ vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "no format save" })
 vim.keymap.set("n", "<c-w>t", "<c-w>T", { desc = "move to new tab" })
 vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
 vim.keymap.set("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })
+vim.keymap.set("n", "gcd", utils.reroot, { desc = "re-root working directory" })

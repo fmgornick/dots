@@ -1,5 +1,38 @@
 local M = {}
 
+-- cd to current buffer root-dir
+M.reroot = function()
+    local root = vim.lsp.buf.list_workspace_folders()[1]
+    if root == nil then
+        local markers = { ".git", ".hg", ".svn" }
+        root = vim.fs.root(0, markers)
+    end
+    if root ~= nil then
+        vim.cmd("cd" .. root)
+        vim.print("new working directory: " .. root)
+    end
+end
+
+-- set quickfix list with warning severity
+M.setqflist = function()
+    vim.diagnostic.setqflist({
+        severity = {
+            vim.diagnostic.severity.WARN,
+            vim.diagnostic.severity.ERROR,
+        },
+    })
+end
+
+-- set location list with warning severity
+M.setloclist = function()
+    vim.diagnostic.setloclist({
+        severity = {
+            vim.diagnostic.severity.WARN,
+            vim.diagnostic.severity.ERROR,
+        },
+    })
+end
+
 -- toggle diff view of two windows
 M.toggle_diff = function()
     local windows = vim.api.nvim_list_wins()
