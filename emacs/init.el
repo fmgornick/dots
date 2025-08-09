@@ -12,7 +12,6 @@
 (setq recentf-save-file "~/.cache/emacs/recentf")                             ;; recently visited files
 (setq save-place-file "~/.cache/emacs/places")                                ;; cursor positions
 (setq transient-history-file "~/.cache/emacs/transient/history.el")           ;; transient history file
-;; (add-to-list 'exec-path "/opt/homebrew/bin")                                  ;; extra executable paths
 
 ;;
 ;; basic mode preferences
@@ -32,7 +31,7 @@
 (setq-default indent-tabs-mode nil)                          ;; spaces instead of tabs
 (setq inhibit-startup-message t)                             ;; no splash screen
 (setq ring-bell-function 'ignore)                            ;; disable bell
-(setq-default truncate-lines t)
+(setq-default truncate-lines t)                              ;; no wrapping lines
 (setq custom-safe-themes t)                                  ;; trust themes i've installed
 (setq ido-enable-flex-matching t)                            ;; allow partial matching
 (setq ido-everywhere t)                                      ;; use ido for most places
@@ -44,6 +43,7 @@
 ;; basic keymaps
 ;;
 (global-set-key (kbd "s-!") 'shell-command)
+(global-set-key (kbd "C-.") 'repeat)
 
 ;;
 ;; gnu/melpa package manager init
@@ -53,6 +53,7 @@
       '(("gnu" . "https://elpa.gnu.org/packages/")
         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
+(package-refresh-contents)
 (unless package-archive-contents (package-refresh-contents))
 
 ;;
@@ -101,13 +102,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(company exec-path-from-shell expand-region go-mode lsp-mode magit
-             multiple-cursors)))
+ '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(put 'scroll-left 'disabled nil)
