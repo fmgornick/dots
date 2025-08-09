@@ -5,8 +5,7 @@ return {
     config = function()
         local cmp = require("cmp")
         cmp.setup({
-            completion = { completeopt = "menu,menuone,select" },
-            experimental = { ghost_text = true },
+            completion = { completeopt = "fuzzy,menuone,select" },
             sources = {
                 { name = "nvim_lsp" },
                 { name = "buffer" },
