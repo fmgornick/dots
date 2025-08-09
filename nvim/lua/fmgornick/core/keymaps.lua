@@ -10,9 +10,6 @@ vim.keymap.set("n", "<leader>R", ":set relativenumber!<cr>", { desc = "toggle re
 vim.keymap.set("n", "grl", utils.setloclist, { desc = "local list" })
 vim.keymap.set("n", "grq", utils.setqflist, { desc = "quickfix list" })
 vim.keymap.set("n", "grd", vim.lsp.buf.declaration, { desc = "jump to declaration" })
-vim.keymap.set("n", "<c-j>", "<c-]>", { desc = "jump to definition of keyword under cursor" })
-vim.keymap.set("n", "<c-k>", "<c-t>", { desc = "jump to [count] older entry in tag stack" })
-vim.keymap.set("n", "<c-w><c-j>", "<c-w><c-]>", { desc = "jump to definition in split" })
 
 -- move visual blocks better
 vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
