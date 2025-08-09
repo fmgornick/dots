@@ -6,6 +6,15 @@ return {
     config = function()
         require("nvim-treesitter.install").update({ with_sync = true })
         require("nvim-treesitter.configs").setup({
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<cr>",
+                    scope_incremental = "<cr>",
+                    node_incremental = "<tab>",
+                    node_decremental = "<s-tab>",
+                },
+            },
             sync_install = false,
             auto_install = true,
             highlight = {
