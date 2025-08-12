@@ -1,17 +1,18 @@
 ;;
 ;; default paths
 ;;
-(setq auto-save-file-name-transforms `((".*" "~/.cache/emacs/autosaves/" t))) ;; #autosave# files
-(setq auto-save-list-file-prefix "~/.cache/emacs/autosaves/")                 ;; autosave file prefixes
-(setq backup-directory-alist `(("." . "~/.cache/emacs/backups")))             ;; backup~ files
-(setq ido-save-directory-list-file "~/.cache/emacs/ido.last")                 ;; ido selections
-(setq lock-file-name-transforms '((".*" "~/.cache/emacs/locs/\\1" t)))        ;; #lock files
-(setq lsp-session-file "~/.cache/emacs/lsp-session")                          ;; lsp session file
-(setq mc/list-file "~/.cache/emacs/mc-lists.el")                              ;; multi-cursor preferences
-(setq package-user-dir "~/.local/share/emacs/packages")                       ;; packages directory
-(setq recentf-save-file "~/.cache/emacs/recentf")                             ;; recently visited files
-(setq save-place-file "~/.cache/emacs/places")                                ;; cursor positions
-(setq transient-history-file "~/.cache/emacs/transient/history.el")           ;; transient history file
+(setq auto-save-file-name-transforms `((".*" "~/.cache/emacs/autosaves/" t)))   ;; #autosave# files
+(setq auto-save-list-file-prefix "~/.cache/emacs/autosaves/")                   ;; autosave file prefixes
+(setq backup-directory-alist `(("." . "~/.cache/emacs/backups")))               ;; backup~ files
+(setq ido-save-directory-list-file "~/.cache/emacs/ido.last")                   ;; ido selections
+(setq lock-file-name-transforms '((".*" "~/.cache/emacs/locs/\\1" t)))          ;; #lock files
+(setq lsp-session-file "~/.cache/emacs/lsp-session")                            ;; lsp session file
+(setq mc/list-file "~/.cache/emacs/mc-lists.el")                                ;; multi-cursor preferences
+(setq package-user-dir "~/.local/share/emacs/packages")                         ;; packages directory
+(setq projectile-known-projects-file "~/.cache/emacs/projectile-bookmarks.eld") ;; projectile bookmarks
+(setq recentf-save-file "~/.cache/emacs/recentf")                               ;; recently visited files
+(setq save-place-file "~/.cache/emacs/places")                                  ;; cursor positions
+(setq transient-history-file "~/.cache/emacs/transient/history.el")             ;; transient history file
 
 ;;
 ;; basic mode preferences
@@ -35,7 +36,7 @@
 (setq custom-safe-themes t)                                  ;; trust themes i've installed
 (setq ido-enable-flex-matching t)                            ;; allow partial matching
 (setq ido-everywhere t)                                      ;; use ido for most places
-(set-frame-font "Hurmit Nerd Font Mono 13" nil t)            ;; default font
+(set-frame-font "Hurmit Nerd Font Mono 16" nil t)            ;; default font
 (global-display-line-numbers-mode t)                         ;; show line numbers
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; start in full-screen
 
@@ -59,10 +60,12 @@
 ;;
 ;; packages
 ;;
+
 ;; exec-path-from-shell
 (unless (package-installed-p 'exec-path-from-shell) (package-install 'exec-path-from-shell))
 (require 'exec-path-from-shell)
 (exec-path-from-shell-initialize)
+
 ;; multiple-cursors
 (unless (package-installed-p 'multiple-cursors) (package-install 'multiple-cursors))
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -86,6 +89,11 @@
 ;; magit
 (unless (package-installed-p 'magit) (package-install 'magit))
 
+;; projectile
+(unless (package-installed-p 'projectile) (package-install 'projectile))
+(projectile-mode 1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+
 ;;
 ;; theme (everforest)
 ;;
@@ -102,7 +110,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(auctex company exec-path-from-shell expand-region go-mode
+            gruvbox-theme latex-preview-pane lsp-mode magit
+            multiple-cursors nov pdf-tools projectile vterm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
