@@ -33,6 +33,8 @@ return {
             vim.keymap.set("n", "<leader>gS", gitsigns.stage_buffer, { desc = "stage buffer" })
             vim.keymap.set("n", "<leader>gt", gitsigns.toggle_current_line_blame, { desc = "toggle line blame" })
             vim.keymap.set("n", "<leader>gT", gitsigns.toggle_deleted, { desc = "toggle deleted" })
+            vim.keymap.set("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "unstage hunk" })
+            vim.keymap.set("n", "<leader>gU", gitsigns.reset_buffer_index, { desc = "unstage buffer" })
         end,
     },
     {

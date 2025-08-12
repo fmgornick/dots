@@ -1,7 +1,7 @@
 local utils = require("fmgornick.core.utils")
 
 --leader commands
-vim.keymap.set("n", "<leader>d", utils.toggle_diff, { desc = "diff windows" })
+vim.keymap.set("n", "<leader>d", utils.diffwindows, { desc = "diff windows" })
 vim.keymap.set("n", "<leader>h", ":nohlsearch<cr>", { desc = "no highlight" })
 vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
 vim.keymap.set("n", "<leader>R", ":set relativenumber!<cr>", { desc = "toggle relative number" })
@@ -25,3 +25,4 @@ vim.keymap.set("n", "<c-w>t", "<c-w>T", { desc = "move to new tab" })
 vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
 vim.keymap.set("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })
 vim.keymap.set("n", "gcd", utils.reroot, { desc = "re-root working directory" })
+vim.keymap.set("n", "gl", utils.logfile, { desc = "open lsp log file" })

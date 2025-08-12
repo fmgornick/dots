@@ -13,7 +13,6 @@ return {
                 },
             },
         },
-        hls = {},
         jsonls = {},
         kotlin_lsp = {},
         lua_ls = {
@@ -33,7 +32,7 @@ return {
                 },
             },
         },
-        pyright = { cmd = { "basedpyright-langserver", "--stdio" } },
+        basedpyright = {},
         rust_analyzer = {},
         texlab = { settings = { texlab = { build = { onSave = true } } } },
         yamlls = { settings = { yaml = { keyOrdering = false } } },

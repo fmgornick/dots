@@ -33,8 +33,11 @@ M.setloclist = function()
     })
 end
 
+-- open lsp log
+M.logfile = function() vim.cmd("edit" .. vim.lsp.get_log_path()) end
+
 -- toggle diff view of two windows
-M.toggle_diff = function()
+M.diffwindows = function()
     local windows = vim.api.nvim_list_wins()
     if #windows ~= 2 then
         vim.notify("must be exactly two windows to diff", vim.log.levels.WARN)
