@@ -8,7 +8,6 @@ return {
             cpp = { "clang_format" },
             css = { "prettierd" },
             go = { "gofmt", "goimports" },
-            glsl = { "clang_format" },
             graphql = { "prettierd" },
             haskell = { "fourmolu" },
             html = { "prettierd" },
