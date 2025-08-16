@@ -2,7 +2,6 @@ local utils = require("fmgornick.core.utils")
 
 --leader commands
 vim.keymap.set("n", "<leader>d", utils.diffwindows, { desc = "diff windows" })
-vim.keymap.set("n", "<leader>h", ":nohlsearch<cr>", { desc = "no highlight" })
 vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
 vim.keymap.set("n", "<leader>R", ":set relativenumber!<cr>", { desc = "toggle relative number" })
 
