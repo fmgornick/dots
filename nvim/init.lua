@@ -4,6 +4,7 @@
 vim.g.mapleader       = " "
 vim.g.maplocalleader  = "\\"
 vim.opt.clipboard     = "unnamedplus"
+vim.opt.complete      = "o,t,.,w,b,u"
 vim.opt.completeopt   = { "fuzzy", "menuone", "noselect" }
 vim.opt.expandtab     = true
 vim.opt.ignorecase    = true
@@ -41,6 +42,7 @@ vim.pack.add(
         { name = "theme",      src = "https://github.com/sainnhe/everforest" },
         { name = "tmux",       src = "https://github.com/alexghergh/nvim-tmux-navigation" },
         { name = "treesitter", src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+        { name = "vimtex",     src = "https://github.com/lervag/vimtex" },
     },
     {
         confirm = false,
