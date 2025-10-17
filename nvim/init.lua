@@ -30,25 +30,22 @@ vim.opt.writebackup   = false
 --------------
 -- PACKAGES --
 --------------
-vim.pack.add(
-    {
-        { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
-        { name = "autopairs",  src = "https://github.com/windwp/nvim-autopairs" },
-        { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
-        { name = "fugitive",   src = "https://github.com/tpope/vim-fugitive" },
-        { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
-        { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
-        { name = "surround",   src = "https://github.com/tpope/vim-surround" },
-        { name = "theme",      src = "https://github.com/sainnhe/everforest" },
-        { name = "tmux",       src = "https://github.com/alexghergh/nvim-tmux-navigation" },
-        { name = "treesitter", src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-        { name = "vimtex",     src = "https://github.com/lervag/vimtex" },
-    },
-    {
-        confirm = false,
-        start = true,
-    }
-)
+vim.pack.add({
+    { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
+    { name = "autopairs",  src = "https://github.com/windwp/nvim-autopairs" },
+    { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
+    { name = "fugitive",   src = "https://github.com/tpope/vim-fugitive" },
+    { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
+    { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
+    { name = "surround",   src = "https://github.com/tpope/vim-surround" },
+    { name = "theme",      src = "https://github.com/sainnhe/everforest" },
+    { name = "tmux",       src = "https://github.com/alexghergh/nvim-tmux-navigation" },
+    { name = "treesitter", src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+    { name = "vimtex",     src = "https://github.com/lervag/vimtex" },
+}, {
+    confirm = false,
+    start = true,
+})
 
 --------------------------
 -- PACKAGE CONFIG/SETUP --
@@ -115,9 +112,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.hl.on_yank({ higroup = "Search", timeout = 100 })
-    end,
+    callback = function() vim.hl.on_yank({ higroup = "Search", timeout = 100 }) end,
 })
 
 -- wrap lines in markdown/latex buffers
@@ -125,6 +120,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("SetWrap", { clear = true }),
     pattern = { "*.md", "*.tex" },
     command = "setlocal wrap linebreak nolist",
+})
+
+-- force close any modified scratch buffers
+vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
+    command = "if bufname('%') ==# '' | setlocal nomodified | endif"
 })
 
 ----------------------
@@ -199,7 +199,7 @@ vim.keymap.set("n", "<M-l>", ntnav.NvimTmuxNavigateRight, { desc = "nvim/tmux pa
 
 -- misc keymap helpers
 vim.keymap.set("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
-vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "no format save" })
+vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatting" })
 vim.keymap.set("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })
 vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
