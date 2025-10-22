@@ -1,0 +1,32 @@
+# settings
+command                       = "/opt/homebrew/bin/tmux -2 new-session -A -s alacritty"
+confirm-close-surface         = false
+cursor-style                  = block
+cursor-style-blink            = false
+custom-shader-animation       = always
+font-family                   = "Hurmit Nerd Font Mono"
+fullscreen                    = true
+quit-after-last-window-closed = true
+
+# theme
+background           = #333C43
+foreground           = #D3C6AA
+cursor-color         = #5D6B66
+selection-background = #5C3F4F
+selection-foreground = #D3C6AA
+palette              = 0=#293136
+palette              = 1=#E67E80
+palette              = 2=#A7C080
+palette              = 3=#DBBC7F
+palette              = 4=#7FBBB3
+palette              = 5=#D699B6
+palette              = 6=#83C092
+palette              = 7=#555F66
+palette              = 8=#434F55
+palette              = 9=#5C3F4F
+palette              = 10=#48584E
+palette              = 11=#55544A
+palette              = 12=#3F5865
+palette              = 13=#59464c
+palette              = 14=#83C092
+palette              = 15=#D3C6AA

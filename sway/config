@@ -1,14 +1,105 @@
-# Default font
+# default font
 font pango:Hurmit Nerd Font Propo Regular 10
 
-### Variables
-set  $mod          Mod4
-set  $left         h
-set  $down         j
-set  $up           k
-set  $right        l
-set  $term         alacritty
-set  $menu         fuzzel
+set  $mod    Mod4
+set  $left   h
+set  $down   j
+set  $up     k
+set  $right  l
+
+# key bindings
+bindsym  $mod+q             kill
+bindsym  $mod+Shift+c       reload
+bindsym  $mod+Shift+e       exec swaymsg exit
+bindsym  $mod+Return        exec alacritty
+bindsym  $mod+d             exec fuzzel
+bindsym  $mod+f             fullscreen
+bindsym  $mod+e             layout toggle split
+bindsym  $mod+s             layout stacking
+bindsym  $mod+w             layout tabbed
+bindsym  $mod+space         focus mode_toggle
+bindsym  $mod+Shift+space   floating toggle
+bindsym  $mod+minus         scratchpad show
+bindsym  $mod+b             splith
+bindsym  $mod+v             splitv
+bindsym  $mod+r             mode "resize"
+bindsym  $mod+$left         focus left
+bindsym  $mod+$down         focus down
+bindsym  $mod+$up           focus up
+bindsym  $mod+$right        focus right
+bindsym  $mod+Left          focus left
+bindsym  $mod+Down          focus down
+bindsym  $mod+Up            focus up
+bindsym  $mod+Right         focus right
+bindsym  $mod+p             focus parent
+bindsym  $mod+c             focus child
+bindsym  $mod+Shift+$left   move left
+bindsym  $mod+Shift+$down   move down
+bindsym  $mod+Shift+$up     move up
+bindsym  $mod+Shift+$right  move right
+bindsym  $mod+Shift+Left    move left
+bindsym  $mod+Shift+Down    move down
+bindsym  $mod+Shift+Up      move up
+bindsym  $mod+Shift+Right   move right
+bindsym  $mod+Shift+minus   move scratchpad
+bindsym  $mod+1             workspace number 1
+bindsym  $mod+2             workspace number 2
+bindsym  $mod+3             workspace number 3
+bindsym  $mod+4             workspace number 4
+bindsym  $mod+5             workspace number 5
+bindsym  $mod+6             workspace number 6
+bindsym  $mod+7             workspace number 7
+bindsym  $mod+8             workspace number 8
+bindsym  $mod+9             workspace number 9
+bindsym  $mod+0             workspace number 10
+bindsym  $mod+bracketleft   workspace prev
+bindsym  $mod+bracketright  workspace next
+bindsym  $mod+Shift+1       move container to workspace number 1
+bindsym  $mod+Shift+2       move container to workspace number 2
+bindsym  $mod+Shift+3       move container to workspace number 3
+bindsym  $mod+Shift+4       move container to workspace number 4
+bindsym  $mod+Shift+5       move container to workspace number 5
+bindsym  $mod+Shift+6       move container to workspace number 6
+bindsym  $mod+Shift+7       move container to workspace number 7
+bindsym  $mod+Shift+8       move container to workspace number 8
+bindsym  $mod+Shift+9       move container to workspace number 9
+bindsym  $mod+Shift+0       move container to workspace number 10
+
+mode "resize" {
+    bindsym  $left   resize shrink width 10px
+    bindsym  $down   resize grow height 10px
+    bindsym  $up     resize shrink height 10px
+    bindsym  $right  resize grow width 10px
+    bindsym  Left    resize shrink width 10px
+    bindsym  Down    resize grow height 10px
+    bindsym  Up      resize shrink height 10px
+    bindsym  Right   resize grow width 10px
+    bindsym  Return  mode "default"
+    bindsym  Escape  mode "default"
+}
+
+bindsym  --locked XF86AudioMute          exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym  --locked XF86AudioLowerVolume   exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym  --locked XF86AudioRaiseVolume   exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym  --locked XF86AudioMicMute       exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+bindsym  --locked XF86MonBrightnessDown  exec ddcutil --bus=10 setvcp 10 - 5
+bindsym  --locked XF86MonBrightnessUp    exec ddcutil --bus=10 setvcp 10 + 5
+bindsym           Print                  exec grim
+
+# input config
+input type:keyboard {
+    repeat_delay  250
+    repeat_rate   40
+    xkb_options   caps:escape
+}
+input type:pointer {
+    accel_profile "flat"
+    pointer_accel -0.3
+}
+seat * hide_cursor when-typing enable
+floating_modifier $mod normal
+
+# theme
 set  $bg_dim       "#293136"
 set  $bg0          "#333c43"
 set  $bg1          "#3a464c"
@@ -36,163 +127,13 @@ set  $gray0        "#7a8478"
 set  $gray1        "#859289"
 set  $gray2        "#9da9a0"
 
-
-### Output configuration (`man 5 sway-output`)
-# background color
 output * background $bg0 solid_color
-# pixel border size
 default_border pixel 1
-# window border colors
 client.focused           $bg5  $bg5  $fg      $bg5  $bg5
 client.focused_inactive  $bg3  $bg3  $fg      $bg3  $bg3
 client.unfocused         $bg1  $bg1  $fg      $bg1  $bg1
 client.urgent            $red  $red  $bg_dim  $red  $red
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration (`man 5 sway-input`)
-input type:keyboard {
-    repeat_delay  250
-    repeat_rate   40
-    xkb_options   caps:escape
-}
-input type:pointer {
-    accel_profile "flat"
-    pointer_accel -0.3
-}
-seat * hide_cursor when-typing enable
-
-### Key bindings
-#
-# Basics:
-#
-    bindsym  $mod+Return   exec $term
-    bindsym  $mod+d        exec $menu
-    bindsym  $mod+q        kill
-    bindsym  $mod+Shift+c  reload
-    bindsym  $mod+Shift+e  exec swaymsg exit
-
-    floating_modifier $mod normal
-
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym  $mod+$left         focus  left
-    bindsym  $mod+$down         focus  down
-    bindsym  $mod+$up           focus  up
-    bindsym  $mod+$right        focus  right
-    bindsym  $mod+Left          focus  left
-    bindsym  $mod+Down          focus  down
-    bindsym  $mod+Up            focus  up
-    bindsym  $mod+Right         focus  right
-    bindsym  $mod+Shift+$left   move   left
-    bindsym  $mod+Shift+$down   move   down
-    bindsym  $mod+Shift+$up     move   up
-    bindsym  $mod+Shift+$right  move   right
-    bindsym  $mod+Shift+Left    move   left
-    bindsym  $mod+Shift+Down    move   down
-    bindsym  $mod+Shift+Up      move   up
-    bindsym  $mod+Shift+Right   move   right
-
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym  $mod+1  workspace  number  1
-    bindsym  $mod+2  workspace  number  2
-    bindsym  $mod+3  workspace  number  3
-    bindsym  $mod+4  workspace  number  4
-    bindsym  $mod+5  workspace  number  5
-    bindsym  $mod+6  workspace  number  6
-    bindsym  $mod+7  workspace  number  7
-    bindsym  $mod+8  workspace  number  8
-    bindsym  $mod+9  workspace  number  9
-    bindsym  $mod+0  workspace  number  10
-
-    # Move focused container to workspace
-    bindsym  $mod+Shift+1  move  container  to  workspace  number  1
-    bindsym  $mod+Shift+2  move  container  to  workspace  number  2
-    bindsym  $mod+Shift+3  move  container  to  workspace  number  3
-    bindsym  $mod+Shift+4  move  container  to  workspace  number  4
-    bindsym  $mod+Shift+5  move  container  to  workspace  number  5
-    bindsym  $mod+Shift+6  move  container  to  workspace  number  6
-    bindsym  $mod+Shift+7  move  container  to  workspace  number  7
-    bindsym  $mod+Shift+8  move  container  to  workspace  number  8
-    bindsym  $mod+Shift+9  move  container  to  workspace  number  9
-    bindsym  $mod+Shift+0  move  container  to  workspace  number  10
-
-    # Navigate between workspaces
-    bindsym $mod+bracketleft workspace prev
-    bindsym $mod+bracketright workspace next
-
-#
-# Layout stuff:
-#
-    bindsym  $mod+b            splith
-    bindsym  $mod+v            splitv
-    bindsym  $mod+f            fullscreen
-    bindsym  $mod+e            layout      toggle split
-    bindsym  $mod+s            layout      stacking
-    bindsym  $mod+w            layout      tabbed
-    bindsym  $mod+space        focus       mode_toggle
-    bindsym  $mod+Shift+space  floating    toggle
-    bindsym  $mod+a            focus       parent
-
-#
-# Scratchpad:
-#
-    bindsym  $mod+minus        scratchpad  show
-    bindsym  $mod+Shift+minus  move        scratchpad
-
-#
-# Resizing containers:
-#
-mode "resize" {
-    bindsym  $left   resize  shrink  width   10px
-    bindsym  $down   resize  grow    height  10px
-    bindsym  $up     resize  shrink  height  10px
-    bindsym  $right  resize  grow    width   10px
-    bindsym  Left    resize  shrink  width   10px
-    bindsym  Down    resize  grow    height  10px
-    bindsym  Up      resize  shrink  height  10px
-    bindsym  Right   resize  grow    width   10px
-
-    bindsym  Return  mode  "default"
-    bindsym  Escape  mode  "default"
-}
-bindsym $mod+r mode "resize"
-
-#
-# Utilities:
-#
-    # volume
-    bindsym  --locked XF86AudioMute         exec  pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym  --locked XF86AudioLowerVolume  exec  pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym  --locked XF86AudioRaiseVolume  exec  pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    bindsym  --locked XF86AudioMicMute      exec  pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-
-    # brightness (hopefully i can find a better solution than ddcutil in the future)
-    bindsym  --locked XF86MonBrightnessDown  exec  ddcutil --bus=10 setvcp 10 - 5
-    bindsym  --locked XF86MonBrightnessUp    exec  ddcutil --bus=10 setvcp 10 + 5
-
-    # screenshots
-    bindsym Print exec grim
-
-#
-# Status Bar (`man 5 sway-bar`)
-#
 bar {
     position top
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done

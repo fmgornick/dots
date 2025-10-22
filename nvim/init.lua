@@ -15,6 +15,7 @@ vim.opt.shiftwidth    = 4
 vim.opt.showcmd       = false
 vim.opt.showtabline   = 0
 vim.opt.signcolumn    = "number"
+vim.opt.smartcase     = true
 vim.opt.smartindent   = true
 vim.opt.softtabstop   = 4
 vim.opt.splitbelow    = true
@@ -115,11 +116,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.hl.on_yank({ higroup = "Search", timeout = 100 }) end,
 })
 
--- wrap lines in markdown/latex buffers
+-- spell check and wrap lines in markdown/latex buffers
 vim.api.nvim_create_autocmd("BufEnter", {
     group = vim.api.nvim_create_augroup("SetWrap", { clear = true }),
     pattern = { "*.md", "*.tex" },
-    command = "setlocal wrap linebreak nolist",
+    command = "setlocal spell wrap linebreak nolist",
 })
 
 -- force close any modified scratch buffers
@@ -177,7 +178,7 @@ vim.keymap.set("n", "<leader>fl", fzf.loclist, { desc = "location list" })
 vim.keymap.set("n", "<leader>fo", fzf.oldfiles, { desc = "old files" })
 vim.keymap.set("n", "<leader>fq", fzf.quickfix, { desc = "quickfix list" })
 vim.keymap.set("n", "<leader>fr", fzf.resume, { desc = "resume search" })
-vim.keymap.set("n", "<leader>gd", fzf.git_branches, { desc = "git diff" })
+vim.keymap.set("n", "<leader>gB", fzf.git_branches, { desc = "git branches" })
 
 -- git commands
 vim.keymap.set("n", "<leader>gb", ":Git blame<cr>", { desc = "blame buffer" })
