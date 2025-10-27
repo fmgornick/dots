@@ -6,7 +6,7 @@ normal      = { family = "Hurmit Nerd Font Propo", style = "Regular"     }
 bold        = { family = "Hurmit Nerd Font Propo", style = "Bold"        }
 italic      = { family = "Hurmit Nerd Font Propo", style = "Italic"      }
 bold_italic = { family = "Hurmit Nerd Font Propo", style = "Bold Italic" }
-size        = 12
+size        = 10
 
 [keyboard]
 bindings = [

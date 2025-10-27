@@ -94,7 +94,7 @@ input type:keyboard {
 }
 input type:pointer {
     accel_profile "flat"
-    pointer_accel -0.3
+    pointer_accel -0.5
 }
 seat * hide_cursor when-typing enable
 floating_modifier $mod normal
