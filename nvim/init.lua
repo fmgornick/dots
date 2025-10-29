@@ -14,7 +14,7 @@ vim.opt.number        = true
 vim.opt.shiftwidth    = 4
 vim.opt.showcmd       = false
 vim.opt.showtabline   = 0
-vim.opt.signcolumn    = "number"
+vim.opt.signcolumn    = "yes"
 vim.opt.smartcase     = true
 vim.opt.smartindent   = true
 vim.opt.softtabstop   = 4
@@ -35,8 +35,8 @@ vim.pack.add({
     { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
     { name = "autopairs",  src = "https://github.com/windwp/nvim-autopairs" },
     { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
-    { name = "fugitive",   src = "https://github.com/tpope/vim-fugitive" },
     { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
+    { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
     { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
     { name = "surround",   src = "https://github.com/tpope/vim-surround" },
     { name = "theme",      src = "https://github.com/sainnhe/everforest" },
@@ -178,12 +178,20 @@ vim.keymap.set("n", "<leader>fl", fzf.loclist, { desc = "location list" })
 vim.keymap.set("n", "<leader>fo", fzf.oldfiles, { desc = "old files" })
 vim.keymap.set("n", "<leader>fq", fzf.quickfix, { desc = "quickfix list" })
 vim.keymap.set("n", "<leader>fr", fzf.resume, { desc = "resume search" })
-vim.keymap.set("n", "<leader>gB", fzf.git_branches, { desc = "git branches" })
 
 -- git commands
-vim.keymap.set("n", "<leader>gb", ":Git blame<cr>", { desc = "blame buffer" })
-vim.keymap.set("n", "<leader>gh", ":Git difftool HEAD<cr>", { desc = "navigate uncommitted hunks" })
-vim.keymap.set("n", "<leader>gd", ":Git difftool -y HEAD<cr>", { desc = "diff HEAD" })
+local git = require("gitsigns")
+vim.keymap.set("n", "]h", function() git.nav_hunk("next") end, { desc = "next hunk" })
+vim.keymap.set("n", "[h", function() git.nav_hunk("prev") end, { desc = "previous hunk" })
+vim.keymap.set("n", "[H", function() git.nav_hunk("first") end, { desc = "first hunk" })
+vim.keymap.set("n", "]H", function() git.nav_hunk("last") end, { desc = "last hunk" })
+vim.keymap.set("n", "<leader>gb", git.blame, { desc = "blame buffer" })
+vim.keymap.set("n", "<leader>gc", fzf.git_branches, { desc = "checkout branch" })
+vim.keymap.set("n", "<leader>gr", git.reset_hunk, { desc = "reset hunk" })
+vim.keymap.set("n", "<leader>gR", git.reset_buffer, { desc = "reset buffer" })
+vim.keymap.set("n", "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
+vim.keymap.set("n", "<leader>gS", git.stage_buffer, { desc = "stage buffer" })
+vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset buffer" })
 
 -- region movement helpers
 vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
