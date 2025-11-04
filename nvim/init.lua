@@ -35,6 +35,7 @@ vim.pack.add({
     { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
     { name = "autopairs",  src = "https://github.com/windwp/nvim-autopairs" },
     { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
+    { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
     { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
     { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
     { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
@@ -83,6 +84,19 @@ require("fzf-lua").setup({
         preview = { hidden = true },
     },
 })
+
+-- git diff view options: diffview
+require("diffview").setup({
+    use_icons = false,
+    file_panel = {
+        listing_style = "list",
+        win_config = {
+            position = "bottom",
+            height = 15
+        }
+    }
+})
+
 
 -- misc
 require("nvim-autopairs").setup()
@@ -159,6 +173,18 @@ local diffwindows = function()
     vim.api.nvim_set_current_win(this_window)
 end
 
+-- select branch to diff changes on with fzf
+local diffview_branches = function()
+    require('fzf-lua').git_branches({
+        cmd = "echo HEAD; git branch --all --format='%(refname:short)'",
+        actions = {
+            ['default'] = function(selected)
+                vim.cmd('DiffviewOpen ' .. selected[1])
+            end,
+        },
+    })
+end
+
 -------------
 -- KEYMAPS --
 -------------
@@ -187,6 +213,8 @@ vim.keymap.set("n", "[H", function() git.nav_hunk("first") end, { desc = "first 
 vim.keymap.set("n", "]H", function() git.nav_hunk("last") end, { desc = "last hunk" })
 vim.keymap.set("n", "<leader>gb", git.blame, { desc = "blame buffer" })
 vim.keymap.set("n", "<leader>gc", fzf.git_branches, { desc = "checkout branch" })
+vim.keymap.set("n", "<leader>gd", diffview_branches, { desc = "diff changes with selected branch" })
+vim.keymap.set("n", "<leader>gq", ":DiffviewClose<cr>", { desc = "close diff" })
 vim.keymap.set("n", "<leader>gr", git.reset_hunk, { desc = "reset hunk" })
 vim.keymap.set("n", "<leader>gR", git.reset_buffer, { desc = "reset buffer" })
 vim.keymap.set("n", "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
