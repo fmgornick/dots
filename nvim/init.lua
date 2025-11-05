@@ -39,11 +39,9 @@ vim.pack.add({
     { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
     { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
     { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
-    { name = "surround",   src = "https://github.com/tpope/vim-surround" },
     { name = "theme",      src = "https://github.com/sainnhe/everforest" },
     { name = "tmux",       src = "https://github.com/alexghergh/nvim-tmux-navigation" },
     { name = "treesitter", src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-    { name = "vimtex",     src = "https://github.com/lervag/vimtex" },
 }, {
     confirm = false,
     start = true,
@@ -52,7 +50,6 @@ vim.pack.add({
 --------------------------
 -- PACKAGE CONFIG/SETUP --
 --------------------------
-
 -- theme: everforest
 vim.g.everforest_background = "soft"
 vim.cmd.colorscheme("everforest")
@@ -60,10 +57,8 @@ vim.cmd.colorscheme("everforest")
 -- syntax highlighting: treesitter
 require("nvim-treesitter.configs").setup({
     auto_install = true,
-    highlight = {
-        enable = true,
-        disable = { "latex" },
-    },
+    highlight = { enable = true },
+    incremental_selection = { enable = true },
 })
 
 -- directory navigation: oil
@@ -97,14 +92,12 @@ require("diffview").setup({
     }
 })
 
-
 -- misc
 require("nvim-autopairs").setup()
 
 ------------------------
 -- AUTOMATIC COMMANDS --
 ------------------------
-
 -- lsp format
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("LspFormat", { clear = true }),
@@ -145,7 +138,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
 ----------------------
 -- HELPER FUNCTIONS --
 ----------------------
-
 -- toggle diff view of two windows
 local diffwindows = function()
     local windows = vim.api.nvim_list_wins()
@@ -188,10 +180,6 @@ end
 -------------
 -- KEYMAPS --
 -------------
-
--- directory navigation
-vim.keymap.set({ "n", "v" }, "<leader>e", require("oil").open, { desc = "file explorer" })
-
 -- file search/grepping
 local fzf = require("fzf-lua")
 fzf.config_files = function() fzf.files({ cwd = "~/.config" }) end
@@ -234,28 +222,26 @@ vim.keymap.set("n", "<M-j>", ntnav.NvimTmuxNavigateDown, { desc = "nvim/tmux pan
 vim.keymap.set("n", "<M-k>", ntnav.NvimTmuxNavigateUp, { desc = "nvim/tmux pane up" })
 vim.keymap.set("n", "<M-l>", ntnav.NvimTmuxNavigateRight, { desc = "nvim/tmux pane right" })
 
+-- lsp shortcuts
+vim.keymap.set("n", "gL", ":edit $NVIM_LOG_FILE<cr>", { desc = "open lsp log file" })
+vim.keymap.set("n", "grl", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
+vim.keymap.set("n", "grq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
+
 -- misc keymap helpers
 vim.keymap.set("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
 vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatting" })
-vim.keymap.set("n", "yc", "<esc>:let @+=expand('%:p')<cr>", { desc = "yank file path" })
+vim.keymap.set("n", "yc", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
 vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
 vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
 vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
 vim.keymap.set("n", "<leader>d", diffwindows, { desc = "toggle diff" })
+vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
-
--- lsp shortcuts
-local logfile = function() vim.cmd("edit" .. vim.lsp.log.get_filename()) end
-vim.keymap.set("n", "gL", logfile, { desc = "open lsp log file" })
-vim.keymap.set("n", "grd", vim.lsp.buf.declaration, { desc = "jump to declaration" })
-vim.keymap.set("n", "grl", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
-vim.keymap.set("n", "grq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
 
 ---------
 -- LSP --
 ---------
-
 -- lsp config
 vim.diagnostic.config({
     severity_sort = true,
@@ -274,4 +260,5 @@ vim.lsp.enable({
     "kotlin_lsp",
     "lua_ls",
     "rust_analyzer",
+    "texlab",
 })
