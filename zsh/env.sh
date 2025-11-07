@@ -21,7 +21,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_RUNTIME_DIR="/tmp"
 
-# add autocomplete path location(s)
+# add auto-complete path location(s)
 export FPATH="/opt/homebrew/share/zsh/site-functions":$FPATH
 
 # hell yeah
@@ -32,6 +32,8 @@ export MANPAGER="nvim -c 'Man!' -o -"
 export ZDOTDIR="$HOME/.cache/zsh"
 export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump"
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
+export HISTSIZE=100000
+export SAVEHIST=100000
 
 # other random environment variables
 export LESSHISTFILE="$HOME/.cache/less/history"

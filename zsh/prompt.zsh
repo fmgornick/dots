@@ -7,7 +7,7 @@ function __gstatus() {
 
 function prompt() {
     if [[ $? -eq 0 || $? -eq 130 ]]; then _status='' # 0/130 => don't print return code
-    else _status='%F{red}$?%f '; fi                  # else  => print return code in red
+    else _status='%F{red}%?%f '; fi                  # else  => print return code in red
 
     gbranch=$(git symbolic-ref --short HEAD 2>/dev/null)
     if [[ $? -eq 0 ]]; then
@@ -16,5 +16,3 @@ function prompt() {
         export PS1="$_status%F{green}%n@%m%f:%F{blue}%1~%f\$ "
     fi
 }
-
-add-zsh-hook precmd prompt

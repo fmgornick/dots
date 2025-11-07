@@ -7,6 +7,7 @@ font-size                        = 13
 fullscreen                       = true
 mouse-hide-while-typing          = true
 quit-after-last-window-closed    = true
+shell-integration-features       = no-cursor
 window-inherit-working-directory = true
 window-save-state                = always
 window-show-tab-bar              = never
