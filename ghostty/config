@@ -1,19 +1,37 @@
-# settings
-command                       = "/opt/homebrew/bin/tmux -2 new-session -A -s alacritty"
-confirm-close-surface         = false
-cursor-style                  = block
-cursor-style-blink            = false
-custom-shader-animation       = always
-font-family                   = "Hurmit Nerd Font Mono"
-fullscreen                    = true
-quit-after-last-window-closed = true
+# options
+confirm-close-surface            = false
+cursor-color                     = cell-background
+cursor-text                      = cell-foreground
+font-family                      = Hurmit Nerd Font Propo
+font-size                        = 13
+fullscreen                       = true
+mouse-hide-while-typing          = true
+quit-after-last-window-closed    = true
+window-inherit-working-directory = true
+window-save-state                = always
+window-show-tab-bar              = never
+
+# keybinds
+keybind = ctrl+space>h=goto_split:left
+keybind = ctrl+space>j=goto_split:bottom
+keybind = ctrl+space>k=goto_split:top
+keybind = ctrl+space>l=goto_split:right
+keybind = ctrl+shift+h=resize_split:left,10
+keybind = ctrl+shift+j=resize_split:down,10
+keybind = ctrl+shift+k=resize_split:up,10
+keybind = ctrl+shift+l=resize_split:right,10
+keybind = ctrl+space>s=new_split:down
+keybind = ctrl+space>v=new_split:right
+keybind = ctrl+space>f=toggle_split_zoom
+keybind = ctrl+space>==equalize_splits
+keybind = super+r=reload_config
 
 # theme
 background           = #333C43
 foreground           = #D3C6AA
 cursor-color         = #5D6B66
 selection-background = #5C3F4F
-selection-foreground = #D3C6AA
+selection-foreground = cell-foreground
 palette              = 0=#293136
 palette              = 1=#E67E80
 palette              = 2=#A7C080

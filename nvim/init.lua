@@ -36,11 +36,10 @@ vim.pack.add({
     { name = "autopairs",  src = "https://github.com/windwp/nvim-autopairs" },
     { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
     { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
+    { name = "everforest", src = "https://github.com/sainnhe/everforest" },
     { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
     { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
     { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
-    { name = "theme",      src = "https://github.com/sainnhe/everforest" },
-    { name = "tmux",       src = "https://github.com/alexghergh/nvim-tmux-navigation" },
     { name = "treesitter", src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 }, {
     confirm = false,
@@ -214,13 +213,6 @@ vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
 vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
 vim.keymap.set("v", "L", ">gv", { desc = "move block right" })
-
--- tmux navigation
-local ntnav = require("nvim-tmux-navigation")
-vim.keymap.set("n", "<M-h>", ntnav.NvimTmuxNavigateLeft, { desc = "nvim/tmux pane left" })
-vim.keymap.set("n", "<M-j>", ntnav.NvimTmuxNavigateDown, { desc = "nvim/tmux pane down" })
-vim.keymap.set("n", "<M-k>", ntnav.NvimTmuxNavigateUp, { desc = "nvim/tmux pane up" })
-vim.keymap.set("n", "<M-l>", ntnav.NvimTmuxNavigateRight, { desc = "nvim/tmux pane right" })
 
 -- lsp shortcuts
 vim.keymap.set("n", "gL", ":edit $NVIM_LOG_FILE<cr>", { desc = "open lsp log file" })
