@@ -40,6 +40,7 @@ vim.pack.add({
     { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
     { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
     { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
+    { name = "surround",   src = "https://github.com/tpope/vim-surround" },
     { name = "treesitter", src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 }, {
     confirm = false,
