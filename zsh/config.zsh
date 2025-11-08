@@ -20,6 +20,7 @@ zstyle ":completion:*" ignored-patterns "_*"
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*" matcher-list "m:{a-zA-Z}={A-Za-z}"
 zstyle ":completion:*" menu select
+bindkey "^[[Z" reverse-menu-complete
 
 # run custom prompt
 autoload -Uz add-zsh-hook
@@ -34,6 +35,7 @@ alias ls="eza"
 alias l="eza -ailhH"
 alias env="env | sort | nvim"
 alias v="nvim"
+alias -- -="cd -"
 alias cd ...="cd ../.."
 alias cd ....="cd ../../.."
 alias cd .....="cd ../../../.."
@@ -45,11 +47,7 @@ alias cd ..........="cd ../../../../../../../../.."
 alias cd ...........="cd ../../../../../../../../../.."
 alias cd ............="cd ../../../../../../../../../../.."
 
-# update packages
 update() {
-  brew update && brew upgrade           # brew
-  # cargo install-update -a             # rust
-  # go-global-update                    # go
-  # pipx upgrade-all -f                 # python
-  # npx npm-check --global --update-all # npm
+  brew update
+  brew upgrade
 }
