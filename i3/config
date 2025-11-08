@@ -1,13 +1,106 @@
-# Default font
+# default font
 font pango:Hurmit Nerd Font Propo Regular 10
 
-set  $mod          Mod4
-set  $left         h
-set  $down         j
-set  $up           k
-set  $right        l
-set  $term         alacritty
-set  $menu         fuzzel
+# default keys
+set  $mod    Mod4
+set  $left   h
+set  $down   j
+set  $up     k
+set  $right  l
+
+# key bindings
+bindsym  $mod+q             kill
+bindsym  $mod+Shift+c       reload
+bindsym  $mod+Shift+r       restart
+bindsym  $mod+Shift+e       exec i3-msg exit
+bindsym  $mod+Return        exec ghostty
+bindsym  $mod+d             exec dmenu_run -i -l 10 -fn 'Hurmit Nerd Font Propo:size=12' -nb $bg1 -nf $fg -sb $fg -sf $bg1
+bindsym  $mod+f             fullscreen toggle
+bindsym  $mod+e             layout toggle split
+bindsym  $mod+s             layout stacking
+bindsym  $mod+w             layout tabbed
+bindsym  $mod+space         focus mode_toggle
+bindsym  $mod+Shift+space   floating toggle
+bindsym  $mod+minus         scratchpad show
+bindsym  $mod+b             split h
+bindsym  $mod+v             split v
+bindsym  $mod+r             mode "resize"
+bindsym  $mod+$left         focus left
+bindsym  $mod+$down         focus down
+bindsym  $mod+$up           focus up
+bindsym  $mod+$right        focus right
+bindsym  $mod+Left          focus left
+bindsym  $mod+Down          focus down
+bindsym  $mod+Up            focus up
+bindsym  $mod+Right         focus right
+bindsym  $mod+p             focus parent
+bindsym  $mod+c             focus child
+bindsym  $mod+Shift+$left   move left
+bindsym  $mod+Shift+$down   move down
+bindsym  $mod+Shift+$up     move up
+bindsym  $mod+Shift+$right  move right
+bindsym  $mod+Shift+Left    move left
+bindsym  $mod+Shift+Down    move down
+bindsym  $mod+Shift+Up      move up
+bindsym  $mod+Shift+Right   move right
+bindsym  $mod+Shift+minus   move scratchpad
+bindsym  $mod+1             workspace number 1
+bindsym  $mod+2             workspace number 2
+bindsym  $mod+3             workspace number 3
+bindsym  $mod+4             workspace number 4
+bindsym  $mod+5             workspace number 5
+bindsym  $mod+6             workspace number 6
+bindsym  $mod+7             workspace number 7
+bindsym  $mod+8             workspace number 8
+bindsym  $mod+9             workspace number 9
+bindsym  $mod+0             workspace number 10
+bindsym  $mod+bracketleft   workspace prev
+bindsym  $mod+bracketright  workspace next
+bindsym  $mod+Shift+1       move container to workspace number 1
+bindsym  $mod+Shift+2       move container to workspace number 2
+bindsym  $mod+Shift+3       move container to workspace number 3
+bindsym  $mod+Shift+4       move container to workspace number 4
+bindsym  $mod+Shift+5       move container to workspace number 5
+bindsym  $mod+Shift+6       move container to workspace number 6
+bindsym  $mod+Shift+7       move container to workspace number 7
+bindsym  $mod+Shift+8       move container to workspace number 8
+bindsym  $mod+Shift+9       move container to workspace number 9
+bindsym  $mod+Shift+0       move container to workspace number 10
+
+# resize mode
+mode "resize" {
+    bindsym  $left   resize shrink width 10 px or 10 ppt
+    bindsym  $down   resize grow height 10 px or 10 ppt
+    bindsym  $up     resize shrink height 10 px or 10 ppt
+    bindsym  $right  resize grow width 10 px or 10 ppt
+    bindsym  Left    resize shrink width 10 px or 10 ppt
+    bindsym  Down    resize grow height 10 px or 10 ppt
+    bindsym  Up      resize shrink height 10 px or 10 ppt
+    bindsym  Right   resize grow width 10 px or 10 ppt
+    bindsym  Return  mode "default"
+    bindsym  Escape  mode "default"
+}
+
+# input config
+exec --no-startup-id setxkbmap -option caps:escape
+exec --no-startup-id xbanish
+exec --no-startup-id xinput --set-prop 11 'libinput Accel Profile Enabled' 0 1 0
+exec --no-startup-id xinput --set-prop 11 'libinput Accel Speed' -0.5
+exec --no-startup-id xset r rate 250 40
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+floating_modifier $mod
+tiling_drag       modifier titlebar
+
+# fn keys
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# exec --no-startup-id dex --autostart --environment i3
+# exec --no-startup-id xrandr --dpi 96
+
+# everforest dark soft
 set  $bg_dim       "#293136"
 set  $bg0          "#333c43"
 set  $bg1          "#3a464c"
@@ -35,138 +128,15 @@ set  $gray0        "#7a8478"
 set  $gray1        "#859289"
 set  $gray2        "#9da9a0"
 
-# window border
+# window + background
+exec --no-startup-id xsetroot -solid $bg0
 default_border pixel 1
 client.focused           $bg5  $bg5  $fg      $bg5  $bg5
 client.focused_inactive  $bg3  $bg3  $fg      $bg3  $bg3
 client.unfocused         $bg1  $bg1  $fg      $bg1  $bg1
 client.urgent            $red  $red  $bg_dim  $red  $red
 
-# misc.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xsetroot -solid $bg0
-exec --no-startup-id xset r rate 250 40
-exec --no-startup-id xbanish
-exec --no-startup-id xrandr --dpi 96
-exec --no-startup-id setxkbmap -option caps:escape
-exec --no-startup-id xinput --set-prop 11 'libinput Accel Profile Enabled' 0 1 0
-exec --no-startup-id xinput --set-prop 11 'libinput Accel Speed' -0.5
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-
-# move tiling windows via drag & drop by left-clicking into the title bar,
-# or left-clicking anywhere into the window while holding the floating modifier.
-tiling_drag modifier titlebar
-
-# start a terminal
-bindsym  $mod+Return   exec $term
-bindsym  $mod+q        kill
-bindsym  $mod+d        exec dmenu_run -i -l 10 -fn 'Hurmit Nerd Font Propo:size=12' -nb $bg1 -nf $fg -sb $fg -sf $bg1
-bindsym  $mod+Shift+c  reload
-bindsym  $mod+Shift+r  restart
-bindsym  $mod+Shift+e  exec i3-msg exit
-
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym  $mod+$left         focus  left
-    bindsym  $mod+$down         focus  down
-    bindsym  $mod+$up           focus  up
-    bindsym  $mod+$right        focus  right
-    bindsym  $mod+Left          focus  left
-    bindsym  $mod+Down          focus  down
-    bindsym  $mod+Up            focus  up
-    bindsym  $mod+Right         focus  right
-    bindsym  $mod+Shift+$left   move   left
-    bindsym  $mod+Shift+$down   move   down
-    bindsym  $mod+Shift+$up     move   up
-    bindsym  $mod+Shift+$right  move   right
-    bindsym  $mod+Shift+Left    move   left
-    bindsym  $mod+Shift+Down    move   down
-    bindsym  $mod+Shift+Up      move   up
-    bindsym  $mod+Shift+Right   move   right
-
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym  $mod+1  workspace  number  1
-    bindsym  $mod+2  workspace  number  2
-    bindsym  $mod+3  workspace  number  3
-    bindsym  $mod+4  workspace  number  4
-    bindsym  $mod+5  workspace  number  5
-    bindsym  $mod+6  workspace  number  6
-    bindsym  $mod+7  workspace  number  7
-    bindsym  $mod+8  workspace  number  8
-    bindsym  $mod+9  workspace  number  9
-    bindsym  $mod+0  workspace  number  10
-
-    # Move focused container to workspace
-    bindsym  $mod+Shift+1  move  container  to  workspace  number  1
-    bindsym  $mod+Shift+2  move  container  to  workspace  number  2
-    bindsym  $mod+Shift+3  move  container  to  workspace  number  3
-    bindsym  $mod+Shift+4  move  container  to  workspace  number  4
-    bindsym  $mod+Shift+5  move  container  to  workspace  number  5
-    bindsym  $mod+Shift+6  move  container  to  workspace  number  6
-    bindsym  $mod+Shift+7  move  container  to  workspace  number  7
-    bindsym  $mod+Shift+8  move  container  to  workspace  number  8
-    bindsym  $mod+Shift+9  move  container  to  workspace  number  9
-    bindsym  $mod+Shift+0  move  container  to  workspace  number  10
-
-    # Navigate between workspaces
-    bindsym $mod+bracketleft workspace prev
-    bindsym $mod+bracketright workspace next
-
-#
-# Layout stuff:
-#
-    bindsym  $mod+b            split h
-    bindsym  $mod+v            split v
-    bindsym  $mod+f            fullscreen  toggle
-    bindsym  $mod+e            layout      toggle split
-    bindsym  $mod+s            layout      stacking
-    bindsym  $mod+w            layout      tabbed
-    bindsym  $mod+space        focus       mode_toggle
-    bindsym  $mod+Shift+space  floating    toggle
-    bindsym  $mod+p            focus       parent
-    bindsym  $mod+c            focus       child
-
-#
-# Scratchpad:
-#
-    # bindsym  $mod+minus        scratchpad  show
-    # bindsym  $mod+Shift+minus  move        scratchpad
-
-#
-# Resizing containers:
-#
-mode "resize" {
-    bindsym  $left   resize  shrink  width   10 px or 10 ppt
-    bindsym  $down   resize  grow    height  10 px or 10 ppt
-    bindsym  $up     resize  shrink  height  10 px or 10 ppt
-    bindsym  $right  resize  grow    width   10 px or 10 ppt
-    bindsym  Left    resize  shrink  width   10 px or 10 ppt
-    bindsym  Down    resize  grow    height  10 px or 10 ppt
-    bindsym  Up      resize  shrink  height  10 px or 10 ppt
-    bindsym  Right   resize  grow    width   10 px or 10 ppt
-
-    bindsym  Return  mode  "default"
-    bindsym  Escape  mode  "default"
-}
-bindsym $mod+r mode "resize"
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# status bar
 bar {
     position top
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done

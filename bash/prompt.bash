@@ -17,4 +17,4 @@ function prompt() {
     fi
 }
 
-PROMPT_COMMAND=prompt
+PROMPT_COMMAND='history -a; prompt'
