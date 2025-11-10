@@ -1,0 +1,50 @@
+[env]
+TERM = "alacritty"
+
+[font]
+normal      = { family = "Hurmit Nerd Font Propo", style = "Regular"     }
+bold        = { family = "Hurmit Nerd Font Propo", style = "Bold"        }
+italic      = { family = "Hurmit Nerd Font Propo", style = "Italic"      }
+bold_italic = { family = "Hurmit Nerd Font Propo", style = "Bold Italic" }
+size        = 10
+
+[keyboard]
+bindings = [
+  { key = "Tab",                 mode = "Search", action = "SearchFocusNext"     },
+  { key = "Tab", mods = "Shift", mode = "Search", action = "SearchFocusPrevious" }
+]
+
+[selection]
+semantic_escape_chars = ",.│`|:\"' ()[]{}<>\t"
+save_to_clipboard     = true
+
+[scrolling]
+multiplier = 2
+
+[colors.primary]
+background = "#333c43"
+foreground = "#d3c6aa"
+
+[colors.normal]
+black   = "#4d5960"
+red     = "#e67e80"
+green   = "#a7c080"
+yellow  = "#dbbc7f"
+blue    = "#7fbbb3"
+magenta = "#d699b6"
+cyan    = "#83c092"
+white   = "#d3c6aa"
+
+[colors.bright]
+black   = "#4d5960"
+red     = "#e67e80"
+green   = "#a7c080"
+yellow  = "#dbbc7f"
+blue    = "#7fbbb3"
+magenta = "#d699b6"
+cyan    = "#83c092"
+white   = "#d3c6aa"
+
+[colors.search]
+matches.background = "#e67e80"
+focused_match.background = "#dbbc7f"
