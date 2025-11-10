@@ -38,6 +38,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export GOPATH="$XDG_DATA_HOME/go"
 
 # misc
+export DOCKER_HOST="unix://$COLIMA_HOME/default/docker.sock"
 export EDITOR="nvim"
 export FPATH="/opt/homebrew/share/zsh/site-functions":$FPATH
 export MANPAGER="nvim -c 'Man!' -o -"

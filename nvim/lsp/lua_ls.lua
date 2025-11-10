@@ -8,9 +8,8 @@ return {
             workspace = {
                 checkThirdParty = false,
                 library = {
-                    vim.env.VIMRUNTIME .. "/lua",       -- nvim auto-complete
-                    vim.fn.stdpath("config") .. "/lua", -- my config auto-complete
-                    "${3rd}/luv/library",               -- lua stdlib
+                    vim.env.VIMRUNTIME .. "/lua",
+                    "${3rd}/luv/library",
                 },
             },
         },

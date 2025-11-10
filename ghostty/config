@@ -1,7 +1,9 @@
 # options
 adjust-cursor-thickness       = 200%
+clipboard-paste-protection    = false
 confirm-close-surface         = false
 cursor-color                  = cell-foreground
+cursor-style-blink            = false
 cursor-text                   = cell-background
 font-family                   = Hurmit Nerd Font Propo
 font-size                     = 13

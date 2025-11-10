@@ -10,7 +10,6 @@ return {
                 onSave = true,
             },
             latexFormatter = "latexindent",
-            bibtexFormatter = "texlab",
         },
     },
 }

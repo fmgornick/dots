@@ -250,7 +250,6 @@ vim.diagnostic.config({
 vim.lsp.enable({
     "clangd",
     "gopls",
-    "kotlin_lsp",
     "lua_ls",
     "rust_analyzer",
     "texlab",
