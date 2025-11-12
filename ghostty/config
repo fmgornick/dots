@@ -49,7 +49,7 @@ palette    =  3=#DBBC7F
 palette    =  4=#7FBBB3
 palette    =  5=#D699B6
 palette    =  6=#83C092
-palette    =  7=#555F66
+palette    =  7=#D3C6AA
 palette    =  8=#434F55
 palette    =  9=#5C3F4F
 palette    = 10=#48584E
@@ -57,4 +57,4 @@ palette    = 11=#55544A
 palette    = 12=#3F5865
 palette    = 13=#59464c
 palette    = 14=#83C092
-palette    = 15=#D3C6AA
+palette    = 15=#555F66

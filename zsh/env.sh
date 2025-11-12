@@ -1,22 +1,20 @@
 # xdg directory spec
-export LOCAL="$HOME/.local"
-export XDG_BIN_HOME="$LOCAL/bin"
+export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$LOCAL/share"
+export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_RUNTIME_DIR="/tmp"
-export XDG_STATE_HOME="$LOCAL/state"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 # paths
-export PATH="$XDG_BIN_HOME":$PATH
 export PATH="/opt/homebrew/bin":$PATH
 export PATH="/opt/homebrew/sbin":$PATH
+export PATH="$XDG_BIN_HOME":$PATH
 export PATH="$XDG_DATA_HOME/cargo/bin":$PATH
 export PATH="$XDG_DATA_HOME/go/bin":$PATH
-export LIBRARY_PATH="/usr/local/lib"
-export LIBRARY_PATH="/opt/homebrew/lib":$LIBRARY_PATH
-export C_INCLUDE_PATH="/usr/local/include"
-export C_INCLUDE_PATH="/opt/homebrew/include":$C_INCLUDE_PATH
+export C_INCLUDE_PATH="/usr/local/include:/opt/homebrew/include"
+export DYLD_LIBRARY_PATH="/usr/local/lib:/opt/homebrew/lib"
+export LIBRARY_PATH="/usr/local/lib:/opt/homebrew/lib"
 
 # cache
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
@@ -32,7 +30,7 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export COLIMA_HOME="$XDG_CONFIG_HOME/colima"
 
 # data
-export CARGO_INSTALL_ROOT="$LOCAL"
+export CARGO_INSTALL_ROOT="$HOME/.local"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export GOPATH="$XDG_DATA_HOME/go"
