@@ -180,6 +180,21 @@ end
 -------------
 -- KEYMAPS --
 -------------
+vim.keymap.set("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
+vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
+vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
+vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
+vim.keymap.set("v", "L", ">gv", { desc = "move block right" })
+vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatting" })
+vim.keymap.set("n", "yc", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
+vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
+vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
+vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
+vim.keymap.set("n", "<leader>d", diffwindows, { desc = "toggle diff" })
+vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
+vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
+vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
+
 -- file search/grepping
 local fzf = require("fzf-lua")
 fzf.config_files = function() fzf.files({ cwd = "~/.config" }) end
@@ -211,28 +226,12 @@ vim.keymap.set("n", "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
 vim.keymap.set("n", "<leader>gS", git.stage_buffer, { desc = "stage buffer" })
 vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset buffer" })
 
--- region movement helpers
-vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
-vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
-vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
-vim.keymap.set("v", "L", ">gv", { desc = "move block right" })
-
 -- lsp shortcuts
-vim.keymap.set("n", "gL", ":edit $NVIM_LOG_FILE<cr>", { desc = "open lsp log file" })
-vim.keymap.set("n", "grl", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
-vim.keymap.set("n", "grq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
-
--- misc keymap helpers
-vim.keymap.set("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
-vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatting" })
-vim.keymap.set("n", "yc", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
-vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
-vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
-vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
-vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
-vim.keymap.set("n", "<leader>d", diffwindows, { desc = "toggle diff" })
-vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
-vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
+local toggle_diagnostics = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
+vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
+vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
+vim.keymap.set("n", "<leader>lf", ":edit $NVIM_LOG_FILE<cr>", { desc = "open lsp log file" })
+vim.keymap.set("n", "<leader>lt", toggle_diagnostics, { desc = "toggle lsp diagnostics" })
 
 ---------
 -- LSP --
