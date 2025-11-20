@@ -136,13 +136,13 @@ vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
 })
 
 ----------------------
--- HELPER FUNCTIONS --
+-- CUSTOM FUNCTIONS --
 ----------------------
 -- toggle diff view of two windows
-local diffwindows = function()
+vim.api.nvim_create_user_command("DiffWindows", function()
     local windows = vim.api.nvim_list_wins()
     if #windows ~= 2 then
-        vim.notify("must be exactly two windows to diff", vim.log.levels.WARN)
+        vim.notify("must be exactly two windows to diff", vim.log.levels.ERROR)
         return
     end
 
@@ -163,19 +163,24 @@ local diffwindows = function()
     vim.api.nvim_set_current_win(other_window)
     vim.cmd(diff_command)
     vim.api.nvim_set_current_win(this_window)
-end
+end, {})
 
 -- select branch to diff changes on with fzf
-local diffview_branches = function()
-    require('fzf-lua').git_branches({
+vim.api.nvim_create_user_command("DiffviewBranch", function()
+    require("fzf-lua").git_branches({
         cmd = "echo HEAD; git branch --all --format='%(refname:short)'",
         actions = {
-            ['default'] = function(selected)
-                vim.cmd('DiffviewOpen ' .. selected[1])
+            ["default"] = function(selected)
+                vim.cmd("DiffviewOpen " .. selected[1])
             end,
         },
     })
-end
+end, {})
+
+-- remove ANSI escape codes in current buffer
+vim.api.nvim_create_user_command("RmANSI", function()
+    pcall(vim.cmd([[:%s/\e\[[0-9;]*m//g]]))
+end, {})
 
 -------------
 -- KEYMAPS --
@@ -190,7 +195,7 @@ vim.keymap.set("n", "yc", ":let @+=expand('%:p')<cr>", { desc = "yank file path"
 vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
 vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
-vim.keymap.set("n", "<leader>d", diffwindows, { desc = "toggle diff" })
+vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
 vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
 vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
@@ -218,7 +223,7 @@ vim.keymap.set("n", "[H", function() git.nav_hunk("first") end, { desc = "first 
 vim.keymap.set("n", "]H", function() git.nav_hunk("last") end, { desc = "last hunk" })
 vim.keymap.set("n", "<leader>gb", git.blame, { desc = "blame buffer" })
 vim.keymap.set("n", "<leader>gc", fzf.git_branches, { desc = "checkout branch" })
-vim.keymap.set("n", "<leader>gd", diffview_branches, { desc = "diff changes with selected branch" })
+vim.keymap.set("n", "<leader>gd", ":DiffviewBranch<cr>", { desc = "diff selected branch" })
 vim.keymap.set("n", "<leader>gq", ":DiffviewClose<cr>", { desc = "close diff" })
 vim.keymap.set("n", "<leader>gr", git.reset_hunk, { desc = "reset hunk" })
 vim.keymap.set("n", "<leader>gR", git.reset_buffer, { desc = "reset buffer" })
