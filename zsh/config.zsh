@@ -33,7 +33,7 @@ compinit -d $ZSH_COMPDUMP
 # shortcuts
 alias ls="eza"
 alias l="eza -ailhH"
-alias env="env | sort | nvim"
+alias env="env | sort"
 alias v="nvim"
 alias -- -="cd -"
 alias cd ...="cd ../.."

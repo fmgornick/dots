@@ -1,5 +1,5 @@
 function __gstatus() {
-    _status=$(git status --porcelain)
+    _status=$(git status --porcelain 2>/dev/null)
     if [[ $_status =~ "\?\?" ]]; then echo "red"     # untracked files
     elif [[ ${#_status} -ne 0 ]]; then echo "yellow" # changes not commited
     else echo "magenta"; fi                          # clean
