@@ -95,9 +95,9 @@ require("diffview").setup({
 -- misc
 require("nvim-autopairs").setup()
 
-------------------------
--- AUTOMATIC COMMANDS --
-------------------------
+--------------
+-- AUTOCMDS --
+--------------
 -- lsp format
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("LspFormat", { clear = true }),
@@ -170,8 +170,9 @@ vim.api.nvim_create_user_command("DiffviewBranch", function()
     require("fzf-lua").git_branches({
         cmd = "echo HEAD; git branch --all --format='%(refname:short)'",
         actions = {
-            ["default"] = function(selected)
-                vim.cmd("DiffviewOpen " .. selected[1])
+            ["default"] = function(selected, opts)
+                local branch = (#selected > 0) and selected[1] or opts.query
+                vim.cmd("DiffviewOpen " .. branch)
             end,
         },
     })
