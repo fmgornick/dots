@@ -234,9 +234,10 @@ vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset b
 
 -- lsp shortcuts
 local toggle_diagnostics = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
+local open_logfile = function() vim.cmd('tabnew ' .. vim.lsp.log.get_filename()) end
 vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
-vim.keymap.set("n", "<leader>lf", ":edit $NVIM_LOG_FILE<cr>", { desc = "open lsp log file" })
+vim.keymap.set("n", "<leader>lf", open_logfile, { desc = "open lsp log file" })
 vim.keymap.set("n", "<leader>lt", toggle_diagnostics, { desc = "toggle lsp diagnostics" })
 
 ---------
