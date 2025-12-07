@@ -39,6 +39,7 @@ export GOPATH="$XDG_DATA_HOME/go"
 export DOCKER_HOST="unix://$COLIMA_HOME/default/docker.sock"
 export EDITOR="nvim"
 export FPATH="/opt/homebrew/share/zsh/site-functions":$FPATH
+export HOMEBREW_NO_AUTO_UPDATE=1
 export MANPAGER="nvim -c 'Man!' -o -"
 export VISUAL="nvim"
 export WORDCHARS="*?_[]~#&;!$%^(){}<>"
