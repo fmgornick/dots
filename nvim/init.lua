@@ -41,7 +41,6 @@ vim.pack.add({
     { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
     { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
     { name = "surround",   src = "https://github.com/tpope/vim-surround" },
-    { name = "treesitter", src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 }, {
     confirm = false,
     start = true,
@@ -53,13 +52,6 @@ vim.pack.add({
 -- theme: everforest
 vim.g.everforest_background = "soft"
 vim.cmd.colorscheme("everforest")
-
--- syntax highlighting: treesitter
-require("nvim-treesitter.configs").setup({
-    auto_install = true,
-    highlight = { enable = true },
-    incremental_selection = { enable = true },
-})
 
 -- directory navigation: oil
 require("oil").setup({
