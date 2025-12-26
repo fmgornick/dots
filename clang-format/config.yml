@@ -1,16 +1,19 @@
 BasedOnStyle: GNU
-IndentWidth: 4
 
-ColumnLimit: 160
 AlignEscapedNewlines: LeftWithLastLine
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
-
-BreakBeforeBraces: Custom
+AllowShortLoopsOnASingleLine: true
+BinPackArguments: false
 BraceWrapping:
   AfterControlStatement: Always
   AfterFunction: true
   BeforeElse: true
-
+BreakBeforeBraces: Custom
+ColumnLimit: 160
+IndentPPDirectives: AfterHash
+IndentWidth: 4
+PPIndentWidth: 2
+SortIncludes: Never
 SpaceBeforeParens: Custom
 SpaceBeforeParensOptions:
   AfterControlStatements: true
