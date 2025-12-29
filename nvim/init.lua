@@ -33,7 +33,6 @@ vim.opt.writebackup   = false
 --------------
 vim.pack.add({
     { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
-    { name = "autopairs",  src = "https://github.com/windwp/nvim-autopairs" },
     { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
     { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
     { name = "everforest", src = "https://github.com/sainnhe/everforest" },
@@ -83,9 +82,6 @@ require("diffview").setup({
         }
     }
 })
-
--- misc
-require("nvim-autopairs").setup()
 
 --------------
 -- AUTOCMDS --
