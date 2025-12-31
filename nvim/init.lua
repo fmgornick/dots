@@ -31,26 +31,48 @@ vim.opt.writebackup   = false
 --------------
 -- PACKAGES --
 --------------
-vim.pack.add({
-    { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
-    { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
-    { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
-    { name = "everforest", src = "https://github.com/sainnhe/everforest" },
-    { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
-    { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
-    { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
-    { name = "surround",   src = "https://github.com/tpope/vim-surround" },
-}, {
-    confirm = false,
-    start = true,
-})
+local os              = vim.loop.os_uname().sysname
+local packages        = {
+    ["Darwin"] = {
+        { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
+        { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
+        { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
+        { name = "everforest", src = "https://github.com/sainnhe/everforest" },
+        { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
+        { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
+        { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
+        { name = "surround",   src = "https://github.com/tpope/vim-surround" },
+    },
+    ["Linux"] = {
+        { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
+        { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
+        { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
+        { name = "everforest", src = "https://github.com/sainnhe/everforest" },
+        { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
+        { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
+        { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
+        { name = "surround",   src = "https://github.com/tpope/vim-surround" },
+    },
+    ["Windows_NT"] = {
+        { name = "abolish",   src = "https://github.com/tpope/vim-abolish" },
+        { name = "colorizer", src = "https://github.com/norcalli/nvim-colorizer.lua" },
+        { name = "diffview",  src = "https://github.com/sindrets/diffview.nvim" },
+        { name = "fzf",       src = "https://github.com/ibhagwan/fzf-lua" },
+        { name = "gitsigns",  src = "https://github.com/lewis6991/gitsigns.nvim" },
+        { name = "oil",       src = "https://github.com/stevearc/oil.nvim" },
+        { name = "surround",  src = "https://github.com/tpope/vim-surround" },
+    },
+}
+vim.pack.add(packages[os], { confirm = false, start = true })
 
 --------------------------
 -- PACKAGE CONFIG/SETUP --
 --------------------------
 -- theme: everforest
-vim.g.everforest_background = "soft"
-vim.cmd.colorscheme("everforest")
+if os ~= "Windows_NT" then
+    vim.g.everforest_background = "soft"
+    vim.cmd.colorscheme("everforest")
+end
 
 -- directory navigation: oil
 require("oil").setup({
