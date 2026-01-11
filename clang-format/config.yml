@@ -10,6 +10,7 @@ BraceWrapping:
   BeforeElse: true
 BreakBeforeBraces: Custom
 ColumnLimit: 160
+Cpp11BracedListStyle: true
 IndentPPDirectives: AfterHash
 IndentWidth: 4
 PPIndentWidth: 2

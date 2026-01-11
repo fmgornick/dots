@@ -242,6 +242,9 @@ vim.keymap.set("n", "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
 vim.keymap.set("n", "<leader>gS", git.stage_buffer, { desc = "stage buffer" })
 vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset buffer" })
 
+-- C specific shortcuts
+vim.keymap.set("n", "<leader>cc", "O/*  */<esc>2hi-<esc>73.BR", { desc = "insert comment" })
+
 -- lsp shortcuts
 local toggle_diagnostics = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
 local open_logfile = function() vim.cmd('tabnew ' .. vim.lsp.log.get_filename()) end
