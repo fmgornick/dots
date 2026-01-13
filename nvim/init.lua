@@ -133,10 +133,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.hl.on_yank({ higroup = "Search", timeout = 100 }) end,
 })
 
+-- use old ansi-style comments for c code
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "c", "cpp" },
+    command = [[setlocal commentstring=/*\ %s\ */]],
+})
+
 -- spell check and wrap lines in markdown/latex buffers
-vim.api.nvim_create_autocmd("BufEnter", {
+vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SetWrap", { clear = true }),
-    pattern = { "*.md", "*.tex" },
+    pattern = { "markdown", "tex" },
     command = "setlocal spell wrap linebreak nolist",
 })
 
@@ -242,7 +248,7 @@ vim.keymap.set("n", "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
 vim.keymap.set("n", "<leader>gS", git.stage_buffer, { desc = "stage buffer" })
 vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset buffer" })
 
--- C specific shortcuts
+-- c specific shortcuts
 vim.keymap.set("n", "<leader>cc", "O/*  */<esc>2hi-<esc>73.BR", { desc = "insert comment" })
 
 -- lsp shortcuts
