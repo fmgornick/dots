@@ -214,6 +214,7 @@ vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved cha
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
 vim.keymap.set("n", "<c-d>", "<c-d>zz", { desc = "scroll down half-page" })
 vim.keymap.set("n", "<c-u>", "<c-u>zz", { desc = "scroll up half-page" })
+vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "escape terminal mode" })
 
 -- file search/grepping
 local fzf = require("fzf-lua")
