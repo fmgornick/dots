@@ -28,51 +28,47 @@ vim.opt.undofile      = true
 vim.opt.wrap          = false
 vim.opt.writebackup   = false
 
+--------
+-- OS --
+--------
+local config_path     = ({
+    Darwin     = "~/.config",
+    Linux      = "~/.config",
+    Windows_NT = "~/AppData",
+})[vim.loop.os_uname().sysname]
+
+
+-- use neovide on windows
+if vim.g.neovide then
+    vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_hide_mouse_when_typing = true
+    vim.g.neovide_scroll_animation_length = 0
+    vim.o.guifont = "Hurmit Nerd Font Propo:h10"
+end
+
 --------------
 -- PACKAGES --
 --------------
-local os              = vim.loop.os_uname().sysname
-local packages        = {
-    ["Darwin"] = {
-        { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
-        { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
-        { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
-        { name = "everforest", src = "https://github.com/sainnhe/everforest" },
-        { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
-        { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
-        { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
-        { name = "surround",   src = "https://github.com/tpope/vim-surround" },
-    },
-    ["Linux"] = {
-        { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
-        { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
-        { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
-        { name = "everforest", src = "https://github.com/sainnhe/everforest" },
-        { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
-        { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
-        { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
-        { name = "surround",   src = "https://github.com/tpope/vim-surround" },
-    },
-    ["Windows_NT"] = {
-        { name = "abolish",   src = "https://github.com/tpope/vim-abolish" },
-        { name = "colorizer", src = "https://github.com/norcalli/nvim-colorizer.lua" },
-        { name = "diffview",  src = "https://github.com/sindrets/diffview.nvim" },
-        { name = "fzf",       src = "https://github.com/ibhagwan/fzf-lua" },
-        { name = "gitsigns",  src = "https://github.com/lewis6991/gitsigns.nvim" },
-        { name = "oil",       src = "https://github.com/stevearc/oil.nvim" },
-        { name = "surround",  src = "https://github.com/tpope/vim-surround" },
-    },
-}
-vim.pack.add(packages[os], { confirm = false, start = true })
+vim.pack.add({
+    { name = "abolish",    src = "https://github.com/tpope/vim-abolish" },
+    { name = "colorizer",  src = "https://github.com/norcalli/nvim-colorizer.lua" },
+    { name = "diffview",   src = "https://github.com/sindrets/diffview.nvim" },
+    { name = "everforest", src = "https://github.com/sainnhe/everforest" },
+    { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
+    { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
+    { name = "surround",   src = "https://github.com/tpope/vim-surround" },
+}, {
+    confirm = false,
+    start = true,
+})
 
 --------------------------
 -- PACKAGE CONFIG/SETUP --
 --------------------------
 -- theme: everforest
-if os ~= "Windows_NT" then
-    vim.g.everforest_background = "soft"
-    vim.cmd.colorscheme("everforest")
-end
+vim.g.everforest_background = "soft"
+vim.cmd.colorscheme("everforest")
 
 -- directory navigation: oil
 require("oil").setup({
@@ -184,7 +180,7 @@ end, {})
 -- select branch to diff changes on with fzf
 vim.api.nvim_create_user_command("DiffviewBranch", function()
     require("fzf-lua").git_branches({
-        cmd = "echo HEAD; git branch --all --format='%(refname:short)'",
+        cmd = "echo 'HEAD' && git branch --all --format='%(refname:short)'",
         actions = {
             ["default"] = function(selected, opts)
                 local branch = (#selected > 0) and selected[1] or opts.query
@@ -216,15 +212,19 @@ vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
 vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
 vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
+vim.keymap.set("n", "<c-d>", "<c-d>zz", { desc = "scroll down half-page" })
+vim.keymap.set("n", "<c-u>", "<c-u>zz", { desc = "scroll up half-page" })
 
 -- file search/grepping
 local fzf = require("fzf-lua")
-fzf.config_files = function() fzf.files({ cwd = "~/.config" }) end
+fzf.config_files = function() fzf.files({ cwd = config_path }) end
+fzf.home_files = function() fzf.files({ cwd = "~" }) end
 fzf.project_files = function() fzf.files({ cwd = "~/projects" }) end
 vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "buffers" })
 vim.keymap.set("n", "<leader>fc", fzf.config_files, { desc = "config files" })
 vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "files" })
 vim.keymap.set("n", "<leader>fg", fzf.live_grep_native, { desc = "grep" })
+vim.keymap.set("n", "<leader>fh", fzf.home_files, { desc = "home files" })
 vim.keymap.set("n", "<leader>fk", fzf.keymaps, { desc = "keymaps" })
 vim.keymap.set("n", "<leader>fl", fzf.loclist, { desc = "location list" })
 vim.keymap.set("n", "<leader>fo", fzf.oldfiles, { desc = "old files" })
