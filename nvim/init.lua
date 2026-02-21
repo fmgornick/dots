@@ -129,12 +129,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.hl.on_yank({ higroup = "Search", timeout = 100 }) end,
 })
 
--- use old ansi-style comments for c code
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp" },
-    command = [[setlocal commentstring=/*\ %s\ */]],
-})
-
 -- spell check and wrap lines in markdown/latex buffers
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SetWrap", { clear = true }),
@@ -195,6 +189,20 @@ vim.api.nvim_create_user_command("RmANSI", function()
     pcall(vim.cmd([[:%s/\e\[[0-9;]*m//g]]))
 end, {})
 
+-- cd into project root directory
+vim.api.nvim_create_user_command("ReRoot", function()
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    local root = vim.fn.expand("%:p:h")
+    if #clients > 0 then
+        root = clients[1].config.root_dir
+    else
+        local root_markers = { ".git" }
+        local paths = vim.fs.find(root_markers, { upward = true, path = root })
+        if #paths > 0 then root = vim.fs.dirname(paths[1]) end
+    end
+    vim.cmd("cd " .. root)
+end, {})
+
 -------------
 -- KEYMAPS --
 -------------
@@ -204,14 +212,16 @@ vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
 vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
 vim.keymap.set("v", "L", ">gv", { desc = "move block right" })
 vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatting" })
-vim.keymap.set("n", "yc", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
+vim.keymap.set("n", "yc", ":let @+=expand('%:p:h')<cr>", { desc = "yank file directory" })
 vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
+vim.keymap.set("n", "yp", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
 vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
 vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
 vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
-vim.keymap.set("n", "<leader>r", ":edit!<cr>", { desc = "reset to last saved change" })
+vim.keymap.set("n", "<leader>r", ":ReRoot<cr>", { desc = "cd into project root directory" })
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
+vim.keymap.set("n", "<leader>z", ":earlier 1f<cr>", { desc = "reset to last saved change" })
 vim.keymap.set("n", "<c-d>", "<c-d>zz", { desc = "scroll down half-page" })
 vim.keymap.set("n", "<c-u>", "<c-u>zz", { desc = "scroll up half-page" })
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "escape terminal mode" })
@@ -248,9 +258,6 @@ vim.keymap.set("n", "<leader>gR", git.reset_buffer, { desc = "reset buffer" })
 vim.keymap.set("n", "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
 vim.keymap.set("n", "<leader>gS", git.stage_buffer, { desc = "stage buffer" })
 vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset buffer" })
-
--- c specific shortcuts
-vim.keymap.set("n", "<leader>cc", "O/*  */<esc>2hi-<esc>73.BR", { desc = "insert comment" })
 
 -- lsp shortcuts
 local toggle_diagnostics = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
