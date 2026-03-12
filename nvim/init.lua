@@ -4,7 +4,7 @@
 vim.g.mapleader       = " "
 vim.g.maplocalleader  = "\\"
 vim.opt.clipboard     = "unnamedplus"
-vim.opt.complete      = "o,t,.,w,b,u"
+vim.opt.complete      = "o,t"
 vim.opt.completeopt   = { "fuzzy", "menuone", "noselect" }
 vim.opt.expandtab     = true
 vim.opt.ignorecase    = true
@@ -221,7 +221,7 @@ vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
 vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
 vim.keymap.set("n", "<leader>r", ":ReRoot<cr>", { desc = "cd into project root directory" })
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
-vim.keymap.set("n", "<leader>z", ":earlier 1f<cr>", { desc = "reset to last saved change" })
+vim.keymap.set("n", "<leader>z", ":edit!<cr>", { desc = "reset to last saved change" })
 vim.keymap.set("n", "<c-d>", "<c-d>zz", { desc = "scroll down half-page" })
 vim.keymap.set("n", "<c-u>", "<c-u>zz", { desc = "scroll up half-page" })
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "escape terminal mode" })
