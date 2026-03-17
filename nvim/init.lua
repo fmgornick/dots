@@ -72,6 +72,11 @@ vim.cmd.colorscheme("everforest")
 
 -- directory navigation: oil
 require("oil").setup({
+    columns = {
+        "permissions",
+        "size",
+        "mtime",
+    },
     skip_confirm_for_simple_edits = true,
     view_options = { show_hidden = true },
 })
