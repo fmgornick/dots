@@ -146,6 +146,11 @@ vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
     command = "if bufname('%') ==# '' | setlocal nomodified | endif"
 })
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "svelte" },
+    command = "set filetype=html | syntax on",
+})
+
 ----------------------
 -- CUSTOM FUNCTIONS --
 ----------------------
