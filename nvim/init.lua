@@ -194,11 +194,6 @@ vim.api.nvim_create_user_command("DiffviewBranch", function()
     })
 end, {})
 
--- remove ANSI escape codes in current buffer
-vim.api.nvim_create_user_command("RmANSI", function()
-    pcall(vim.cmd([[:%s/\e\[[0-9;]*m//g]]))
-end, {})
-
 -- cd into project root directory
 vim.api.nvim_create_user_command("ReRoot", function()
     local clients = vim.lsp.get_clients({ bufnr = 0 })
