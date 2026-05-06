@@ -13,7 +13,9 @@ function prompt() {
     if [[ $? -eq 0 ]]; then
         export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\][\[$(__gstatus)$gbranch\[\e[0m\]]\$ "
     else
-        export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\]\$ "
+        ghash=$(git rev-parse --short HEAD 2>/dev/null)
+        if [[ $? -eq 0 ]]; then export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\][\[$(__gstatus)$ghash\[\e[0m\]]\$ "
+        else export PS1="$status\[\e[0;32m\]\u@\h\[\e[0m\]:\[\e[0;34m\]\W\[\e[0m\]\$ "; fi
     fi
 }
 

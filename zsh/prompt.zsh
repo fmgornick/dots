@@ -13,6 +13,8 @@ function prompt() {
     if [[ $? -eq 0 ]]; then
         export PS1="$_status%F{green}%n@%m%f:%F{blue}%1~%f[%F{$(__gstatus)}$gbranch%f]\$ "
     else
-        export PS1="$_status%F{green}%n@%m%f:%F{blue}%1~%f\$ "
+        ghash=$(git rev-parse --short HEAD 2>/dev/null)
+        if [[ $? -eq 0 ]]; then export PS1="$_status%F{green}%n@%m%f:%F{blue}%1~%f[%F{$(__gstatus)}$ghash%f]\$ "
+        else export PS1="$_status%F{green}%n@%m%f:%F{blue}%1~%f\$ "; fi
     fi
 }
