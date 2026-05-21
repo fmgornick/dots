@@ -10,6 +10,7 @@ font-size                     = 13
 gtk-titlebar                  = false
 mouse-hide-while-typing       = true
 quit-after-last-window-closed = true
+scrollback-limit              = 10000000
 selection-background          = cell-foreground
 selection-foreground          = cell-background
 shell-integration-features    = no-cursor

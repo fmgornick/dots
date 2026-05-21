@@ -63,9 +63,9 @@ vim.pack.add({
     start = true,
 })
 
---------------------------
--- PACKAGE CONFIG/SETUP --
---------------------------
+--------------------
+-- PACKAGE CONFIG --
+--------------------
 -- theme: everforest
 vim.g.everforest_background = "soft"
 vim.cmd.colorscheme("everforest")
@@ -184,7 +184,7 @@ end, {})
 -- select branch to diff changes on with fzf
 vim.api.nvim_create_user_command("DiffviewBranch", function()
     require("fzf-lua").git_branches({
-        cmd = "echo 'HEAD' && git branch --all --format='%(refname:short)'",
+        cmd = "echo 'HEAD\nHEAD~1' && git branch --all --format='%(refname:short)'",
         actions = {
             ["default"] = function(selected, opts)
                 local branch = (#selected > 0) and selected[1] or opts.query
