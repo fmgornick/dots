@@ -222,6 +222,7 @@ vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
 vim.keymap.set("n", "yp", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
 vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
+vim.keymap.set("n", "<leader>b", ":.!xargs printf '\\%b'<cr>", { desc = "interpret backslash characters" })
 vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
 vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
 vim.keymap.set("n", "<leader>r", ":ReRoot<cr>", { desc = "cd into project root directory" })
@@ -267,6 +268,7 @@ vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset b
 -- lsp shortcuts
 local toggle_diagnostics = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
 local open_logfile = function() vim.cmd('tabnew ' .. vim.lsp.log.get_filename()) end
+vim.keymap.set("n", "<leader>lc", vim.lsp.codelens.run, { desc = "run codelens" })
 vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
 vim.keymap.set("n", "<leader>lf", open_logfile, { desc = "open lsp log file" })
