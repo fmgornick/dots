@@ -31,10 +31,12 @@ autoload -Uz compinit
 compinit -d $ZSH_COMPDUMP
 
 # shortcuts
-alias ls="eza"
-alias l="eza -ailhH"
 alias env="env | sort"
+alias l="eza -ailhH"
+alias ls="eza"
+alias update="brew update && brew upgrade"
 alias v="nvim"
+
 alias -- -="cd -"
 alias cd ...="cd ../.."
 alias cd ....="cd ../../.."
@@ -46,8 +48,3 @@ alias cd .........="cd ../../../../../../../.."
 alias cd ..........="cd ../../../../../../../../.."
 alias cd ...........="cd ../../../../../../../../../.."
 alias cd ............="cd ../../../../../../../../../../.."
-
-update() {
-  brew update
-  brew upgrade
-}
