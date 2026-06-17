@@ -9,4 +9,6 @@ vpn-kill() {
     sudo networksetup -setdnsservers Wi-Fi "Empty"
     sudo dscacheutil -flushcache
     sudo killall -HUP mDNSResponder
+    sudo ipconfig set en0 DHCP
+    sudo route -n flush
 }
