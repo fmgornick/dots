@@ -1,37 +1,34 @@
 --------------------
 -- CONFIG OPTIONS --
 --------------------
-vim.g.mapleader       = " "
-vim.g.maplocalleader  = "\\"
-vim.opt.clipboard     = "unnamedplus"
-vim.opt.complete      = "o,t"
-vim.opt.completeopt   = { "fuzzy", "menuone", "noselect" }
-vim.opt.expandtab     = true
-vim.opt.ignorecase    = true
-vim.opt.inccommand    = "split"
-vim.opt.mousescroll   = { "ver:1", "hor:1" }
-vim.opt.number        = true
-vim.opt.shiftwidth    = 4
-vim.opt.showcmd       = false
-vim.opt.showtabline   = 0
-vim.opt.signcolumn    = "yes"
-vim.opt.smartcase     = true
-vim.opt.smartindent   = true
-vim.opt.softtabstop   = 4
-vim.opt.splitbelow    = true
-vim.opt.splitright    = true
-vim.opt.swapfile      = false
-vim.opt.tabstop       = 4
-vim.opt.termguicolors = true
-vim.opt.title         = true
-vim.opt.undofile      = true
-vim.opt.wrap          = false
-vim.opt.writebackup   = false
+vim.g.mapleader     = " "
+vim.opt.clipboard   = "unnamedplus"
+vim.opt.complete    = "o,t"
+vim.opt.completeopt = { "fuzzy", "menuone", "noselect" }
+vim.opt.expandtab   = true
+vim.opt.ignorecase  = true
+vim.opt.inccommand  = "split"
+vim.opt.mousescroll = { "ver:1", "hor:1" }
+vim.opt.number      = true
+vim.opt.shiftwidth  = 4
+vim.opt.showcmd     = false
+vim.opt.signcolumn  = "yes"
+vim.opt.smartcase   = true
+vim.opt.smartindent = true
+vim.opt.softtabstop = 4
+vim.opt.splitbelow  = true
+vim.opt.splitright  = true
+vim.opt.swapfile    = false
+vim.opt.tabstop     = 4
+vim.opt.title       = true
+vim.opt.undofile    = true
+vim.opt.wrap        = false
+vim.opt.writebackup = false
 
 --------
 -- OS --
 --------
-local config_path     = ({
+local config_path   = ({
     Darwin     = "~/.config",
     Linux      = "~/.config",
     Windows_NT = "~/AppData",
@@ -71,11 +68,6 @@ vim.cmd.colorscheme("everforest")
 
 -- directory navigation: oil
 require("oil").setup({
-    columns = {
-        "permissions",
-        "size",
-        "mtime",
-    },
     skip_confirm_for_simple_edits = true,
     view_options = { show_hidden = true },
 })
@@ -112,7 +104,7 @@ require("diffview").setup({
 vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("LspFormat", { clear = true }),
     callback = function(args)
-        if vim.lsp.get_clients() then
+        if #vim.lsp.get_clients({ bufnr = args.buf, method = "textDocument/formatting" }) > 0 then
             vim.lsp.buf.format({ bufnr = args.buf, timeout_ms = 1000 })
         end
     end,
@@ -122,9 +114,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     callback = function()
-        local curpos = vim.api.nvim_win_get_cursor(0)
         vim.cmd([[keeppatterns %s/\s\+$//e]])
-        vim.api.nvim_win_set_cursor(0, curpos)
+        vim.cmd([[keeppatterns %s/\($\n\s*\)\+\%$//e]])
     end,
 })
 
@@ -257,7 +248,6 @@ vim.keymap.set("n", "]H", function() git.nav_hunk("last") end, { desc = "last hu
 vim.keymap.set("n", "<leader>gb", git.blame, { desc = "blame buffer" })
 vim.keymap.set("n", "<leader>gc", fzf.git_branches, { desc = "checkout branch" })
 vim.keymap.set("n", "<leader>gd", ":DiffviewBranch<cr>", { desc = "diff selected branch" })
-vim.keymap.set("n", "<leader>gq", ":DiffviewClose<cr>", { desc = "close diff" })
 vim.keymap.set("n", "<leader>gr", git.reset_hunk, { desc = "reset hunk" })
 vim.keymap.set("n", "<leader>gR", git.reset_buffer, { desc = "reset buffer" })
 vim.keymap.set("n", "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
@@ -267,7 +257,6 @@ vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset b
 -- lsp shortcuts
 local toggle_diagnostics = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
 local open_logfile = function() vim.cmd('tabnew ' .. vim.lsp.log.get_filename()) end
-vim.keymap.set("n", "<leader>lc", vim.lsp.codelens.run, { desc = "run codelens" })
 vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
 vim.keymap.set("n", "<leader>lf", open_logfile, { desc = "open lsp log file" })
