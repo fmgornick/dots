@@ -1,0 +1,13 @@
+bind  '"\eOP":         ""'      #  <F1>    ->  nothing
+bind  '"\eOQ":         ""'      #  <F2>    ->  nothing
+bind  '"\eOR":         ""'      #  <F3>    ->  nothing
+bind  '"\eOS":         ""'      #  <F4>    ->  nothing
+bind  '"\e[15~":       ""'      #  <F5>    ->  nothing
+bind  '"\e[17~":       ""'      #  <F6>    ->  nothing
+bind  '"\e[18~":       ""'      #  <F7>    ->  nothing
+bind  '"\e[19~":       ""'      #  <F8>    ->  nothing
+bind  '"\e[20~":       ""'      #  <F9>    ->  nothing
+bind  '"\e[21~":       ""'      #  <F10>   ->  nothing
+bind  '"\e[24~":       ""'      #  <F12>   ->  nothing
+bind  '"\e[27;2;13~":  "\n"'    #  <S-CR>  ->  <CR>
+bind  '"\e[59;5u":     "\C-l"'  #  <C-;>   ->  clear

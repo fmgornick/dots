@@ -7,6 +7,9 @@ export XDG_DATA_HOME="$LOCAL/share"
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 export XDG_STATE_HOME="$LOCAL/state"
 
+# paths
+export PATH="$XDG_BIN_HOME":$PATH
+
 # cache
 export HISTFILE="$XDG_CACHE_HOME/bash/history"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
