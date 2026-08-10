@@ -2,7 +2,7 @@ function __gstatus() {
     status=$(git status --porcelain 2>/dev/null)
     if [[ $status =~ "??" ]]; then echo '\e[0;31m\]'    # untracked files      => RED
     elif [[ ${#status} -ne 0 ]]; then echo '\e[0;33m\]' # changes not commited => YELLOW
-    else echo '\e[0;35m\]'; fi                          # clean                => MAGENTA
+    else echo '\e[0;36m\]'; fi                          # clean                => CYAN
 }
 
 function prompt() {
