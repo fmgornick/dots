@@ -248,9 +248,9 @@ vim.keymap.set("n", "]H", function() git.nav_hunk("last") end, { desc = "last hu
 vim.keymap.set("n", "<leader>gb", git.blame, { desc = "blame buffer" })
 vim.keymap.set("n", "<leader>gc", fzf.git_branches, { desc = "checkout branch" })
 vim.keymap.set("n", "<leader>gd", ":DiffviewBranch<cr>", { desc = "diff selected branch" })
-vim.keymap.set("n", "<leader>gr", git.reset_hunk, { desc = "reset hunk" })
+vim.keymap.set({ "n", "v" }, "<leader>gr", git.reset_hunk, { desc = "reset hunk" })
+vim.keymap.set({ "n", "v" }, "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
 vim.keymap.set("n", "<leader>gR", git.reset_buffer, { desc = "reset buffer" })
-vim.keymap.set("n", "<leader>gs", git.stage_hunk, { desc = "stage hunk" })
 vim.keymap.set("n", "<leader>gS", git.stage_buffer, { desc = "stage buffer" })
 vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset buffer" })
 
