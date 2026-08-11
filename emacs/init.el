@@ -36,7 +36,7 @@
 (setq custom-safe-themes t)                                  ;; trust themes i've installed
 (setq ido-enable-flex-matching t)                            ;; allow partial matching
 (setq ido-everywhere t)                                      ;; use ido for most places
-(set-frame-font "Hurmit Nerd Font Mono 16" nil t)            ;; default font
+(set-frame-font "Hurmit Nerd Font Mono 13" nil t)            ;; default font
 (global-display-line-numbers-mode t)                         ;; show line numbers
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; start in full-screen
 
