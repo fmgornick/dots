@@ -19,7 +19,6 @@ export LIBRARY_PATH="/usr/local/lib:/opt/homebrew/lib"
 # cache
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 export LESSHISTFILE="$XDG_CACHE_HOME/less/history"
-export ZDOTDIR="$XDG_CACHE_HOME/zsh/dots"
 export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump"
 export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
 export HISTSIZE=100000

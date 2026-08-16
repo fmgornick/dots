@@ -201,15 +201,14 @@ end, {})
 -------------
 -- KEYMAPS --
 -------------
-vim.keymap.set("n", "<c-g>", "2<c-g>", { desc = "get buffer info" })
 vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
 vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
 vim.keymap.set("v", "L", ">gv", { desc = "move block right" })
 vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatting" })
-vim.keymap.set("n", "yc", ":let @+=expand('%:p:h')<cr>", { desc = "yank file directory" })
-vim.keymap.set("n", "yf", ":%y+<cr>", { desc = "yank file contents" })
+vim.keymap.set("n", "yd", ":let @+=expand('%:p:h')<cr>", { desc = "yank file directory" })
 vim.keymap.set("n", "yp", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
+vim.keymap.set("n", "yY", ":%y+<cr>", { desc = "yank file contents" })
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
 vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
 vim.keymap.set("n", "<leader>b", ":.!xargs printf '\\%b'<cr>", { desc = "interpret backslash characters" })
