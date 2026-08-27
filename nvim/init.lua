@@ -100,45 +100,36 @@ require("diffview").setup({
 --------------
 -- AUTOCMDS --
 --------------
--- lsp format
+local augroup = vim.api.nvim_create_augroup("UserCmds", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("LspFormat", { clear = true }),
+    desc = "lsp format",
+    group = augroup,
     callback = function(args)
-        if #vim.lsp.get_clients({ bufnr = args.buf, method = "textDocument/formatting" }) > 0 then
+        if next(vim.lsp.get_clients({ bufnr = args.buf, method = "textDocument/formatting" })) then
             vim.lsp.buf.format({ bufnr = args.buf, timeout_ms = 1000 })
         end
     end,
 })
-
--- remove trailing whitespace/newlines
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function()
-        vim.cmd([[keeppatterns %s/\s\+$//e]])
-        vim.cmd([[keeppatterns %s/\($\n\s*\)\+\%$//e]])
-    end,
-})
-
--- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function() vim.hl.on_yank({ higroup = "Search", timeout = 100 }) end,
+    desc = "highlight on yank",
+    group = augroup,
+    command = [[silent! lua vim.hl.on_yank({ higroup = "Search", timeout = 100 })]],
 })
-
--- spell check and wrap lines in markdown/latex buffers
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "remove trailing whitespace/newlines",
+    group = augroup,
+    command = [[keeppatterns %s/\s\+$//e | keeppatterns %s/\($\n\s*\)\+\%$//e]],
+})
 vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("SetWrap", { clear = true }),
+    desc = "spell check and wrap lines in markdown/latex buffers",
+    group = augroup,
     pattern = { "markdown", "tex" },
-    command = "setlocal spell wrap linebreak nolist",
+    command = [[setlocal spell wrap linebreak nolist]],
 })
-
--- force close any modified scratch buffers
 vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
-    command = "if bufname('%') ==# '' | setlocal nomodified | endif"
-})
-
-vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "svelte" },
-    command = "set filetype=html | syntax on",
+    desc = "force close any modified scratch buffers",
+    group = augroup,
+    command = [[if bufname('%') ==# '' | setlocal nomodified | endif]],
 })
 
 ----------------------
@@ -201,6 +192,7 @@ end, {})
 -------------
 -- KEYMAPS --
 -------------
+-- misc.
 vim.keymap.set("v", "H", "<gv", { desc = "move block left" })
 vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
 vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
