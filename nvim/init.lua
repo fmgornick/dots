@@ -2,6 +2,7 @@
 -- CONFIG OPTIONS --
 --------------------
 vim.g.mapleader     = " "
+vim.g.netrw_banner  = 0
 vim.opt.clipboard   = "unnamedplus"
 vim.opt.complete    = "o,t"
 vim.opt.completeopt = { "fuzzy", "menuone", "noselect" }
@@ -53,11 +54,7 @@ vim.pack.add({
     { name = "everforest", src = "https://github.com/sainnhe/everforest" },
     { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
     { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
-    { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
-}, {
-    confirm = false,
-    start = true,
-})
+}, { confirm = false })
 
 --------------------
 -- PACKAGE CONFIG --
@@ -65,12 +62,6 @@ vim.pack.add({
 -- theme: everforest
 vim.g.everforest_background = "soft"
 vim.cmd.colorscheme("everforest")
-
--- directory navigation: oil
-require("oil").setup({
-    skip_confirm_for_simple_edits = true,
-    view_options = { show_hidden = true },
-})
 
 -- file search/grep: fzf-lua
 require("fzf-lua").setup({
@@ -137,29 +128,16 @@ vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
 ----------------------
 -- toggle diff view of two windows
 vim.api.nvim_create_user_command("DiffWindows", function()
-    local windows = vim.api.nvim_list_wins()
-    if #windows ~= 2 then
+    if #vim.api.nvim_list_wins() ~= 2 then
         vim.notify("must be exactly two windows to diff", vim.log.levels.ERROR)
-        return
-    end
-
-    local this_window = vim.api.nvim_get_current_win()
-    local other_window
-    for _, window in ipairs(windows) do
-        if this_window ~= window then other_window = window end
-    end
-
-    local diff_command
-    if vim.o.diff then
-        diff_command = "diffoff"
+    elseif vim.o.diff then
+        vim.cmd("diffoff!")
     else
-        diff_command = "diffthis"
+        for _, id in ipairs(vim.api.nvim_list_wins()) do
+            vim.api.nvim_set_current_win(id)
+            vim.cmd("diffthis")
+        end
     end
-
-    vim.cmd(diff_command)
-    vim.api.nvim_set_current_win(other_window)
-    vim.cmd(diff_command)
-    vim.api.nvim_set_current_win(this_window)
 end, {})
 
 -- select branch to diff changes on with fzf
@@ -205,12 +183,10 @@ vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = 
 vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
 vim.keymap.set("n", "<leader>b", ":.!xargs printf '\\%b'<cr>", { desc = "interpret backslash characters" })
 vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
-vim.keymap.set("n", "<leader>e", require("oil").open, { desc = "file explorer" })
+vim.keymap.set("n", "<leader>e", ":Explore<cr>", { desc = "file explorer" })
 vim.keymap.set("n", "<leader>r", ":ReRoot<cr>", { desc = "cd into project root directory" })
 vim.keymap.set("n", "<leader>t", ":%s/\\s\\+$//e<cr>", { desc = "remove trailing spaces" })
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
-vim.keymap.set("n", "<c-d>", "<c-d>zz", { desc = "scroll down half-page" })
-vim.keymap.set("n", "<c-u>", "<c-u>zz", { desc = "scroll up half-page" })
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "escape terminal mode" })
 
 -- file search/grepping
