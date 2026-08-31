@@ -1,48 +1,40 @@
---------------------
--- CONFIG OPTIONS --
---------------------
-vim.g.mapleader     = " "
-vim.g.netrw_banner  = 0
-vim.opt.clipboard   = "unnamedplus"
-vim.opt.complete    = "o,t"
-vim.opt.completeopt = { "fuzzy", "menuone", "noselect" }
-vim.opt.expandtab   = true
-vim.opt.ignorecase  = true
-vim.opt.inccommand  = "split"
-vim.opt.mousescroll = { "ver:1", "hor:1" }
-vim.opt.number      = true
-vim.opt.shiftwidth  = 4
-vim.opt.showcmd     = false
-vim.opt.signcolumn  = "yes"
-vim.opt.smartcase   = true
-vim.opt.smartindent = true
-vim.opt.softtabstop = 4
-vim.opt.splitbelow  = true
-vim.opt.splitright  = true
-vim.opt.swapfile    = false
-vim.opt.tabstop     = 4
-vim.opt.title       = true
-vim.opt.undofile    = true
-vim.opt.wrap        = false
-vim.opt.writebackup = false
-
---------
--- OS --
---------
-local config_path   = ({
-    Darwin     = "~/.config",
-    Linux      = "~/.config",
-    Windows_NT = "~/AppData",
-})[vim.loop.os_uname().sysname]
-
-
--- use neovide on windows
-if vim.g.neovide then
-    vim.g.neovide_cursor_animation_length = 0
-    vim.g.neovide_hide_mouse_when_typing = true
-    vim.g.neovide_scroll_animation_length = 0
-    vim.o.guifont = "Hurmit Nerd Font Propo:h10"
-end
+-------------------
+-- CONFIGURATION --
+-------------------
+-- options
+vim.opt.clipboard                     = "unnamedplus"
+vim.opt.complete                      = "o,t"
+vim.opt.completeopt                   = { "fuzzy", "menuone", "noselect" }
+vim.opt.expandtab                     = true
+vim.opt.guifont                       = "Hurmit Nerd Font Propo:h10"
+vim.opt.ignorecase                    = true
+vim.opt.inccommand                    = "split"
+vim.opt.mousescroll                   = { "ver:1", "hor:1" }
+vim.opt.number                        = true
+vim.opt.shiftwidth                    = 4
+vim.opt.showcmd                       = false
+vim.opt.signcolumn                    = "yes"
+vim.opt.smartcase                     = true
+vim.opt.smartindent                   = true
+vim.opt.softtabstop                   = 4
+vim.opt.splitbelow                    = true
+vim.opt.splitright                    = true
+vim.opt.swapfile                      = false
+vim.opt.tabline                       = "[%{tabpagenr()}/%{tabpagenr('$')}] %f"
+vim.opt.tabstop                       = 4
+vim.opt.title                         = true
+vim.opt.undofile                      = true
+vim.opt.wrap                          = false
+vim.opt.writebackup                   = false
+-- globals
+vim.g.everforest_background           = "soft"
+vim.g.mapleader                       = " "
+vim.g.neovide_cursor_animation_length = 0
+vim.g.neovide_hide_mouse_when_typing  = true
+vim.g.neovide_scroll_animation_length = 0
+vim.g.netrw_alto                      = 0
+vim.g.netrw_banner                    = 0
+vim.g.netrw_preview                   = 1
 
 --------------
 -- PACKAGES --
@@ -55,16 +47,8 @@ vim.pack.add({
     { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
     { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
 }, { confirm = false })
-
---------------------
--- PACKAGE CONFIG --
---------------------
--- theme: everforest
-vim.g.everforest_background = "soft"
-vim.cmd.colorscheme("everforest")
-
--- file search/grep: fzf-lua
-require("fzf-lua").setup({
+vim.cmd.colorscheme("everforest") -- theme: everforest
+require("fzf-lua").setup({        -- file search/grep: fzf-lua
     "fzf-native",
     files = { follow = true },
     grep = { follow = true },
@@ -75,17 +59,14 @@ require("fzf-lua").setup({
         preview = { hidden = true },
     },
 })
-
--- git diff view options: diffview
-require("diffview").setup({
+require("diffview").setup({ -- git diff view options: diffview
     use_icons = false,
     file_panel = {
-        listing_style = "list",
         win_config = {
             position = "bottom",
-            height = 15
-        }
-    }
+            height = 15,
+        },
+    },
 })
 
 --------------
@@ -114,11 +95,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("FileType", {
     desc = "spell check and wrap lines in markdown/latex buffers",
     group = augroup,
-    pattern = { "markdown", "tex" },
+    pattern = { "markdown", "tex", "text" },
     command = [[setlocal spell wrap linebreak nolist]],
 })
 vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
-    desc = "force close any modified scratch buffers",
+    desc = "close modified scratch buffers without writing",
     group = augroup,
     command = [[if bufname('%') ==# '' | setlocal nomodified | endif]],
 })
@@ -126,7 +107,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
 ----------------------
 -- CUSTOM FUNCTIONS --
 ----------------------
--- toggle diff view of two windows
 vim.api.nvim_create_user_command("DiffWindows", function()
     if #vim.api.nvim_list_wins() ~= 2 then
         vim.notify("must be exactly two windows to diff", vim.log.levels.ERROR)
@@ -138,9 +118,7 @@ vim.api.nvim_create_user_command("DiffWindows", function()
             vim.cmd("diffthis")
         end
     end
-end, {})
-
--- select branch to diff changes on with fzf
+end, { desc = "toggle diff view of two windows" })
 vim.api.nvim_create_user_command("DiffviewBranch", function()
     require("fzf-lua").git_branches({
         cmd = "echo 'HEAD\nHEAD~1' && git branch --all --format='%(refname:short)'",
@@ -151,9 +129,7 @@ vim.api.nvim_create_user_command("DiffviewBranch", function()
             end,
         },
     })
-end, {})
-
--- cd into project root directory
+end, { desc = "select branch to diff changes on with fzf" })
 vim.api.nvim_create_user_command("ReRoot", function()
     local clients = vim.lsp.get_clients({ bufnr = 0 })
     local root = vim.fn.expand("%:p:h")
@@ -165,7 +141,19 @@ vim.api.nvim_create_user_command("ReRoot", function()
         if #paths > 0 then root = vim.fs.dirname(paths[1]) end
     end
     vim.cmd("cd " .. root)
-end, {})
+    vim.notify(root or "", vim.log.levels.INFO)
+end, { desc = "cd into project root directory" })
+
+---------
+-- LSP --
+---------
+vim.diagnostic.config({ severity_sort = true }) -- show error/warning diagnostices before info/hint
+vim.lsp.enable(                                 -- enale servers configured in lsp directory
+    vim.iter(vim.fs.dir(vim.fs.joinpath(vim.fn.stdpath("config"), "lsp")))
+    :filter(function(name, type) return type == "file" and name:match("%.lua$") end)
+    :map(function(name) return (name:gsub("%.lua$", "")) end)
+    :totable()
+)
 
 -------------
 -- KEYMAPS --
@@ -176,6 +164,7 @@ vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
 vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
 vim.keymap.set("v", "L", ">gv", { desc = "move block right" })
 vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatting" })
+vim.keymap.set("n", "cd", ":ReRoot<cr>", { desc = "cd into project root directory" })
 vim.keymap.set("n", "yd", ":let @+=expand('%:p:h')<cr>", { desc = "yank file directory" })
 vim.keymap.set("n", "yp", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
 vim.keymap.set("n", "yY", ":%y+<cr>", { desc = "yank file contents" })
@@ -184,16 +173,15 @@ vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", re
 vim.keymap.set("n", "<leader>b", ":.!xargs printf '\\%b'<cr>", { desc = "interpret backslash characters" })
 vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
 vim.keymap.set("n", "<leader>e", ":Explore<cr>", { desc = "file explorer" })
-vim.keymap.set("n", "<leader>r", ":ReRoot<cr>", { desc = "cd into project root directory" })
 vim.keymap.set("n", "<leader>t", ":%s/\\s\\+$//e<cr>", { desc = "remove trailing spaces" })
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "escape terminal mode" })
 
 -- file search/grepping
 local fzf = require("fzf-lua")
-fzf.config_files = function() fzf.files({ cwd = config_path }) end
-fzf.home_files = function() fzf.files({ cwd = "~" }) end
-fzf.project_files = function() fzf.files({ cwd = "~/projects" }) end
+fzf.home_files = function() fzf.files({ cwd = vim.uv.os_homedir() }) end
+fzf.config_files = function() fzf.files({ cwd = vim.fs.dirname(vim.fn.stdpath("config")) }) end
+fzf.project_files = function() fzf.files({ cwd = vim.fs.joinpath(vim.uv.os_homedir(), "projects") }) end
 vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "buffers" })
 vim.keymap.set("n", "<leader>fc", fzf.config_files, { desc = "config files" })
 vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "files" })
@@ -222,33 +210,9 @@ vim.keymap.set("n", "<leader>gS", git.stage_buffer, { desc = "stage buffer" })
 vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset buffer" })
 
 -- lsp shortcuts
-local toggle_diagnostics = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
-local open_logfile = function() vim.cmd('tabnew ' .. vim.lsp.log.get_filename()) end
+vim.diagnostic.fletcher_logs = function() vim.cmd('tabnew ' .. vim.lsp.log.get_filename()) end
+vim.diagnostic.fletcher_toggle = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
 vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
+vim.keymap.set("n", "<leader>lL", vim.diagnostic.fletcher_logs, { desc = "open lsp log file" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
-vim.keymap.set("n", "<leader>lf", open_logfile, { desc = "open lsp log file" })
-vim.keymap.set("n", "<leader>lt", toggle_diagnostics, { desc = "toggle lsp diagnostics" })
-
----------
--- LSP --
----------
--- lsp config
-vim.diagnostic.config({
-    severity_sort = true,
-    jump = {
-        severity = {
-            vim.diagnostic.severity.WARN,
-            vim.diagnostic.severity.ERROR,
-        },
-    }
-})
-
--- lsp servers
-vim.lsp.enable({
-    "clangd",
-    "gopls",
-    "lua_ls",
-    "rust_analyzer",
-    "texlab",
-    "zls",
-})
+vim.keymap.set("n", "<leader>lt", vim.diagnostic.fletcher_toggle, { desc = "toggle lsp diagnostics" })
