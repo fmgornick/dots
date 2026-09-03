@@ -32,9 +32,6 @@ vim.g.mapleader                       = " "
 vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_hide_mouse_when_typing  = true
 vim.g.neovide_scroll_animation_length = 0
-vim.g.netrw_alto                      = 0
-vim.g.netrw_banner                    = 0
-vim.g.netrw_preview                   = 1
 
 --------------
 -- PACKAGES --
@@ -46,9 +43,14 @@ vim.pack.add({
     { name = "everforest", src = "https://github.com/sainnhe/everforest" },
     { name = "fzf",        src = "https://github.com/ibhagwan/fzf-lua" },
     { name = "gitsigns",   src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { name = "oil",        src = "https://github.com/stevearc/oil.nvim" },
 }, { confirm = false })
 vim.cmd.colorscheme("everforest") -- theme: everforest
-require("fzf-lua").setup({        -- file search/grep: fzf-lua
+require("oil").setup({            -- directory navigation: oil
+    skip_confirm_for_simple_edits = true,
+    view_options = { show_hidden = true },
+})
+require("fzf-lua").setup({ -- file search/grep: fzf-lua
     "fzf-native",
     files = { follow = true },
     grep = { follow = true },
@@ -172,7 +174,7 @@ vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = 
 vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
 vim.keymap.set("n", "<leader>b", ":.!xargs printf '\\%b'<cr>", { desc = "interpret backslash characters" })
 vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
-vim.keymap.set("n", "<leader>e", ":Explore<cr>", { desc = "file explorer" })
+vim.keymap.set("n", "<leader>e", ":Oil<cr>", { desc = "file explorer" })
 vim.keymap.set("n", "<leader>t", ":%s/\\s\\+$//e<cr>", { desc = "remove trailing spaces" })
 vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "escape terminal mode" })
