@@ -3,7 +3,7 @@
 -------------------
 -- options
 vim.opt.clipboard                     = "unnamedplus"
-vim.opt.complete                      = "o,t"
+vim.opt.complete                      = { "o", "t" }
 vim.opt.completeopt                   = { "fuzzy", "menuone", "noselect" }
 vim.opt.expandtab                     = true
 vim.opt.guifont                       = "Hurmit Nerd Font Propo:h10"
@@ -87,7 +87,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "highlight on yank",
     group = augroup,
-    command = [[silent! lua vim.hl.on_yank({ higroup = "Search", timeout = 100 })]],
+    callback = function() vim.hl.hl_op({ higroup = "Search", timeout = 100 }) end,
 })
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "remove trailing whitespace/newlines",
@@ -169,14 +169,10 @@ vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatti
 vim.keymap.set("n", "cd", ":ReRoot<cr>", { desc = "cd into project root directory" })
 vim.keymap.set("n", "yd", ":let @+=expand('%:p:h')<cr>", { desc = "yank file directory" })
 vim.keymap.set("n", "yp", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
-vim.keymap.set("n", "yY", ":%y+<cr>", { desc = "yank file contents" })
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
 vim.keymap.set("v", "<leader>/", "gcgv", { desc = "toggle comment selection", remap = true })
 vim.keymap.set("n", "<leader>b", ":.!xargs printf '\\%b'<cr>", { desc = "interpret backslash characters" })
 vim.keymap.set("n", "<leader>d", ":DiffWindows<cr>", { desc = "toggle diff" })
-vim.keymap.set("n", "<leader>e", ":Oil<cr>", { desc = "file explorer" })
-vim.keymap.set("n", "<leader>t", ":%s/\\s\\+$//e<cr>", { desc = "remove trailing spaces" })
-vim.keymap.set("n", "<leader>u", vim.pack.update, { desc = "update plugins" })
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>", { desc = "escape terminal mode" })
 
 -- file search/grepping
@@ -212,9 +208,5 @@ vim.keymap.set("n", "<leader>gS", git.stage_buffer, { desc = "stage buffer" })
 vim.keymap.set("n", "<leader>gU", git.reset_buffer_index, { desc = "soft reset buffer" })
 
 -- lsp shortcuts
-vim.diagnostic.fletcher_logs = function() vim.cmd('tabnew ' .. vim.lsp.log.get_filename()) end
-vim.diagnostic.fletcher_toggle = function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end
 vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "diagnostic local list" })
-vim.keymap.set("n", "<leader>lL", vim.diagnostic.fletcher_logs, { desc = "open lsp log file" })
 vim.keymap.set("n", "<leader>lq", vim.diagnostic.setqflist, { desc = "diagnostic quickfix list" })
-vim.keymap.set("n", "<leader>lt", vim.diagnostic.fletcher_toggle, { desc = "toggle lsp diagnostics" })
