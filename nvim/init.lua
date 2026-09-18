@@ -97,7 +97,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd("FileType", {
     desc = "spell check and wrap lines in markdown/latex buffers",
     group = augroup,
-    pattern = { "markdown", "tex", "text" },
+    pattern = { "markdown", "tex" },
     command = [[setlocal spell wrap linebreak nolist]],
 })
 vim.api.nvim_create_autocmd({ "BufLeave", "ExitPre" }, {
