@@ -28,6 +28,10 @@ vim.opt.wrap                          = false
 vim.opt.writebackup                   = false
 -- globals
 vim.g.everforest_background           = "soft"
+vim.g.loaded_node_provider            = 0
+vim.g.loaded_perl_provider            = 0
+vim.g.loaded_python3_provider         = 0
+vim.g.loaded_ruby_provider            = 0
 vim.g.mapleader                       = " "
 vim.g.neovide_cursor_animation_length = 0
 vim.g.neovide_hide_mouse_when_typing  = true
@@ -125,26 +129,23 @@ vim.api.nvim_create_user_command("DiffviewBranch", function()
     require("fzf-lua").git_branches({
         cmd = "echo 'HEAD\nHEAD~1' && git branch --all --format='%(refname:short)'",
         actions = {
+            ["ctrl-f"] = function(_, opts) vim.cmd("DiffviewOpen " .. opts.query) end,
             ["default"] = function(selected, opts)
-                local branch = (#selected > 0) and selected[1] or opts.query
-                vim.cmd("DiffviewOpen " .. branch)
+                vim.cmd("DiffviewOpen " .. ((#selected > 0) and selected[1] or opts.query))
             end,
         },
     })
 end, { desc = "select branch to diff changes on with fzf" })
-vim.api.nvim_create_user_command("ReRoot", function()
-    local clients = vim.lsp.get_clients({ bufnr = 0 })
-    local root = vim.fn.expand("%:p:h")
-    if #clients > 0 then
-        root = clients[1].config.root_dir
-    else
-        local root_markers = { ".git" }
-        local paths = vim.fs.find(root_markers, { upward = true, path = root })
-        if #paths > 0 then root = vim.fs.dirname(paths[1]) end
-    end
-    vim.cmd("cd " .. root)
-    vim.notify(root or "", vim.log.levels.INFO)
-end, { desc = "cd into project root directory" })
+vim.api.nvim_create_user_command("CD", function()
+    require("fzf-lua").fzf_exec("echo " .. vim.fn.expand('%:h') .. " && fd -t d -H", {
+        actions = {
+            ["ctrl-f"] = function(_, opts) vim.cmd("cd " .. opts.query) end,
+            ["default"] = function(selected, opts)
+                vim.cmd("cd " .. ((#selected > 0) and selected[1] or opts.query))
+            end,
+        },
+    })
+end, { desc = "select directory to cd into" })
 
 ---------
 -- LSP --
@@ -166,7 +167,7 @@ vim.keymap.set("v", "J", ":move '>+1<cr>gv=gv", { desc = "move block down" })
 vim.keymap.set("v", "K", ":move '<-2<cr>gv=gv", { desc = "move block up" })
 vim.keymap.set("v", "L", ">gv", { desc = "move block right" })
 vim.keymap.set("n", "<c-s>", ":noautocmd w<cr>", { desc = "save without formatting" })
-vim.keymap.set("n", "cd", ":ReRoot<cr>", { desc = "cd into project root directory" })
+vim.keymap.set("n", "cd", ":CD<cr>", { desc = "cd into project root directory" })
 vim.keymap.set("n", "yd", ":let @+=expand('%:p:h')<cr>", { desc = "yank file directory" })
 vim.keymap.set("n", "yp", ":let @+=expand('%:p')<cr>", { desc = "yank file path" })
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment line", remap = true })
